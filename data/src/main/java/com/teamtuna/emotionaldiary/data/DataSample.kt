@@ -2,7 +2,7 @@ package com.teamtuna.emotionaldiary.data
 
 import com.teamtuna.emotionaldiary.domain.MyClass
 
-class dataSample {
+class DataSample {
 
     fun getDoamin() {
         val domain = MyClass()
