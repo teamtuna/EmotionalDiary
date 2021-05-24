@@ -1,10 +1,9 @@
-package com.teamtuna.emotionaldiary
+package com.teamtuna.emotionaldiary.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import dagger.hilt.android.AndroidEntryPoint
+import androidx.appcompat.app.AppCompatActivity
+import com.teamtuna.emotionaldiary.presentation.R
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
