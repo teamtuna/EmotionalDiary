@@ -1,6 +1,5 @@
 package com.teamtuna.emotionaldiary.usecase
 
-import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.entity.Emotional
@@ -11,11 +10,17 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.jupiter.MockitoExtension
 
 @DisplayName("감정추가에서 ")
+@ExtendWith(MockitoExtension::class)
 internal class EmotionalAddUseCaseTest {
-    private val repository: EmotionalRepository by lazy { mock() }
+
+    @Mock
+    private lateinit var repository: EmotionalRepository
 
     @BeforeEach
     fun setUp() {
