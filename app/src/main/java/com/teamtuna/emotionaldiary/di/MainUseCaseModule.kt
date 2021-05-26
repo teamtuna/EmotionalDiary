@@ -1,8 +1,10 @@
 package com.teamtuna.emotionaldiary.di
 
 import android.content.Context
+import androidx.room.Room
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
 import com.teamtuna.emotionaldiary.datasource.LocalDataSourceImpl
+import com.teamtuna.emotionaldiary.db.EmotionRoomDatabase
 import com.teamtuna.emotionaldiary.repository.MainRepository
 import com.teamtuna.emotionaldiary.repository.MainRepositoryImpl
 import com.teamtuna.emotionaldiary.usecase.MainUseCase
@@ -46,5 +48,21 @@ object LocalDataSourceModule {
         @ApplicationContext context : Context  //need if use room lib
     ): LocalDataSource {
         return LocalDataSourceImpl()
+    }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object RoomDatabaseModule {
+
+    @Singleton
+    @Provides
+    fun provideDatabase(
+        @ApplicationContext context : Context
+    ): EmotionRoomDatabase {
+        return Room.databaseBuilder(
+            context,
+            EmotionRoomDatabase::class.java, "emotion-db"
+        ).build()
     }
 }

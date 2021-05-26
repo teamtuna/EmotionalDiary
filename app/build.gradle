@@ -37,13 +37,6 @@ android {
 }
 
 dependencies {
-    // room
-    implementation "androidx.room:room-runtime:$versions.roomVersion"
-    kapt "androidx.room:room-compiler:$versions.roomVersion"
-    implementation "androidx.room:room-ktx:$versions.roomVersion"
-    testImplementation "androidx.room:room-testing:$versions.roomVersion"
-
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlinVersion"
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation "com.google.dagger:hilt-android:$versions.hiltVersion"
@@ -51,6 +44,13 @@ dependencies {
     testRuntimeOnly(testRuntimeDeps)
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
+
+    // room
+    implementation "androidx.room:room-runtime:$versions.roomVersion"
+    kapt "androidx.room:room-compiler:$versions.roomVersion"
+    implementation "androidx.room:room-ktx:$versions.roomVersion"
+    testImplementation "androidx.room:room-testing:$versions.roomVersion"
+
 
     implementation project(":presentation")
     implementation project(":domain")
