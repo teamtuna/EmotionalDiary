@@ -1,6 +1,6 @@
 package com.teamtuna.emotionaldiary.datasource
 
-import com.teamtuna.emotionaldiary.entity.Emotional
+import com.teamtuna.emotionaldiary.entity.Emotion
 
 class LocalDataSourceImpl : LocalDataSource {
 
@@ -8,7 +8,7 @@ class LocalDataSourceImpl : LocalDataSource {
 
     }
 
-    override fun add(emotional: Emotional, reason: String): Int {
+    override fun add(emotion: Emotion, reason: String): Int {
         return 1
     }
 }

@@ -2,7 +2,7 @@ package com.teamtuna.emotionaldiary.repository
 
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
-import com.teamtuna.emotionaldiary.entity.Emotional
+import com.teamtuna.emotionaldiary.entity.Emotion
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -18,20 +18,20 @@ internal class EmotionalRepositoryTest {
     @Mock
     private lateinit var localDataSource: LocalDataSource
 
-    private lateinit var repository: EmotionalRepository
+    private lateinit var repository: EmotionRepository
 
-    private lateinit var testEmotion : Emotional
+    private lateinit var testEmotion : Emotion
 
     @BeforeEach
     fun setUp() {
-        repository = EmotionalRepositoryImpl(localDataSource)
+        repository = EmotionRepositoryImpl(localDataSource)
     }
 
 
     @DisplayName("Repository에서 Add시 Local에 같은 Emotional이 저장")
     @Test
     fun addTest() {
-        testEmotion = Emotional.JOY
+        testEmotion = Emotion.JOY
         whenever(localDataSource.add(testEmotion, "Test")).thenReturn(1)
         val actual = repository.add(testEmotion,"Test")
 

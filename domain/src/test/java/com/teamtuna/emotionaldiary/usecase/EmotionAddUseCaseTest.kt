@@ -2,8 +2,8 @@ package com.teamtuna.emotionaldiary.usecase
 
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
-import com.teamtuna.emotionaldiary.entity.Emotional
-import com.teamtuna.emotionaldiary.repository.EmotionalRepository
+import com.teamtuna.emotionaldiary.entity.Emotion
+import com.teamtuna.emotionaldiary.repository.EmotionRepository
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.jupiter.api.AfterEach
@@ -17,14 +17,14 @@ import org.mockito.junit.jupiter.MockitoExtension
 
 @DisplayName("감정추가에서 ")
 @ExtendWith(MockitoExtension::class)
-internal class EmotionalAddUseCaseTest {
+internal class EmotionAddUseCaseTest {
 
     @Mock
-    private lateinit var repository: EmotionalRepository
+    private lateinit var repository: EmotionRepository
 
     @BeforeEach
     fun setUp() {
-        whenever(repository.add(Emotional.JOY, "기쁨이")).thenReturn(1)
+        whenever(repository.add(Emotion.JOY, "기쁨이")).thenReturn(1)
     }
 
     @AfterEach
@@ -35,14 +35,14 @@ internal class EmotionalAddUseCaseTest {
     @DisplayName("기쁨이를 추가 한경우 EmotionalRepository.add가 호출되는지확인")
     fun addUseCase() {
         //given
-        val addUsecase = EmotionalAddUseCase(repository)
+        val addUsecase = EmotionAddUseCase(repository)
         //val getUsecase = EmotionalGetUseCase(repository)
 
         //when
-        val actual /*id*/ = addUsecase(Emotional.JOY, "기쁨이")
+        val actual /*id*/ = addUsecase(Emotion.JOY, "기쁨이")
 
         //then
-        Mockito.verify(repository, times(1)).add(Emotional.JOY, "기쁨이")
+        Mockito.verify(repository, times(1)).add(Emotion.JOY, "기쁨이")
         assertThat(actual, equalTo(1))
     }
 }

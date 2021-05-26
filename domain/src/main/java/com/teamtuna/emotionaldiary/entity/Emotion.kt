@@ -1,6 +1,6 @@
 package com.teamtuna.emotionaldiary.entity
 
-enum class Emotional {
+enum class Emotion {
     JOY,
     SADNESS,
     ANGER,

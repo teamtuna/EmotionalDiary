@@ -1,8 +1,8 @@
 package com.teamtuna.emotionaldiary.datasource
 
-import com.teamtuna.emotionaldiary.entity.Emotional
+import com.teamtuna.emotionaldiary.entity.Emotion
 
 interface LocalDataSource {
     fun test()
-    fun add(emotional: Emotional, reason : String) : Int
+    fun add(emotion: Emotion, reason : String) : Int
 }
