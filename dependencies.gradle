@@ -34,6 +34,7 @@ ext {
             targetSdkVersion            :   30,
             minSdkVersion               :   23,
             hiltVersion                 :   '2.35.1',
+            roomVersion                 :   '2.3.0',
     ]
 
 }
