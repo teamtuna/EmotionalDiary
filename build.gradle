@@ -7,10 +7,6 @@ buildscript {
         mavenCentral()
     }
     
-    ext.kotlin_version = "1.5.0"
-    ext.hilt_version = "2.35.1"
-    ext.room_version = "2.3.0"
-
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
