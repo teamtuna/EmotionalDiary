@@ -36,6 +36,7 @@ ext {
             hiltVersion            : '2.35.1',
             roomVersion            : '2.3.0',
             androidXTestCoreVersion: '1.2.0',
+            coroutinesVersion : '1.4.3'
     ]
 
 }

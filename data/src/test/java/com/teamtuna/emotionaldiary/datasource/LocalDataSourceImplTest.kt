@@ -3,6 +3,7 @@ package com.teamtuna.emotionaldiary.datasource
 import androidx.room.Room
 import com.teamtuna.emotionaldiary.entity.Emotion
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
+import com.teamtuna.emotionaldiary.MainCoroutineRule
 import com.teamtuna.emotionaldiary.db.EmotionRoomDatabase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.After
