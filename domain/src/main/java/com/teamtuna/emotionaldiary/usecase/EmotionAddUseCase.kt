@@ -4,7 +4,7 @@ import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.repository.EmotionRepository
 
 class EmotionAddUseCase(private val emotionRepository: EmotionRepository) {
-    operator fun invoke(emotion: Emotion, reason: String): Int {
+    operator fun invoke(emotion: Emotion, reason: String): Long {
         return emotionRepository.add(emotion, reason)
     }
 }

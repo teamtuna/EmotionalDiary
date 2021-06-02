@@ -61,6 +61,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$versions.roomVersion"
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     testImplementation "androidx.room:room-testing:$versions.roomVersion"
+    testImplementation 'org.robolectric:robolectric:4.4'
+    implementation "androidx.test:core:$versions.androidXTestCoreVersion"
 
     implementation project(":domain")
 }

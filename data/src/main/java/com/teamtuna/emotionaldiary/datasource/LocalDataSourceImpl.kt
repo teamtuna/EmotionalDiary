@@ -1,14 +1,15 @@
 package com.teamtuna.emotionaldiary.datasource
 
+import com.teamtuna.emotionaldiary.db.EmotionalDao
+import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.Emotion
 
-class LocalDataSourceImpl : LocalDataSource {
+class LocalDataSourceImpl(
+    private val emotionDao: EmotionalDao
+) : LocalDataSource {
 
-    override fun test() {
-
-    }
-
-    override fun add(emotion: Emotion, reason: String): Int {
-        return 1
+    override fun add(emotion: Emotion, reason: String): Long {
+        val entity: EmotionalEntity = EmotionalEntity(emotion = emotion, reason = reason)
+        return emotionDao.insertEmotional(entity)
     }
 }
