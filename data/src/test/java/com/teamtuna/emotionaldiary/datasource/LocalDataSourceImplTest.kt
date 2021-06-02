@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.teamtuna.emotionaldiary.MainCoroutineRule
 import com.teamtuna.emotionaldiary.db.EmotionRoomDatabase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
