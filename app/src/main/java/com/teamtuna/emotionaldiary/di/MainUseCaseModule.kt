@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
 import com.teamtuna.emotionaldiary.datasource.LocalDataSourceImpl
 import com.teamtuna.emotionaldiary.db.EmotionRoomDatabase
+import com.teamtuna.emotionaldiary.repository.EmotionRepository
+import com.teamtuna.emotionaldiary.repository.EmotionRepositoryImpl
 import com.teamtuna.emotionaldiary.repository.MainRepository
 import com.teamtuna.emotionaldiary.repository.MainRepositoryImpl
 import com.teamtuna.emotionaldiary.usecase.MainUseCase
@@ -37,6 +39,18 @@ object MainRepositoryModule {
         return MainRepositoryImpl(localDataSource)
     }
 }
+
+@Module
+@InstallIn(SingletonComponent::class)
+object EmotionRepositoryModule {
+
+    @Singleton
+    @Provides
+    fun provideEmotionRepository(localDataSource: LocalDataSource): EmotionRepository {
+        return EmotionRepositoryImpl(localDataSource)
+    }
+}
+
 
 @Module
 @InstallIn(SingletonComponent::class)

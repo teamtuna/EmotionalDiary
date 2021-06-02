@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EmotionalDiary</string>
+    <string name="emotion_add_fragment_title">Emotion Add Fragment</string>
 </resources>

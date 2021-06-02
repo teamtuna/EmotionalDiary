@@ -62,5 +62,8 @@ dependencies {
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     testImplementation "androidx.room:room-testing:$versions.roomVersion"
 
+    implementation "com.google.dagger:hilt-android:$versions.hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$versions.hiltVersion"
+
     implementation project(":domain")
 }
