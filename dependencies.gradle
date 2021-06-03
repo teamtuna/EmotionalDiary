@@ -28,13 +28,15 @@ ext {
             'androidx.test.espresso:espresso-core:3.3.0'
     ]
     versions = [
-            kotlinVersion               :   '1.5.0',
-            androidBuildToolVersion     :   '30.0.3',
-            compileSdkVersion           :   30,
-            targetSdkVersion            :   30,
-            minSdkVersion               :   23,
-            hiltVersion                 :   '2.35.1',
-            roomVersion                 :   '2.3.0',
+            kotlinVersion          : '1.5.0',
+            androidBuildToolVersion: '30.0.3',
+            compileSdkVersion      : 30,
+            targetSdkVersion       : 30,
+            minSdkVersion          : 23,
+            hiltVersion            : '2.35.1',
+            roomVersion            : '2.3.0',
+            androidXTestCoreVersion: '1.2.0',
+            coroutinesVersion : '1.4.3'
     ]
 
 }

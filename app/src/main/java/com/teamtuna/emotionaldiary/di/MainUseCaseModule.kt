@@ -26,7 +26,6 @@ object MainUseCaseModule {
     }
 }
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object MainRepositoryModule {
@@ -45,9 +44,9 @@ object LocalDataSourceModule {
     @Singleton
     @Provides
     fun provideLocalDataSource(
-        @ApplicationContext context : Context  //need if use room lib
+        database: EmotionRoomDatabase,   //need if use room lib
     ): LocalDataSource {
-        return LocalDataSourceImpl()
+        return LocalDataSourceImpl(database.fcmDao())
     }
 }
 
@@ -58,7 +57,7 @@ object RoomDatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(
-        @ApplicationContext context : Context
+        @ApplicationContext context: Context
     ): EmotionRoomDatabase {
         return Room.databaseBuilder(
             context,

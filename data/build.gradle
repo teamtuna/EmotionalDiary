@@ -61,6 +61,13 @@ dependencies {
     kapt "androidx.room:room-compiler:$versions.roomVersion"
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     testImplementation "androidx.room:room-testing:$versions.roomVersion"
+    testImplementation 'org.robolectric:robolectric:4.4'
+    implementation "androidx.test:core:$versions.androidXTestCoreVersion"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion"
 
     implementation project(":domain")
 }
