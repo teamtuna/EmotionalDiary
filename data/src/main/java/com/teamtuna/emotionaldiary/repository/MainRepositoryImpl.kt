@@ -3,11 +3,11 @@ package com.teamtuna.emotionaldiary.repository
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
 
 class MainRepositoryImpl(
-    local : LocalDataSource,
+    local: LocalDataSource,
     /*remote : RemoteDataSource*/
-): MainRepository {
+) : MainRepository {
 
-    override fun test() {
+    override fun test(): Result<Unit> {
         /*if(local.test())
             return local.test()
         else {
@@ -15,5 +15,6 @@ class MainRepositoryImpl(
             local.add(result)
             return result
         }*/
+        return Result.success(Unit)
     }
 }

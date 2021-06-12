@@ -5,8 +5,7 @@ import com.teamtuna.emotionaldiary.repository.MainRepository
 class MainUseCase(
     private val repository: MainRepository
 ) {
-    operator fun invoke(): Boolean {
+    operator fun invoke(): Result<Unit> {
         return repository.test()
     }
-
 }
