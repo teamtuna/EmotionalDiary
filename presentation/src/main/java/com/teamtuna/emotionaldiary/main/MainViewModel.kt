@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val mainUseCase : MainUseCase): ViewModel() {
-    fun test() = mainUseCase.invoke()
+    fun test() = mainUseCase()
 }
