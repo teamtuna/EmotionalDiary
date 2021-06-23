@@ -8,5 +8,5 @@ import androidx.room.OnConflictStrategy
 interface EmotionalDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertEmotional(entity: EmotionalEntity): Long
+    fun insertEmotional(entity: EmotionalEntity): Long
 }

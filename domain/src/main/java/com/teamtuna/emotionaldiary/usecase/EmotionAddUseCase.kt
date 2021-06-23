@@ -5,7 +5,7 @@ import com.teamtuna.emotionaldiary.repository.EmotionRepository
 import javax.inject.Inject
 
 class EmotionAddUseCase @Inject constructor(private val emotionRepository: EmotionRepository) {
-    operator fun invoke(emotion: Emotion, reason: String): Int {
+    suspend operator fun invoke(emotion: Emotion, reason: String): Long {
         return emotionRepository.add(emotion, reason)
     }
 }

@@ -5,7 +5,7 @@ import com.teamtuna.emotionaldiary.entity.Emotion
 import javax.inject.Inject
 
 class EmotionRepositoryImpl @Inject constructor(private val localDataSource: LocalDataSource) : EmotionRepository {
-    override fun add(emotion: Emotion, reason: String): Int {
+    override suspend fun add(emotion: Emotion, reason: String): Long {
         return localDataSource.add(emotion, reason)
     }
 }
