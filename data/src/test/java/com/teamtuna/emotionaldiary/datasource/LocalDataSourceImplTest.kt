@@ -5,6 +5,8 @@ import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.teamtuna.emotionaldiary.MainCoroutineRule
 import com.teamtuna.emotionaldiary.db.EmotionRoomDatabase
 import com.teamtuna.emotionaldiary.entity.Emotion
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -43,6 +45,23 @@ class LocalDataSourceImplTest {
         val reason = "test 내가 만든것도 아닌데 혼남"
         val dbId = localDataSource.add(Emotion.FEAR, reason)
         assert(dbId > 0)
+    }
+
+    @Test
+    fun `기존 데이터가 없으면? 어떻게 하지?`() = runBlocking {
+        val emotionalEntity = localDataSource.get(1)
+        assertNull(emotionalEntity)
+    }
+
+    @Test
+    fun `기존 데이터가 있으면 원하는 데이터를 줍시다`() = runBlocking {
+        val reason = "test 내가 만든것도 아닌데 혼남"
+        val dbId = localDataSource.add(Emotion.FEAR, reason)
+        val entity = requireNotNull(localDataSource.get(dbId))
+
+        assertEquals(Emotion.FEAR, entity.emotion)
+        assertEquals(reason, entity.reason)
+
     }
 
 }

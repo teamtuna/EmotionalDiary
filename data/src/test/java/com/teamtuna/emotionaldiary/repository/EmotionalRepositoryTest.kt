@@ -2,6 +2,8 @@ package com.teamtuna.emotionaldiary.repository
 
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
+import com.teamtuna.emotionaldiary.db.EmotionalEntity
+import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -39,5 +41,27 @@ internal class EmotionalRepositoryTest {
 
         Mockito.verify(localDataSource).add(testEmotion, "Test")
         assertEquals(1, actual)
+    }
+
+    @DisplayName("Repository에서 get할 때 ")
+    @Test
+    fun getTest() = runBlocking {
+        whenever(localDataSource.get(1)).thenReturn(
+            EmotionalEntity(
+                id = 1,
+                emotion = Emotion.JOY,
+                reason = "No Emotion"
+            )
+        )
+
+        val actual = repository.get(1)
+
+        val expect = DailyEmotion(
+            id = 1,
+            emotion = Emotion.JOY,
+            reason = "No Emotion"
+        )
+        Mockito.verify(localDataSource).get(1)
+        assertEquals(expect, actual)
     }
 }
