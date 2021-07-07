@@ -47,6 +47,7 @@ class LocalDataSourceImplTest {
         assert(dbId > 0)
     }
 
+
     @Test
     fun `기존 데이터가 없으면? 어떻게 하지?`() = runBlocking {
         val emotionalEntity = localDataSource.get(1)
