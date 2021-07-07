@@ -1,7 +1,10 @@
 package com.teamtuna.emotionaldiary.repository
 
+import com.nhaarman.mockitokotlin2.isA
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
+import com.teamtuna.emotionaldiary.db.EmotionalEntity
+import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -12,6 +15,9 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
+import com.teamtuna.emotionaldiary.entity.Result
+import org.junit.Assert
+import org.junit.jupiter.api.Assertions.assertTrue
 
 @ExtendWith(MockitoExtension::class)
 internal class EmotionalRepositoryTest {
@@ -28,7 +34,6 @@ internal class EmotionalRepositoryTest {
         repository = EmotionRepositoryImpl(localDataSource)
     }
 
-
     @DisplayName("Repository에서 Add시 Local에 같은 Emotional이 저장")
     @Test
     fun addTest() = runBlocking {
@@ -38,6 +43,32 @@ internal class EmotionalRepositoryTest {
 
 
         Mockito.verify(localDataSource).add(testEmotion, "Test")
-        assertEquals(1, actual)
+
+        assertTrue(actual is Result.Success)
+        assertEquals(1, (actual as Result.Success).data)
+    }
+
+    @DisplayName("Repository에서 get할 때 ")
+    @Test
+    fun getTest() = runBlocking {
+        whenever(localDataSource.get(1)).thenReturn(
+            EmotionalEntity(
+                id = 1,
+                emotion = Emotion.JOY,
+                reason = "No Emotion"
+            )
+        )
+
+        val actual = repository.get(1)
+
+        assertTrue(actual is Result.Success)
+
+        val expect = DailyEmotion(
+            id = 1,
+            emotion = Emotion.JOY,
+            reason = "No Emotion"
+        )
+        Mockito.verify(localDataSource).get(1)
+        assertEquals(expect, (actual as Result.Success).data)
     }
 }
