@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "905818189236",
+    "project_id": "emotionaldiary-251de",
+    "storage_bucket": "emotionaldiary-251de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905818189236:android:554effc506e467fe5e16e1",
+        "android_client_info": {
+          "package_name": "com.teamtuna.emotionaldiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905818189236-3c7n501j8ocn38kdcp9qbut0f829atqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2I1NUn0bftIROGhJeLGPyVOtnIrKybBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905818189236-3c7n501j8ocn38kdcp9qbut0f829atqr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
