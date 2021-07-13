@@ -30,3 +30,12 @@ $] ./gradlew ktlintApplyToIdea
 ```
 $] ./gradlew addKtlintCheckGitPreCommitHook
 ```
+위의 린트가 커밋룰이 적용되지 않는다면 아래와 같이 핀터레스트의 [ktlint Rule](https://github.com/pinterest/ktlint) 적용 후 다시 적용해야 합니다.
+```
+ktlint installGitPreCommitHook
+```
+적용 이후에 다시 핀터레스트의 githook이 Commit할때 정상 동작하는지 확인 하고 아래 명령어를 통해 pre-commit hook을 지우고 기존 적용하려는 룰을 재설치 해봅니다
+```
+rm .git/hooks/pre-commit
+./gradlew addKtlintCheckGitPreCommitHook
+```
