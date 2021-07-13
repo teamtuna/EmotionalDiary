@@ -3,6 +3,7 @@ package com.teamtuna.emotionaldiary.usecase
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.entity.Emotion
+import com.teamtuna.emotionaldiary.entity.Result
 import com.teamtuna.emotionaldiary.repository.EmotionRepository
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
@@ -16,6 +17,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import com.teamtuna.emotionaldiary.entity.Result
+import kotlinx.coroutines.runBlocking
 
 @DisplayName("감정추가에서 ")
 @ExtendWith(MockitoExtension::class)

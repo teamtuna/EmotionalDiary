@@ -1,13 +1,14 @@
 package com.teamtuna.emotionaldiary.repository
 
-import com.nhaarman.mockitokotlin2.isA
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
 import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
+import com.teamtuna.emotionaldiary.entity.Result
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,9 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
-import com.teamtuna.emotionaldiary.entity.Result
-import org.junit.Assert
-import org.junit.jupiter.api.Assertions.assertTrue
 
 @ExtendWith(MockitoExtension::class)
 internal class EmotionalRepositoryTest {
