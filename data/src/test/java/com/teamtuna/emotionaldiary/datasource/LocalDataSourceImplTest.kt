@@ -49,13 +49,13 @@ class LocalDataSourceImplTest {
 
 
     @Test
-    fun `기존 데이터가 없으면? 어떻게 하지?`() = runBlocking {
+    fun `기존_데이터가_없으면_어떻게_하지`() = runBlocking {
         val emotionalEntity = localDataSource.get(1)
         assertNull(emotionalEntity)
     }
 
     @Test
-    fun `기존 데이터가 있으면 원하는 데이터를 줍시다`() = runBlocking {
+    fun `기존_데이터가_있으면_원하는_데이터를_줍시다`() = runBlocking {
         val reason = "test 내가 만든것도 아닌데 혼남"
         val dbId = localDataSource.add(Emotion.FEAR, reason)
         val entity = requireNotNull(localDataSource.get(dbId))
