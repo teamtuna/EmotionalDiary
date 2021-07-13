@@ -28,15 +28,19 @@ jobs:
       with:
         java-version: 1.8
     
+    # 유닛 테스트
     - name: Unit tests
       run: bash ./gradlew test --stacktrace
     
+    # 빌드
     - name: Build with Gradle
       run: ./gradlew build
 
+    # Debug APK 빌드
     - name: Build debug APK
       run: bash ./gradlew assembleDebug --stacktrace
       
+    # APK 업로드
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
