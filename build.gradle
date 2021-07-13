@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
     }
     
     dependencies {
@@ -12,6 +13,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
         classpath "de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1" //junit5
         classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hiltVersion"
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:${versions.ktlintGradlePlugin}"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -23,6 +25,17 @@ allprojects {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
     }
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
+    ktlint {
+        debug = false
+        android = true
+        version = "0.36.0"
+        filter {
+            exclude("**/test/**")
+            exclude("**/androidTest/**")
+        }
+    }
+
 }
 
 task clean(type: Delete) {
