@@ -32,4 +32,4 @@ jobs:
       run: bash ./gradlew test --stacktrace
     
     - name: Build with Gradle
-        run: ./gradlew build
+      run: ./gradlew build
