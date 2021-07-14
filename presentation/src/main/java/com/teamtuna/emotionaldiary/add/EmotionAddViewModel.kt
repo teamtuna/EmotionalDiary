@@ -8,9 +8,9 @@ import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.process
 import com.teamtuna.emotionaldiary.usecase.EmotionAddUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class EmotionAddViewModel @Inject constructor(
