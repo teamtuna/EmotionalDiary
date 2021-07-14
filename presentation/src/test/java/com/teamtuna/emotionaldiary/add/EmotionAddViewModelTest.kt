@@ -40,7 +40,7 @@ internal class EmotionAddViewModelTest {
      * JUnit 5 에서 사용하려면 https://stackoverflow.com/a/51012642 참고
      * @ExtendWith(MockitoExtension::class, InstantExecutorExtension::class)
      */
-    //var instantExecutorRule = InstantExecutorExtension()
+    // var instantExecutorRule = InstantExecutorExtension()
 
     @BeforeEach
     fun setUp() {
@@ -57,13 +57,13 @@ internal class EmotionAddViewModelTest {
     @Test
     @DisplayName("기쁨이를 추가 한경우 EmotionAddViewModel.add가 호출되는지확인")
     fun add() = runBlockingTest {
-        //given
+        // given
         whenever(emotionRepository.add(Emotion.JOY, "기쁨이")).thenReturn(Result.Success(1L))
 
-        //when
+        // when
         viewModel.add(Emotion.JOY, "기쁨이")
 
-        //then
+        // then
         Mockito.verify(emotionRepository, times(1)).add(Emotion.JOY, "기쁨이")
     }
 }

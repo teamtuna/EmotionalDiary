@@ -15,10 +15,10 @@ import javax.inject.Inject
 @HiltViewModel
 class EmotionAddViewModel @Inject constructor(
     private val emotionAddUseCase: EmotionAddUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _response = MutableLiveData<Long>()
-    val response : LiveData<Long>
+    val response: LiveData<Long>
         get() = _response
 
     fun add(emotion: Emotion, reason: String) {
@@ -27,9 +27,7 @@ class EmotionAddViewModel @Inject constructor(
                 // Cannot invoke setValue on a background thread
                 _response.postValue(it)
             }, {
-
             })
         }
     }
-
 }

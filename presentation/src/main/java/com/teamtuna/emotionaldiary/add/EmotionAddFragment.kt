@@ -17,9 +17,14 @@ class EmotionAddFragment : Fragment() {
 
     private val emotionAddViewModel: EmotionAddViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_emotion_add, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(
+            R.layout.fragment_emotion_add, container, false
+        )
 
         emotionAddViewModel.response.observe(viewLifecycleOwner, {
             Log.e("TEST!!!", "response : $it")

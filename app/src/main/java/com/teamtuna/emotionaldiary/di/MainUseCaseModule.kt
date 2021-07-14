@@ -50,7 +50,6 @@ object EmotionRepositoryModule {
     }
 }
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalDataSourceModule {

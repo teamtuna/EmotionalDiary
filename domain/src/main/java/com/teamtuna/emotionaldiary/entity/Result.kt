@@ -12,5 +12,4 @@ inline fun <reified T> Result<T>.process(success: (T) -> Unit, error: (ErrorMode
     }
 }
 
-
 data class ErrorModel(val title: String? = "unKnown error", val description: String? = null)
