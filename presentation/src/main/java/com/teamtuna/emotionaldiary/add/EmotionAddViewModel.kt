@@ -5,14 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.teamtuna.emotionaldiary.entity.Emotion
+import com.teamtuna.emotionaldiary.entity.process
 import com.teamtuna.emotionaldiary.usecase.EmotionAddUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class EmotionAddViewModel @Inject constructor(
-        private val emotionAddUseCase: EmotionAddUseCase
+    private val emotionAddUseCase: EmotionAddUseCase
 ): ViewModel() {
 
     private val _response = MutableLiveData<Long>()
@@ -20,10 +22,12 @@ class EmotionAddViewModel @Inject constructor(
         get() = _response
 
     fun add(emotion: Emotion, reason: String) {
-        viewModelScope.launch {
-            emotionAddUseCase(emotion, reason).let {
+        viewModelScope.launch(Dispatchers.IO) {
+            emotionAddUseCase(emotion, reason).process({
                 _response.value = it
-            }
+            }, {
+
+            })
         }
     }
 
