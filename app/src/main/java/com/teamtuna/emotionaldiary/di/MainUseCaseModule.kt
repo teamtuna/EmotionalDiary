@@ -44,7 +44,7 @@ object LocalDataSourceModule {
     @Singleton
     @Provides
     fun provideLocalDataSource(
-        database: EmotionRoomDatabase,   //need if use room lib
+        database: EmotionRoomDatabase // need if use room lib
     ): LocalDataSource {
         return LocalDataSourceImpl(database.fcmDao())
     }

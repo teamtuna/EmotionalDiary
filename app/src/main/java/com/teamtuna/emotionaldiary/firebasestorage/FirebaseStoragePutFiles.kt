@@ -17,8 +17,12 @@ fun firebaseStoragePutFiles(dir: File) {
             }.forEach { uri ->
                 val filename = uri.lastPathSegment ?: uri.toString()
                 val meta = when {
-                    filename.contains(".txt") -> storageMetadata { contentType = "text/plain" }
-                    filename.contains(".jpeg") -> storageMetadata { contentType = "image/jpeg" }
+                    filename.contains(".txt") -> storageMetadata {
+                        contentType = "text/plain"
+                    }
+                    filename.contains(".jpeg") -> storageMetadata {
+                        contentType = "image/jpeg"
+                    }
                     else -> storageMetadata { contentType = "application/octet-stream" }
                 }
                 Firebase.storage.reference.child("image/$filename").putFile(uri, meta)

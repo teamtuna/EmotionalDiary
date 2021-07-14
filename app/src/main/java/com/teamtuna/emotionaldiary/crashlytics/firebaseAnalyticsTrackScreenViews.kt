@@ -30,7 +30,6 @@ fun Application.firebaseCrashlyticsScreenLog() {
                 key(FirebaseAnalytics.Param.SCREEN_NAME, activity.title.toString())
                 key(FirebaseAnalytics.Param.SCREEN_CLASS, activity.javaClass.simpleName)
             }
-
         }
     })
 }

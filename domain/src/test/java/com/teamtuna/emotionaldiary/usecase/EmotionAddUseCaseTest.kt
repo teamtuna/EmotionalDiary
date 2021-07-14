@@ -27,17 +27,17 @@ internal class EmotionAddUseCaseTest {
     @Test
     @DisplayName("기쁨이를 추가 한경우 EmotionalRepository.add가 호출되는지확인")
     fun addUseCase() = runBlockingTest {
-        //given
+        // given
         val answers = Result.Success(1L)
         whenever(repository.add(Emotion.JOY, "기쁨이")).thenReturn(answers)
         val addUsecase = EmotionAddUseCase(repository)
 
-        //val getUsecase = EmotionalGetUseCase(repository)
+        // val getUsecase = EmotionalGetUseCase(repository)
 
-        //when
+        // when
         val actual /*id*/ = addUsecase(Emotion.JOY, "기쁨이")
 
-        //then
+        // then
         Mockito.verify(repository, times(1)).add(Emotion.JOY, "기쁨이")
         assertThat((actual as Result.Success).data, equalTo(1L))
     }

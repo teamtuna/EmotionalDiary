@@ -23,7 +23,8 @@ fun Application.firebaseAnalyticsTrackScreenViews() {
         override fun onActivityDestroyed(activity: Activity) {}
         override fun onActivityResumed(activity: Activity) {
             firebaseAnalytics.logEvent(
-                FirebaseAnalytics.Event.SCREEN_VIEW, bundleOf(
+                FirebaseAnalytics.Event.SCREEN_VIEW,
+                bundleOf(
                     FirebaseAnalytics.Param.SCREEN_NAME to activity.title,
                     FirebaseAnalytics.Param.SCREEN_CLASS to activity.javaClass.simpleName
                 )

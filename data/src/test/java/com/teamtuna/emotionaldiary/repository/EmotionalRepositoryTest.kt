@@ -39,7 +39,6 @@ internal class EmotionalRepositoryTest {
         whenever(localDataSource.add(testEmotion, "Test")).thenReturn(1)
         val actual = repository.add(testEmotion, "Test")
 
-
         Mockito.verify(localDataSource).add(testEmotion, "Test")
 
         assertTrue(actual is Result.Success)
