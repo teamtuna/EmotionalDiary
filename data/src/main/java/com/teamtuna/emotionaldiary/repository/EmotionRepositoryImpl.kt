@@ -7,8 +7,11 @@ import com.teamtuna.emotionaldiary.entity.ErrorModel
 import com.teamtuna.emotionaldiary.entity.Result
 import com.teamtuna.emotionaldiary.entity.UniqId
 import com.teamtuna.emotionaldiary.map
+import javax.inject.Inject
 
-class EmotionRepositoryImpl(private val localDataSource: LocalDataSource) : EmotionRepository {
+class EmotionRepositoryImpl @Inject constructor(
+    private val localDataSource: LocalDataSource
+) : EmotionRepository {
     override suspend fun add(
         emotion: Emotion,
         reason: String
