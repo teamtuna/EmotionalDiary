@@ -1,7 +1,9 @@
 package com.teamtuna.emotionaldiary.repository
 
+import com.teamtuna.emotionaldiary.datasource.LocalDataSource
+
 class MainRepositoryImpl(
-    // private val local: LocalDataSource,
+    private val local: LocalDataSource
     // remote: RemoteDataSource
 ) : MainRepository {
 
