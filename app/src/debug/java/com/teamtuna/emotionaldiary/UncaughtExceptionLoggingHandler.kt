@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
@@ -61,8 +62,26 @@ class UncaughtExceptionLoggingHandler(
     private fun lastActivityWeakReference(context: Context) {
         (context.applicationContext as Application).registerActivityLifecycleCallbacks(object :
             Application.ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            }
+
+            override fun onActivityStarted(activity: Activity) {
+            }
+
             override fun onActivityResumed(activity: Activity) {
                 mLastActivityWeakReference = WeakReference(activity)
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+            }
+
+            override fun onActivityStopped(activity: Activity) {
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+            }
+
+            override fun onActivityDestroyed(activity: Activity) {
             }
         })
     }
