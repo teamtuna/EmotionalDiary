@@ -16,7 +16,3 @@ class EasterEgg(private val activity: Activity) {
         Toast.makeText(activity, "Hello", Toast.LENGTH_SHORT).show()
     }
 }
-
-
-
-

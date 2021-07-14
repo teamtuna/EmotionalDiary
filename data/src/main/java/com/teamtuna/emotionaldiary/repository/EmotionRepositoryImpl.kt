@@ -1,7 +1,11 @@
 package com.teamtuna.emotionaldiary.repository
 
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
-import com.teamtuna.emotionaldiary.entity.*
+import com.teamtuna.emotionaldiary.entity.DailyEmotion
+import com.teamtuna.emotionaldiary.entity.Emotion
+import com.teamtuna.emotionaldiary.entity.ErrorModel
+import com.teamtuna.emotionaldiary.entity.Result
+import com.teamtuna.emotionaldiary.entity.UniqId
 import com.teamtuna.emotionaldiary.map
 
 class EmotionRepositoryImpl(private val localDataSource: LocalDataSource) : EmotionRepository {
@@ -16,6 +20,5 @@ class EmotionRepositoryImpl(private val localDataSource: LocalDataSource) : Emot
         return localDataSource.get(id)?.let {
             Result.Success(it.map())
         } ?: Result.Fail(ErrorModel())
-
     }
 }
