@@ -107,31 +107,31 @@ class EmotionalDiaryFirebaseMessagingService : FirebaseMessagingService() {
 private fun RemoteMessage.Notification.dump() {
     Log.d(
         // @formatter:off
-        "\ntitle                  : " + title                    // : String? = null
-            + "\nbody                   : " + body                      // : String? = null
-            + "\nicon                   : " + icon                      // : String? = null
-            + "\nimageUrl               : " + imageUrl                  // : String? = null
-            + "\nsound                  : " + sound                     // : String? = null
-            + "\ntag                    : " + tag                       // : String? = null
-            + "\ncolor                  : " + color                     // : String? = null
-            + "\nclickAction            : " + clickAction               // : String? = null
-            + "\nchannelId              : " + channelId                 // : String? = null
-            + "\nlink                   : " + link                      // : Uri? = null
-            + "\nticker                 : " + ticker                    // : String? = null
-            + "\nnotificationPriority   : " + notificationPriority      // : Int? = null
-            + "\nvisibility             : " + visibility                // : Int? = null
-            + "\nnotificationCount      : " + notificationCount         // : Int? = null
-            + "\nlightSettings          : " + lightSettings             // : IntArray
-            + "\neventTime              : " + eventTime                 // : Long? = null
-            + "\nsticky                 : " + sticky                    // = false
-            + "\nlocalOnly              : " + localOnly                 // = false
-            + "\ndefaultSound           : " + defaultSound              // = false
-            + "\ndefaultLightSettings   : " + defaultLightSettings      // = false
-            + "\nvibrateTimings         : " + vibrateTimings            // : LongArray
-            + "\nbodyLocalizationKey    : " + bodyLocalizationKey
-            + "\nbodyLocalizationArgs   : " + bodyLocalizationArgs
-            + "\ntitleLocalizationKey   : " + titleLocalizationKey
-            + "\ntitleLocalizationArgs  : " + titleLocalizationArgs
-            + "\ndefaultVibrateSettings : " + defaultVibrateSettings
+        "\ntitle                  : " + title + // : String? = null
+            "\nbody                   : " + body + // : String? = null
+            "\nicon                   : " + icon + // : String? = null
+            "\nimageUrl               : " + imageUrl + // : String? = null
+            "\nsound                  : " + sound + // : String? = null
+            "\ntag                    : " + tag + // : String? = null
+            "\ncolor                  : " + color + // : String? = null
+            "\nclickAction            : " + clickAction + // : String? = null
+            "\nchannelId              : " + channelId + // : String? = null
+            "\nlink                   : " + link + // : Uri? = null
+            "\nticker                 : " + ticker + // : String? = null
+            "\nnotificationPriority   : " + notificationPriority + // : Int? = null
+            "\nvisibility             : " + visibility + // : Int? = null
+            "\nnotificationCount      : " + notificationCount + // : Int? = null
+            "\nlightSettings          : " + lightSettings + // : IntArray
+            "\neventTime              : " + eventTime + // : Long? = null
+            "\nsticky                 : " + sticky + // = false
+            "\nlocalOnly              : " + localOnly + // = false
+            "\ndefaultSound           : " + defaultSound + // = false
+            "\ndefaultLightSettings   : " + defaultLightSettings + // = false
+            "\nvibrateTimings         : " + vibrateTimings + // : LongArray
+            "\nbodyLocalizationKey    : " + bodyLocalizationKey +
+            "\nbodyLocalizationArgs   : " + bodyLocalizationArgs +
+            "\ntitleLocalizationKey   : " + titleLocalizationKey +
+            "\ntitleLocalizationArgs  : " + titleLocalizationArgs +
+            "\ndefaultVibrateSettings : " + defaultVibrateSettings
     )
 }
