@@ -21,8 +21,3 @@ class EmotionalDiaryApplication : Application() {
         easterEgg()
     }
 }
-
-
-
-
-

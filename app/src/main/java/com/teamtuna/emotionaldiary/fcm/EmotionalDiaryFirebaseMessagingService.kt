@@ -1,6 +1,5 @@
 package com.teamtuna.emotionaldiary.fcm
 
-
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -17,7 +16,6 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.teamtuna.emotionaldiary.R
 
-
 const val IS_HANDLE_MESSAGE_WITHIN_10_SECONDS = true
 
 class EmotionalDiaryFirebaseMessagingService : FirebaseMessagingService() {
@@ -28,7 +26,6 @@ class EmotionalDiaryFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun sendRegistrationToServer(token: String?) {
         Log.d("sendRegistrationTokenToServer($token)")
-
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -57,7 +54,6 @@ class EmotionalDiaryFirebaseMessagingService : FirebaseMessagingService() {
         WorkManager.getInstance(applicationContext).beginWith(work).enqueue()
     }
 
-
     private fun sendNotification(messageBody: String) {
         val intent = packageManager.getLaunchIntentForPackage(packageName)!!
 
@@ -77,7 +73,8 @@ class EmotionalDiaryFirebaseMessagingService : FirebaseMessagingService() {
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -109,36 +106,32 @@ class EmotionalDiaryFirebaseMessagingService : FirebaseMessagingService() {
 
 private fun RemoteMessage.Notification.dump() {
     Log.d(
-        //@formatter:off
-        "\ntitle                  : " + title                     //: String? = null
-        + "\nbody                   : " + body                      //: String? = null
-        + "\nicon                   : " + icon                      //: String? = null
-        + "\nimageUrl               : " + imageUrl                  //: String? = null
-        + "\nsound                  : " + sound                     //: String? = null
-        + "\ntag                    : " + tag                       //: String? = null
-        + "\ncolor                  : " + color                     //: String? = null
-        + "\nclickAction            : " + clickAction               //: String? = null
-        + "\nchannelId              : " + channelId                 //: String? = null
-        + "\nlink                   : " + link                      //: Uri? = null
-        + "\nticker                 : " + ticker                    //: String? = null
-        + "\nnotificationPriority   : " + notificationPriority      //: Int? = null
-        + "\nvisibility             : " + visibility                //: Int? = null
-        + "\nnotificationCount      : " + notificationCount         //: Int? = null
-        + "\nlightSettings          : " + lightSettings             //: IntArray
-        + "\neventTime              : " + eventTime                 //: Long? = null
-        + "\nsticky                 : " + sticky                    //= false
-        + "\nlocalOnly              : " + localOnly                 //= false
-        + "\ndefaultSound           : " + defaultSound              //= false
-        + "\ndefaultLightSettings   : " + defaultLightSettings      //= false
-        + "\nvibrateTimings         : " + vibrateTimings            //: LongArray
-        + "\nbodyLocalizationKey    : " + bodyLocalizationKey
-        + "\nbodyLocalizationArgs   : " + bodyLocalizationArgs
-        + "\ntitleLocalizationKey   : " + titleLocalizationKey
-        + "\ntitleLocalizationArgs  : " + titleLocalizationArgs
-        + "\ndefaultVibrateSettings : " + defaultVibrateSettings
+        // @formatter:off
+        "\ntitle                  : " + title + // : String? = null
+            "\nbody                   : " + body + // : String? = null
+            "\nicon                   : " + icon + // : String? = null
+            "\nimageUrl               : " + imageUrl + // : String? = null
+            "\nsound                  : " + sound + // : String? = null
+            "\ntag                    : " + tag + // : String? = null
+            "\ncolor                  : " + color + // : String? = null
+            "\nclickAction            : " + clickAction + // : String? = null
+            "\nchannelId              : " + channelId + // : String? = null
+            "\nlink                   : " + link + // : Uri? = null
+            "\nticker                 : " + ticker + // : String? = null
+            "\nnotificationPriority   : " + notificationPriority + // : Int? = null
+            "\nvisibility             : " + visibility + // : Int? = null
+            "\nnotificationCount      : " + notificationCount + // : Int? = null
+            "\nlightSettings          : " + lightSettings + // : IntArray
+            "\neventTime              : " + eventTime + // : Long? = null
+            "\nsticky                 : " + sticky + // = false
+            "\nlocalOnly              : " + localOnly + // = false
+            "\ndefaultSound           : " + defaultSound + // = false
+            "\ndefaultLightSettings   : " + defaultLightSettings + // = false
+            "\nvibrateTimings         : " + vibrateTimings + // : LongArray
+            "\nbodyLocalizationKey    : " + bodyLocalizationKey +
+            "\nbodyLocalizationArgs   : " + bodyLocalizationArgs +
+            "\ntitleLocalizationKey   : " + titleLocalizationKey +
+            "\ntitleLocalizationArgs  : " + titleLocalizationArgs +
+            "\ndefaultVibrateSettings : " + defaultVibrateSettings
     )
 }
-
-
-
-

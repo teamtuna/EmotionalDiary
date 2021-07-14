@@ -20,3 +20,22 @@
 **P5**: 그냥 사소한 의견입니다 (Approve)
 - 작성자는 P5에 대해 아무런 의견을 달지 않고 무시해도 괜찮습니다.
 
+# 코드 스타일
+ktlint를 적용 중 입니다. 아래 명령어 실행 후 안드로이드 스튜디오를 재시작 해주세요.
+```
+$] ./gradlew ktlintApplyToIdea
+```
+
+린트 룰에 위배되는 코드의 경우 PR을 생성하면 린트 에러를 체크합니다. 커밋 전에 린트 에러가 있는지를 파악하고 싶다면 아래 명령어를 이용해 프리 커밋 훅을 설치하고 체크 합니다
+```
+$] ./gradlew addKtlintCheckGitPreCommitHook
+```
+위의 린트가 커밋룰이 적용되지 않는다면 아래와 같이 핀터레스트의 [ktlint Rule](https://github.com/pinterest/ktlint) 적용 후 다시 적용해야 합니다.
+```
+ktlint installGitPreCommitHook
+```
+적용 이후에 다시 핀터레스트의 githook이 Commit할때 정상 동작하는지 확인 하고 아래 명령어를 통해 pre-commit hook을 지우고 기존 적용하려는 룰을 재설치 해봅니다
+```
+rm .git/hooks/pre-commit
+./gradlew addKtlintCheckGitPreCommitHook
+```
