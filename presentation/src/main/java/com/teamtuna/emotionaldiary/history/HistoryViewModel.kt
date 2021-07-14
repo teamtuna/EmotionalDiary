@@ -12,5 +12,4 @@ class HistoryViewModel @Inject constructor() : ViewModel() {
 
     private val _emotionList = MutableLiveData<List<DailyEmotion>>()
     val emotionList: LiveData<List<DailyEmotion>> get() = _emotionList
-
 }

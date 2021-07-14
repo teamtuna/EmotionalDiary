@@ -28,6 +28,4 @@ class HistoryActivity : AppCompatActivity() {
             historyAdapter.submitList(it)
         })
     }
-
-
 }
