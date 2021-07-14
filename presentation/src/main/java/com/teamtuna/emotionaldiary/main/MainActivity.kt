@@ -3,6 +3,7 @@ package com.teamtuna.emotionaldiary.main
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.teamtuna.emotionaldiary.add.EmotionAddFragment
 import com.teamtuna.emotionaldiary.presentation.R
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,5 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val fragment = EmotionAddFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.fragment, fragment).commit()
     }
 }

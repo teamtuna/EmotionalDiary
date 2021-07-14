@@ -1,4 +1,4 @@
-package com.teamtuna.emotionaldiary.usecase;
+package com.teamtuna.emotionaldiary.usecase
 
 import com.teamtuna.emotionaldiary.repository.MainRepository
 
