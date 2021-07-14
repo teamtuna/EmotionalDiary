@@ -69,5 +69,8 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion"
 
+    implementation "com.google.dagger:hilt-android:$versions.hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$versions.hiltVersion"
+
     implementation project(":domain")
 }
