@@ -9,8 +9,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -26,24 +24,18 @@ internal class EmotionAddUseCaseTest {
     @Mock
     private lateinit var repository: EmotionRepository
 
-    @BeforeEach
-    fun setUp() = runBlockingTest {
-        whenever(repository.add(Emotion.JOY, "기쁨이")).thenReturn(1)
-    }
-
-    @AfterEach
-    fun tearDown() {
-    }
-
     @Test
     @DisplayName("기쁨이를 추가 한경우 EmotionalRepository.add가 호출되는지확인")
     fun addUseCase() = runBlockingTest {
         //given
-        val addUseCase = EmotionAddUseCase(repository)
+        val answers = Result.Success(1L)
+        whenever(repository.add(Emotion.JOY, "기쁨이")).thenReturn(answers)
+        val addUsecase = EmotionAddUseCase(repository)
+
+        //val getUsecase = EmotionalGetUseCase(repository)
 
         //when
-        val actual = addUseCase(Emotion.JOY, "기쁨이")
-        println("actual : $actual")
+        val actual /*id*/ = addUsecase(Emotion.JOY, "기쁨이")
 
         //then
         Mockito.verify(repository, times(1)).add(Emotion.JOY, "기쁨이")
