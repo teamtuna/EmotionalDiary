@@ -32,6 +32,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    testOptions {
+        /**
+         * LiveData 사용시 발생. (안드로이드 프레임워크를 필요로 하기 때문에 JUnit 기반으로 테스트를 실행하면 발생)
+         * java.lang.RuntimeException: Method myLooper in android.os.Looper not mocked.
+         * https://developer.android.com/training/testing/unit-testing/local-unit-tests?hl=ko
+         * 0 또는 null로 리턴되므로 마지막 수단으로 사용
+         */
+        // unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -59,6 +69,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.1'
     testImplementation 'org.mockito:mockito-junit-jupiter:3.10.0'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
     testImplementation "junit:junit:4.13.2"
     testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.5.2"
