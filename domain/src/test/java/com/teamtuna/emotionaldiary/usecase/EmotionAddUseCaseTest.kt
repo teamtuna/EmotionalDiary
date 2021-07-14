@@ -3,6 +3,7 @@ package com.teamtuna.emotionaldiary.usecase
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.entity.Emotion
+import com.teamtuna.emotionaldiary.entity.Result
 import com.teamtuna.emotionaldiary.repository.EmotionRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -46,6 +47,6 @@ internal class EmotionAddUseCaseTest {
 
         //then
         Mockito.verify(repository, times(1)).add(Emotion.JOY, "기쁨이")
-        assertThat(actual, equalTo(1))
+        assertThat((actual as Result.Success).data, equalTo(1L))
     }
 }
