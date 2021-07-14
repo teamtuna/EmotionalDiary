@@ -15,10 +15,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.doOnPreDraw
 import java.lang.reflect.Method
 
-
 fun Application.easterEgg() = registerActivityLifecycleCallbacks(EasterEggRunner())
 
-class EasterEggRunner(private val easterEggClzName: Array<String> = arrayOf(EasterEgg::class.java.name)) : Application.ActivityLifecycleCallbacks {
+class EasterEggRunner(
+    private val easterEggClzName: Array<String> = arrayOf(EasterEgg::class.java.name)
+) :
+    Application.ActivityLifecycleCallbacks {
     var systemWindowInsetTop: Int = 0
     override fun onActivityStarted(activity: Activity) {
         val parent = activity.findViewById<ViewGroup>(Window.ID_ANDROID_CONTENT)
@@ -28,7 +30,8 @@ class EasterEggRunner(private val easterEggClzName: Array<String> = arrayOf(East
         val easterEggButton = with(activity) {
             TextView(this).apply {
                 setOnApplyWindowInsetsListener { _, insets ->
-                    systemWindowInsetTop = WindowInsetsCompat.toWindowInsetsCompat(insets).getInsets(WindowInsetsCompat.Type.systemBars()).top
+                    systemWindowInsetTop = WindowInsetsCompat.toWindowInsetsCompat(insets)
+                        .getInsets(WindowInsetsCompat.Type.systemBars()).top
                     insets
                 }
                 doOnPreDraw {
@@ -36,16 +39,25 @@ class EasterEggRunner(private val easterEggClzName: Array<String> = arrayOf(East
                     getLocationInWindow(locationInWindow)
                     if (locationInWindow[1] == 0) y = systemWindowInsetTop.toFloat()
                 }
-                val versionCode = PackageInfoCompat.getLongVersionCode(packageManager.getPackageInfo(packageName, 0))
+                val versionCode = PackageInfoCompat.getLongVersionCode(
+                    packageManager.getPackageInfo(
+                        packageName,
+                        0
+                    )
+                )
                 val versionName = packageManager.getPackageInfo(packageName, 0).versionName
 
                 @SuppressLint("SetTextI18n")
                 text = "EasterEgg::$versionName::$versionCode"
                 tag = EASTER_EGG_VIEW_TAG
                 setTextColor(0x00ff0000)
-                textSize = 9f//sp
+                textSize = 9f // sp
             }.also {
-                parent.addView(it, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                parent.addView(
+                    it,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
             }
         }
 
@@ -64,8 +76,13 @@ class EasterEggRunner(private val easterEggClzName: Array<String> = arrayOf(East
         easterEggButton.setOnClickListener {
             AlertDialog.Builder(activity)
                 .setAdapter(adapter) { dialog, which ->
-                    val classMethod = (dialog as AlertDialog).listView.getItemAtPosition(which) as Map<*, *>
-                    invokeMethod(classMethod[KEY_CLASS] as Class<*>, classMethod[KEY_METHOD] as Method, activity)
+                    val classMethod =
+                        (dialog as AlertDialog).listView.getItemAtPosition(which) as Map<*, *>
+                    invokeMethod(
+                        classMethod[KEY_CLASS] as Class<*>,
+                        classMethod[KEY_METHOD] as Method,
+                        activity
+                    )
                 }
                 .show()
         }
@@ -81,20 +98,18 @@ class EasterEggRunner(private val easterEggClzName: Array<String> = arrayOf(East
                         KEY_CLASS to this,
                         KEY_METHOD to it,
                         KEY_CLASS_NAME to simpleName,
-                        KEY_METHOD_NAME to it.name,
+                        KEY_METHOD_NAME to it.name
                     )
                 }
                 .toList()
         }
     }.getOrDefault(emptyList())
 
-
     private fun invokeMethod(clazz: Class<*>, method: Method, activity: Activity) {
         val constructor = clazz.getConstructor(Activity::class.java)
         val receiver = constructor.newInstance(activity)
         method.invoke(receiver)
     }
-
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
     override fun onActivityResumed(activity: Activity) {}
@@ -111,4 +126,3 @@ class EasterEggRunner(private val easterEggClzName: Array<String> = arrayOf(East
         private const val KEY_METHOD_NAME = "methodName"
     }
 }
-

@@ -47,7 +47,6 @@ class LocalDataSourceImplTest {
         assert(dbId > 0)
     }
 
-
     @Test
     fun `기존_데이터가_없으면_어떻게_하지`() = runBlocking {
         val emotionalEntity = localDataSource.get(1)
@@ -62,7 +61,5 @@ class LocalDataSourceImplTest {
 
         assertEquals(Emotion.FEAR, entity.emotion)
         assertEquals(reason, entity.reason)
-
     }
-
 }

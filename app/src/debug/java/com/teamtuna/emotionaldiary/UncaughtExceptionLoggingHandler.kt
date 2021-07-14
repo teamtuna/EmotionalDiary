@@ -17,18 +17,27 @@ import com.teamtuna.emotionaldiary.firebasestorage.firebaseStoragePutFiles
 import java.io.File
 import java.lang.ref.WeakReference
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
-
-fun Application.uncaughtExceptionLoggingHandler() = UncaughtExceptionLoggingHandler(applicationContext)
+fun Application.uncaughtExceptionLoggingHandler() =
+    UncaughtExceptionLoggingHandler(applicationContext)
 
 class UncaughtExceptionLoggingHandler(
     appContext: Context,
-    actor: ((File) -> Unit)? = ::firebaseStoragePutFiles,
+    actor: ((File) -> Unit)? = ::firebaseStoragePutFiles
 ) {
-    private var versionTag: String = "version ${appContext.runCatching { PackageInfoCompat.getLongVersionCode(packageManager.getPackageInfo(packageName, 0)) }.getOrDefault(-1L)}"
+    private var versionTag: String = "version ${
+        appContext.runCatching {
+            PackageInfoCompat.getLongVersionCode(
+                packageManager.getPackageInfo(
+                    packageName,
+                    0
+                )
+            )
+        }.getOrDefault(-1L)
+    }"
     private var logDir = File(appContext.externalCacheDir, "temp")
-
 
     init {
         lastActivityWeakReference(appContext)
@@ -51,22 +60,37 @@ class UncaughtExceptionLoggingHandler(
 
     private var mLastActivityWeakReference: WeakReference<Activity>? = null
     private fun lastActivityWeakReference(context: Context) {
-        (context.applicationContext as Application).registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
-            override fun onActivityStarted(activity: Activity) {}
-            override fun onActivityPaused(activity: Activity) {}
-            override fun onActivityStopped(activity: Activity) {}
-            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
-            override fun onActivityDestroyed(activity: Activity) {}
+        (context.applicationContext as Application).registerActivityLifecycleCallbacks(object :
+            Application.ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            }
+
+            override fun onActivityStarted(activity: Activity) {
+            }
+
             override fun onActivityResumed(activity: Activity) {
                 mLastActivityWeakReference = WeakReference(activity)
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+            }
+
+            override fun onActivityStopped(activity: Activity) {
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+            }
+
+            override fun onActivityDestroyed(activity: Activity) {
             }
         })
     }
 
-
     private fun uncaughtExceptionFilename(): String {
-        val now = SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault()).format(Date(System.currentTimeMillis()))
+        val now = SimpleDateFormat(
+            "yyyyMMdd-HHmmss",
+            Locale.getDefault()
+        ).format(Date(System.currentTimeMillis()))
         return now + mLastActivityWeakReference?.get()?.run {
             var name = ":" + javaClass.simpleName
 
@@ -95,8 +119,6 @@ class UncaughtExceptionLoggingHandler(
             }
     }
 
-
-    ////////////////////////////////////////////////////////////////////////////////
     @Suppress("UNCHECKED_CAST")
     private fun <T : View> ViewGroup.findViewByChild(clz: Class<T>): T? {
         val result = children.firstOrNull { clz.isInstance(it) }
@@ -106,5 +128,3 @@ class UncaughtExceptionLoggingHandler(
         return result as? T
     }
 }
-
-
