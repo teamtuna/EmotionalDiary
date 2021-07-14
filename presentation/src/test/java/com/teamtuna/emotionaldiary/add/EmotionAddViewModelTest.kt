@@ -1,7 +1,11 @@
 package com.teamtuna.emotionaldiary.add
 
 import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.entity.Emotion
+import com.teamtuna.emotionaldiary.entity.Result
+import com.teamtuna.emotionaldiary.repository.EmotionRepository
+import com.teamtuna.emotionaldiary.usecase.EmotionAddUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
@@ -18,11 +22,16 @@ import org.mockito.junit.jupiter.MockitoExtension
 @ExtendWith(MockitoExtension::class)
 internal class EmotionAddViewModelTest {
 
-    @Mock
     private lateinit var viewModel: EmotionAddViewModel
 
+    @Mock
+    private lateinit var emotionRepository: EmotionRepository
+
     @BeforeEach
-    fun setUp() = runBlockingTest {
+    fun setUp() {
+        viewModel = EmotionAddViewModel(
+            EmotionAddUseCase(emotionRepository)
+        )
     }
 
     @AfterEach
@@ -34,6 +43,7 @@ internal class EmotionAddViewModelTest {
     @DisplayName("기쁨이를 추가 한경우 EmotionAddViewModel.add가 호출되는지확인")
     fun add() = runBlockingTest {
         //given
+        whenever(emotionRepository.add(Emotion.JOY, "기쁨이")).thenReturn(Result.Success(1L))
 
         //when
         viewModel.add(Emotion.JOY, "기쁨이")
