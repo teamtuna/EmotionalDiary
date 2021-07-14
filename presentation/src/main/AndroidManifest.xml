@@ -19,6 +19,8 @@
             </intent-filter>
 
         </activity>
+        <activity android:name="com.teamtuna.emotionaldiary.history.HistoryActivity" />
+
     </application>
 
 </manifest>
