@@ -1,0 +1,4 @@
+<resources>
+    <string name="default_notification_channel_id" translatable="false">Emotional</string>
+    <string name="default_notification_channel_name" translatable="false">Common Channel</string>
+</resources>
