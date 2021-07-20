@@ -8,6 +8,7 @@ on:
     branches: [ develop, master ]
     tags:
       - v*.*
+      - test/*
 
   pull_request:
     branches:
@@ -93,7 +94,7 @@ jobs:
         run: |
           find . -type f -name *app-debug.apk
           echo "::set-output name=DEBUG_APK_PATH::$(find . -type f -name *app-debug.apk)"
-                    echo "::set-output name=DEBUG_APK_NAME::$(basename $(find . -type f -name *app-debug.apk))"
+          echo "::set-output name=DEBUG_APK_NAME::$(basename $(find . -type f -name *app-debug.apk))"
 
       - name: Upload APKs to Slack
         shell: bash
@@ -101,7 +102,7 @@ jobs:
           ref=${GITHUB_REF#refs/}
           sha=${GITHUB_SHA::8}
           gitlog="$(cat gitlog.txt)"
-          debug_permalink=$(curl https://slack.com/api/files.upload -H "Authorization: Bearer ${{ secrets.GIT_TUNA_WORKFLOW_TOKEN }}" -F file=@${{ steps.apk.outputs.DEBUG_APK_PATH }} -F channels=CBWHTBLNL -F thread_ts='1607309305.245800' | jq -r '.file.url_private_download')
+          debug_permalink=$(curl https://slack.com/api/files.upload -H "Authorization: Bearer ${{ secrets.GIT_TUNA_WORKFLOW_TOKEN }}" -F file=@${{ steps.apk.outputs.DEBUG_APK_PATH }} -F channels=CPMANENF3 -F thread_ts='1607309305.245800' | jq -r '.file.url_private_download')
           curl https://slack.com/api/chat.postMessage -X POST -H 'Authorization: Bearer ${{ secrets.GIT_TUNA_WORKFLOW_TOKEN }}' -H 'Content-type: application/json' --data '{"channel":"CPMANENF3","attachments": [{ "color":"#FF7E36", "fields": [{"title":"Publisher","value":"${{ github.actor }}","short":true}, {"title":"Build Variant","value":"Debug","short":true}, {"title":"Ref","value":"'"$ref"'","short":true}, {"title":"Sha", "value":"'"$sha"'","short":true}, {"title":"Recent changes","value":"'"$gitlog"'","short":false}],"actions": [{ "type": "button", "name": "download", "text": "${{ steps.apk.outputs.DEBUG_APK_NAME }}", "url": "'"$debug_permalink"'", "style": "primary" }] }] }'
 
   slack-workflow-status:
