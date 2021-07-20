@@ -1,0 +1,115 @@
+# This is a basic workflow to help you get started with Actions
+
+name: develop
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ release/**, develop, master ]
+  pull_request:
+    branches: [ develop, release/** ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  unit-tests-app-module:
+    name: Run unit tests on app module
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+
+      # 유닛 테스트
+      - name: Run Unit tests
+        shell: bash
+        run: |
+          ./gradlew --no-daemon app:testDebugUnitTest
+
+      # 테스트 결과
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-module-results.html
+          path: ./app/build/reports/tests/testDebugUnitTest/index.html
+  unit-tests-presentation-module:
+    name: Run unit tests on presentation module
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+
+      # 유닛 테스트
+      - name: Run Unit tests
+        shell: bash
+        run: |
+          ./gradlew --no-daemon presentation:testDebugUnitTest
+
+      # 테스트 결과
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-module-results.html
+          path: ./presentation/build/reports/tests/testDebugUnitTest/index.html
+
+  unit-tests-domain-module:
+    name: Run unit tests on domain module
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+
+      # 유닛 테스트
+      - name: Run Unit tests
+        shell: bash
+        run: |
+          ./gradlew --no-daemon domain:testDebugUnitTest
+
+      # 테스트 결과
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-module-results.html
+          path: ./domain/build/reports/tests/testDebugUnitTest/index.html
+
+  unit-tests-data-module:
+    name: Run unit tests on data module
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+
+      # 유닛 테스트
+      - name: Run Unit tests
+        shell: bash
+        run: |
+          ./gradlew --no-daemon data:testDebugUnitTest
+
+      # 테스트 결과
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-module-results.html
+          path: ./data/build/reports/tests/testDebugUnitTest/index.html
