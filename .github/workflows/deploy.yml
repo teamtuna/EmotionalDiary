@@ -6,11 +6,12 @@ name: Deploy APKs
 on:
   push:
     branches: [ develop, master ]
+    tags:
+      - v*.*
+
   pull_requests:
     branches:
       - develop
-  tags:
-    - v*.*
 
 
   # Allows you to run this workflow manually from the Actions tab
