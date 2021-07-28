@@ -116,7 +116,7 @@ jobs:
       - name: Slack workflow notification
         uses: Gamesight/slack-workflow-status@v1.0.1
         with:
-          repo_token: ${{secrets.GIT_TUNA_WORKFLOW_TOKEN}}
+          repo_token: ${{secrets.GITHUB_TOKEN}}
           slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
           name: 'Android workflow bot'
           icon_emoji: ':android:'
