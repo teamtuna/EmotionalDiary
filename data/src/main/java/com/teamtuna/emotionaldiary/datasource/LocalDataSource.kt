@@ -8,4 +8,6 @@ interface LocalDataSource {
     suspend fun add(emotion: Emotion, reason: String): UniqId
 
     suspend fun get(id: UniqId): EmotionalEntity?
+
+    suspend fun replace(id: UniqId, emotion: Emotion, reason: String): Boolean
 }

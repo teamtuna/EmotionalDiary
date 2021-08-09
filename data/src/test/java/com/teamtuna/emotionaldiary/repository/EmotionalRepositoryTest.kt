@@ -68,4 +68,19 @@ internal class EmotionalRepositoryTest {
         Mockito.verify(localDataSource).get(1)
         assertEquals(expect, (actual as Result.Success).data)
     }
+
+    @DisplayName("Repository Replace")
+    @Test
+    fun replaceTest() = runBlocking {
+        whenever(localDataSource.replace(1, Emotion.FEAR, "Yes")).thenReturn(
+            true
+        )
+
+        val actual = repository.replace(1, Emotion.FEAR, "Yes")
+
+        assertTrue(actual is Result.Success)
+
+        Mockito.verify(localDataSource).replace(1, Emotion.FEAR, "Yes")
+        assertTrue((actual as Result.Success).data)
+    }
 }

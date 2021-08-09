@@ -19,6 +19,10 @@ class EmotionRepositoryImpl @Inject constructor(
         return Result.Success(localDataSource.add(emotion, reason))
     }
 
+    override suspend fun replace(id: UniqId, emotion: Emotion, reason: String): Result<Boolean> {
+        return Result.Success(localDataSource.replace(id, emotion, reason))
+    }
+
     override suspend fun get(id: UniqId): Result<DailyEmotion> {
         return localDataSource.get(id)?.let {
             Result.Success(it.map())

@@ -19,4 +19,10 @@ class LocalDataSourceImpl(
     override suspend fun get(id: UniqId): EmotionalEntity? = withContext(Dispatchers.IO) {
         return@withContext emotionDao.getEmotional(id)
     }
+
+    override suspend fun replace(id: UniqId, emotion: Emotion, reason: String): Boolean =
+        withContext(Dispatchers.IO) {
+            val replacedId = emotionDao.insertEmotional(EmotionalEntity(id, emotion, reason))
+            return@withContext replacedId == id
+        }
 }
