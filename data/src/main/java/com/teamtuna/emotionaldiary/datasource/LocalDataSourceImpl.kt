@@ -4,6 +4,7 @@ import com.teamtuna.emotionaldiary.db.EmotionalDao
 import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.UniqId
+import java.util.Date
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -13,6 +14,12 @@ class LocalDataSourceImpl(
     override suspend fun add(emotion: Emotion, reason: String): UniqId =
         withContext(Dispatchers.IO) {
             val entity = EmotionalEntity(emotion = emotion, reason = reason)
+            return@withContext emotionDao.insertEmotional(entity)
+        }
+
+    override suspend fun add(emotion: Emotion, date: Date, reason: String): UniqId =
+        withContext(Dispatchers.IO) {
+            val entity = EmotionalEntity(emotion = emotion, date = date, reason = reason)
             return@withContext emotionDao.insertEmotional(entity)
         }
 

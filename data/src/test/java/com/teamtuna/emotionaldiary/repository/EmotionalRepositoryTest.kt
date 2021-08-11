@@ -6,6 +6,7 @@ import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.Result
+import java.util.Calendar
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -40,6 +41,20 @@ internal class EmotionalRepositoryTest {
         val actual = repository.add(testEmotion, "Test")
 
         Mockito.verify(localDataSource).add(testEmotion, "Test")
+
+        assertTrue(actual is Result.Success)
+        assertEquals(1, (actual as Result.Success).data)
+    }
+
+    @DisplayName("Repository에서 Add시 Local에 같은 날짜의 Emotional이 저장")
+    @Test
+    fun addTest2() = runBlocking {
+        testEmotion = Emotion.JOY
+        val currentDate = Calendar.getInstance().time
+        whenever(localDataSource.add(testEmotion, currentDate, "Test")).thenReturn(1)
+        val actual = repository.add(testEmotion, currentDate, "Test")
+
+        Mockito.verify(localDataSource).add(testEmotion, currentDate, "Test")
 
         assertTrue(actual is Result.Success)
         assertEquals(1, (actual as Result.Success).data)
