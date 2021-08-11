@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">EmotionalDiary</string>
     <string name="emotion_add_fragment_title">Emotion Add Fragment</string>
+    <string name="description_joy">joy</string>
+    <string name="description_sad">sad</string>
+    <string name="description_anger">anger</string>
+    <string name="description_fear">fear</string>
+    <string name="description_disgust">disgust</string>
 </resources>
