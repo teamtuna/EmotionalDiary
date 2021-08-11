@@ -63,10 +63,12 @@ internal class EmotionalRepositoryTest {
     @DisplayName("Repository에서 get할 때 ")
     @Test
     fun getTest() = runBlocking {
+        val currentDate = LocalDateTime.now()
         whenever(localDataSource.get(1)).thenReturn(
             EmotionalEntity(
                 id = 1,
                 emotion = Emotion.JOY,
+                date = currentDate,
                 reason = "No Emotion"
             )
         )
@@ -75,7 +77,6 @@ internal class EmotionalRepositoryTest {
 
         assertTrue(actual is Result.Success)
 
-        val currentDate = LocalDateTime.now()
         val expect = DailyEmotion(
             id = 1,
             emotion = Emotion.JOY,
