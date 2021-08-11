@@ -1,7 +1,5 @@
 package com.teamtuna.emotionaldiary.add
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.entity.Emotion
@@ -10,6 +8,7 @@ import com.teamtuna.emotionaldiary.repository.EmotionRepository
 import com.teamtuna.emotionaldiary.usecase.EmotionAddByDateUseCase
 import com.teamtuna.emotionaldiary.usecase.EmotionAddUseCase
 import com.teamtuna.util.InstantExecutorExtension
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -19,7 +18,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 
-@ExperimentalCoroutinesApi
 @DisplayName("감정추가 뷰모델 테스트")
 @ExtendWith(MockitoExtension::class, InstantExecutorExtension::class)
 internal class EmotionAddViewModelTest {
