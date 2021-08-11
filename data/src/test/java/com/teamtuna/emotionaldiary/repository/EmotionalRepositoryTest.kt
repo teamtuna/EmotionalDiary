@@ -72,15 +72,14 @@ internal class EmotionalRepositoryTest {
     @DisplayName("Repository Replace")
     @Test
     fun replaceTest() = runBlocking {
-        whenever(localDataSource.replace(1, Emotion.FEAR, "Yes")).thenReturn(
-            true
-        )
+        whenever(localDataSource.replace(DailyEmotion(1, Emotion.FEAR, "Yes")))
+            .thenReturn(true)
 
-        val actual = repository.replace(1, Emotion.FEAR, "Yes")
+        val actual = repository.replace(DailyEmotion(1, Emotion.FEAR, "Yes"))
 
         assertTrue(actual is Result.Success)
 
-        Mockito.verify(localDataSource).replace(1, Emotion.FEAR, "Yes")
+        Mockito.verify(localDataSource).replace(DailyEmotion(1, Emotion.FEAR, "Yes"))
         assertTrue((actual as Result.Success).data)
     }
 }
