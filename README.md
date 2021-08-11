@@ -20,6 +20,7 @@
 **P5**: 그냥 사소한 의견입니다 (Approve)
 - 작성자는 P5에 대해 아무런 의견을 달지 않고 무시해도 괜찮습니다.
 
+
 # 코드 스타일
 ktlint를 적용 중 입니다. 아래 명령어 실행 후 안드로이드 스튜디오를 재시작 해주세요.
 ```
@@ -39,3 +40,7 @@ ktlint installGitPreCommitHook
 rm .git/hooks/pre-commit
 ./gradlew addKtlintCheckGitPreCommitHook
 ```
+
+
+# DESIGN
+https://app.zeplin.io/project/60c23fafe6bd938adb07baa3
