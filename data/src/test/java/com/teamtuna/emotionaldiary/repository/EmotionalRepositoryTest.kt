@@ -75,12 +75,34 @@ internal class EmotionalRepositoryTest {
 
         assertTrue(actual is Result.Success)
 
+        val currentDate = Calendar.getInstance().time
         val expect = DailyEmotion(
             id = 1,
             emotion = Emotion.JOY,
+            date = currentDate,
             reason = "No Emotion"
         )
         Mockito.verify(localDataSource).get(1)
         assertEquals(expect, (actual as Result.Success).data)
+    }
+
+    @DisplayName("Repository Replace")
+    @Test
+    fun replaceTest() = runBlocking {
+        val currentDate = Calendar.getInstance().time
+        whenever(localDataSource.replace(
+            DailyEmotion(1, Emotion.FEAR, currentDate, "Yes"))
+        ).thenReturn(true)
+
+        val actual = repository.replace(
+            DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+        )
+
+        assertTrue(actual is Result.Success)
+
+        Mockito.verify(localDataSource).replace(
+            DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+        )
+        assertTrue((actual as Result.Success).data)
     }
 }

@@ -6,7 +6,7 @@ import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.ErrorModel
 import com.teamtuna.emotionaldiary.entity.Result
 import com.teamtuna.emotionaldiary.entity.UniqId
-import com.teamtuna.emotionaldiary.map
+import com.teamtuna.emotionaldiary.toDailyEmotion
 import java.util.Date
 import javax.inject.Inject
 
@@ -20,13 +20,17 @@ class EmotionRepositoryImpl @Inject constructor(
         return Result.Success(localDataSource.add(emotion, reason))
     }
 
+    override suspend fun replace(dailyEmotion: DailyEmotion): Result<Boolean> {
+        return Result.Success(localDataSource.replace(dailyEmotion))
+    }
+
     override suspend fun add(emotion: Emotion, date: Date, reason: String): Result<Long> {
         return Result.Success(localDataSource.add(emotion, date, reason))
     }
 
     override suspend fun get(id: UniqId): Result<DailyEmotion> {
         return localDataSource.get(id)?.let {
-            Result.Success(it.map())
+            Result.Success(it.toDailyEmotion())
         } ?: Result.Fail(ErrorModel())
     }
 }

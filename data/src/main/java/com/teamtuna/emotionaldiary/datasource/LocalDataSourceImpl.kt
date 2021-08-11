@@ -2,8 +2,10 @@ package com.teamtuna.emotionaldiary.datasource
 
 import com.teamtuna.emotionaldiary.db.EmotionalDao
 import com.teamtuna.emotionaldiary.db.EmotionalEntity
+import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.UniqId
+import com.teamtuna.emotionaldiary.toEntity
 import java.util.Date
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -26,4 +28,10 @@ class LocalDataSourceImpl(
     override suspend fun get(id: UniqId): EmotionalEntity? = withContext(Dispatchers.IO) {
         return@withContext emotionDao.getEmotional(id)
     }
+
+    override suspend fun replace(dailyEmotion: DailyEmotion): Boolean =
+        withContext(Dispatchers.IO) {
+            val replacedId = emotionDao.insertEmotional(dailyEmotion.toEntity())
+            return@withContext replacedId == dailyEmotion.id
+        }
 }

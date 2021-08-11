@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="emotional_fear">#cc6f3283</color>
+    <color name="emotional_fear_accent">#c000ff</color>
+    <color name="emotional_joy">#ffd500</color>
+    <color name="emotional_joy_accent">#e99e24</color>
+    <color name="emotional_sad">#343d88</color>
+    <color name="emotional_sad_accent">#1d2ba2</color>
+    <color name="emotional_anger">#c12a2b</color>
+    <color name="emotional_anger_accent">#ff0002</color>
+    <color name="emotional_disgust">#1c5929</color>
+    <color name="emotional_disgust_accent">#00ff36</color>
+</resources>
