@@ -1,7 +1,12 @@
 package com.teamtuna.emotionaldiary.entity
 
-import java.util.Date
+import java.time.LocalDateTime
 
-data class DailyEmotion(val id: UniqId, val emotion: Emotion, val date: Date, val reason: String)
+data class DailyEmotion(
+    val id: UniqId,
+    val emotion: Emotion,
+    val date: LocalDateTime,
+    val reason: String
+)
 
 typealias UniqId = Long

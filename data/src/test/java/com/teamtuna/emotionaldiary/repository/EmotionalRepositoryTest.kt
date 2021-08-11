@@ -6,7 +6,7 @@ import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.Result
-import java.util.Calendar
+import java.time.LocalDateTime
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -50,7 +50,7 @@ internal class EmotionalRepositoryTest {
     @Test
     fun addTest2() = runBlocking {
         testEmotion = Emotion.JOY
-        val currentDate = Calendar.getInstance().time
+        val currentDate = LocalDateTime.now()
         whenever(localDataSource.add(testEmotion, currentDate, "Test")).thenReturn(1)
         val actual = repository.add(testEmotion, currentDate, "Test")
 
@@ -75,7 +75,7 @@ internal class EmotionalRepositoryTest {
 
         assertTrue(actual is Result.Success)
 
-        val currentDate = Calendar.getInstance().time
+        val currentDate = LocalDateTime.now()
         val expect = DailyEmotion(
             id = 1,
             emotion = Emotion.JOY,
@@ -89,7 +89,7 @@ internal class EmotionalRepositoryTest {
     @DisplayName("Repository Replace")
     @Test
     fun replaceTest() = runBlocking {
-        val currentDate = Calendar.getInstance().time
+        val currentDate = LocalDateTime.now()
         whenever(localDataSource.replace(
             DailyEmotion(1, Emotion.FEAR, currentDate, "Yes"))
         ).thenReturn(true)

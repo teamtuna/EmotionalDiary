@@ -9,7 +9,7 @@ import com.teamtuna.emotionaldiary.entity.process
 import com.teamtuna.emotionaldiary.usecase.EmotionAddByDateUseCase
 import com.teamtuna.emotionaldiary.usecase.EmotionAddUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.Date
+import java.time.LocalDateTime
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +34,7 @@ class EmotionAddViewModel @Inject constructor(
         }
     }
 
-    fun add(emotion: Emotion, date: Date, reason: String) {
+    fun add(emotion: Emotion, date: LocalDateTime, reason: String) {
         viewModelScope.launch(Dispatchers.IO) {
             emotionAddByDateUseCase(emotion, date, reason).process({
                 // Cannot invoke setValue on a background thread

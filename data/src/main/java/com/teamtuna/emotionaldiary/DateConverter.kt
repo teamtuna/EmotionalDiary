@@ -1,17 +1,17 @@
 package com.teamtuna.emotionaldiary
 
 import androidx.room.TypeConverter
-import java.util.Date
+import java.time.LocalDateTime
 
 object DateConverter {
 
     @TypeConverter
-    fun toDate(value: Long?): Date? {
-        return value?.let { Date(it) }
+    fun toDate(value: Long?): LocalDateTime? {
+        return value?.let { it.toLocalDateTime() }
     }
 
     @TypeConverter
-    fun fromDate(date: Date?): Long? {
-        return date?.time
+    fun fromDate(date: LocalDateTime?): Long? {
+        return date?.getTime()
     }
 }
