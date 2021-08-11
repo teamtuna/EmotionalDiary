@@ -4,12 +4,14 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.teamtuna.emotionaldiary.MainCoroutineRule
 import com.teamtuna.emotionaldiary.db.EmotionRoomDatabase
+import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -61,5 +63,29 @@ class LocalDataSourceImplTest {
 
         assertEquals(Emotion.FEAR, entity.emotion)
         assertEquals(reason, entity.reason)
+    }
+
+    @Test
+    fun `replace 기존 데이터가 존재하면 데이터를 바꿔서 저장한다`() = runBlocking {
+        val actualReason = "test2"
+        assertTrue(localDataSource.replace(DailyEmotion(1L, Emotion.JOY, actualReason)))
+
+        val entity = requireNotNull(localDataSource.get(1L))
+
+        assertEquals(Emotion.JOY, entity.emotion)
+        assertEquals(actualReason, entity.reason)
+    }
+
+    @Test
+    fun `replace 기존 데이터가 존재하지 않으면 새롭게 데이터를 넣어서 저장한다`() = runBlocking {
+        val reason = "test1"
+        val actualReason = "test2"
+        val dbId = localDataSource.add(Emotion.FEAR, reason)
+        assertTrue(localDataSource.replace(DailyEmotion(dbId, Emotion.JOY, actualReason)))
+
+        val entity = requireNotNull(localDataSource.get(dbId))
+
+        assertEquals(Emotion.JOY, entity.emotion)
+        assertEquals(actualReason, entity.reason)
     }
 }
