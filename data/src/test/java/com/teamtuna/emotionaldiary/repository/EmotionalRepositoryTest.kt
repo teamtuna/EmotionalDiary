@@ -15,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
+import java.time.LocalDateTime
 import kotlinx.coroutines.runBlocking
 
 @ExtendWith(MockitoExtension::class)
@@ -45,13 +46,29 @@ internal class EmotionalRepositoryTest {
         assertEquals(1, (actual as Result.Success).data)
     }
 
+    @DisplayName("Repository에서 Add시 Local에 같은 날짜의 Emotional이 저장")
+    @Test
+    fun addTest2() = runBlocking {
+        testEmotion = Emotion.JOY
+        val currentDate = LocalDateTime.now()
+        whenever(localDataSource.add(testEmotion, currentDate, "Test")).thenReturn(1)
+        val actual = repository.add(testEmotion, currentDate, "Test")
+
+        Mockito.verify(localDataSource).add(testEmotion, currentDate, "Test")
+
+        assertTrue(actual is Result.Success)
+        assertEquals(1, (actual as Result.Success).data)
+    }
+
     @DisplayName("Repository에서 get할 때 ")
     @Test
     fun getTest() = runBlocking {
+        val currentDate = LocalDateTime.now()
         whenever(localDataSource.get(1)).thenReturn(
             EmotionalEntity(
                 id = 1,
                 emotion = Emotion.JOY,
+                date = currentDate,
                 reason = "No Emotion"
             )
         )
@@ -63,6 +80,7 @@ internal class EmotionalRepositoryTest {
         val expect = DailyEmotion(
             id = 1,
             emotion = Emotion.JOY,
+            date = currentDate,
             reason = "No Emotion"
         )
         Mockito.verify(localDataSource).get(1)
@@ -72,14 +90,22 @@ internal class EmotionalRepositoryTest {
     @DisplayName("Repository Replace")
     @Test
     fun replaceTest() = runBlocking {
-        whenever(localDataSource.replace(DailyEmotion(1, Emotion.FEAR, "Yes")))
-            .thenReturn(true)
+        val currentDate = LocalDateTime.now()
+        whenever(
+            localDataSource.replace(
+                DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+            )
+        ).thenReturn(true)
 
-        val actual = repository.replace(DailyEmotion(1, Emotion.FEAR, "Yes"))
+        val actual = repository.replace(
+            DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+        )
 
         assertTrue(actual is Result.Success)
 
-        Mockito.verify(localDataSource).replace(DailyEmotion(1, Emotion.FEAR, "Yes"))
+        Mockito.verify(localDataSource).replace(
+            DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+        )
         assertTrue((actual as Result.Success).data)
     }
 

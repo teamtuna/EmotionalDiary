@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.Result
 import com.teamtuna.emotionaldiary.repository.EmotionRepository
+import java.time.LocalDateTime
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.equalTo
@@ -39,6 +40,23 @@ internal class EmotionAddUseCaseTest {
 
         // then
         Mockito.verify(repository, times(1)).add(Emotion.JOY, "기쁨이")
+        assertThat((actual as Result.Success).data, equalTo(1L))
+    }
+
+    @Test
+    @DisplayName("기쁨이를 추가 한경우 EmotionalRepository.add 가 호출되는지확인")
+    fun addUseCase2() = runBlockingTest {
+        // given
+        val answers = Result.Success(1L)
+        val currentDate = LocalDateTime.now()
+        whenever(repository.add(Emotion.JOY, currentDate, "기쁨이")).thenReturn(answers)
+        val addUseCase = EmotionAddByDateUseCase(repository)
+
+        // when
+        val actual = addUseCase(Emotion.JOY, currentDate, "기쁨이")
+
+        // then
+        Mockito.verify(repository, times(1)).add(Emotion.JOY, currentDate, "기쁨이")
         assertThat((actual as Result.Success).data, equalTo(1L))
     }
 }
