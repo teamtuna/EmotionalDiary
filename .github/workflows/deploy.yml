@@ -100,6 +100,19 @@ jobs:
           debug_permalink=$(curl https://slack.com/api/files.upload -H "Authorization: Bearer ${{ secrets.ANDROID_BOT_TOKEN }}" -F file=@${{ steps.apk.outputs.DEBUG_APK_PATH }} -F channels=CPMANENF3 -F thread_ts='1607309305.245800' | jq -r '.file.url_private_download')
           curl https://slack.com/api/chat.postMessage -X POST -H 'Authorization: Bearer ${{ secrets.ANDROID_BOT_TOKEN }}' -H 'Content-type: application/json' --data '{"channel":"CPMANENF3","attachments": [{ "color":"#FF7E36", "fields": [{"title":"Publisher","value":"${{ github.actor }}","short":true}, {"title":"Build Variant","value":"Debug","short":true}, {"title":"Ref","value":"'"$ref"'","short":true}, {"title":"Sha", "value":"'"$sha"'","short":true}, {"title":"Recent changes","value":"'"$gitlog"'","short":false}],"actions": [{ "type": "button", "name": "download", "text": "${{ steps.apk.outputs.DEBUG_APK_NAME }}", "url": "'"$debug_permalink"'", "style": "primary" }] }] }'
 
+      - name: upload apk to google play store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: ${{ SERVICE_ACCOUNT_JSON }}
+          packageName: com.teamtuna.emotionaldiary
+          releaseFiles: app/build/outputs/bundle/release/*.aab
+          track: production
+          inAppUpdatePriority: 2
+          userFraction: 0.33
+          whatsNewDirectory: distribution/whatsnew
+          mappingFile: app/build/outputs/mapping/release/mapping.txt
+
+
   slack-workflow-status:
     if: always()
     name: Post workflow status to slack
