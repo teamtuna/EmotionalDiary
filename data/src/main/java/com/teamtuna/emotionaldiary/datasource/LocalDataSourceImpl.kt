@@ -27,4 +27,12 @@ class LocalDataSourceImpl(
             val replacedId = emotionDao.insertEmotional(dailyEmotion.toEntity())
             return@withContext replacedId == dailyEmotion.id
         }
+
+    override suspend fun delete(id: UniqId) {
+        withContext(Dispatchers.IO) {
+            emotionDao.getEmotional(id)?.run {
+                emotionDao.deleteEmotional(this)
+            }
+        }
+    }
 }
