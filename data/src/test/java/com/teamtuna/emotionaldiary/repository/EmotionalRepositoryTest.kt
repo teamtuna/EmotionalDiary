@@ -6,7 +6,6 @@ import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.Result
-import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -16,6 +15,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
+import kotlinx.coroutines.runBlocking
 
 @ExtendWith(MockitoExtension::class)
 internal class EmotionalRepositoryTest {
@@ -81,5 +81,20 @@ internal class EmotionalRepositoryTest {
 
         Mockito.verify(localDataSource).replace(DailyEmotion(1, Emotion.FEAR, "Yes"))
         assertTrue((actual as Result.Success).data)
+    }
+
+    @DisplayName("Repository Delete")
+    @Test
+    fun deleteTest() = runBlocking {
+        whenever(localDataSource.add(Emotion.FEAR, "Yes"))
+            .thenReturn(1L)
+
+        whenever(localDataSource.delete(1L))
+            .thenReturn(Unit)
+
+        val addResult = repository.add(Emotion.FEAR, "Yes")
+        repository.delete((addResult as Result.Success).data)
+
+        Mockito.verify(localDataSource).delete(addResult.data)
     }
 }

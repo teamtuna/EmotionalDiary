@@ -8,4 +8,5 @@ interface EmotionRepository {
     suspend fun add(emotion: Emotion, reason: String): Result<Long>
     suspend fun replace(dailyEmotion: DailyEmotion): Result<Boolean>
     suspend fun get(id: Long): Result<DailyEmotion>
+    suspend fun delete(id: Long)
 }

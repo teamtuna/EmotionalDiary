@@ -28,4 +28,8 @@ class EmotionRepositoryImpl @Inject constructor(
             Result.Success(it.toDailyEmotion())
         } ?: Result.Fail(ErrorModel())
     }
+
+    override suspend fun delete(id: Long) {
+        localDataSource.delete(id)
+    }
 }
