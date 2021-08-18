@@ -95,4 +95,25 @@ class LocalDataSourceImplTest {
         assertEquals(Emotion.JOY, entity.emotion)
         assertEquals(actualReason, entity.reason)
     }
+
+    @Test
+    fun `delete 기존 데이터가 존재하면 데이터를 삭제하도록 한다`() = runBlocking {
+        val reason = "existData"
+        val dbId = localDataSource.add(Emotion.FEAR, reason)
+
+        localDataSource.delete(dbId)
+
+        val existEmotional = localDataSource.get(dbId)
+
+        assertNull(existEmotional)
+    }
+
+    @Test
+    fun `delete 기존 데이터가 존재하지 않으면 데이터 삭제를 해도 아무런 동작을 하지 않는다`() = runBlocking {
+        localDataSource.delete(1L)
+
+        val existEmotional = localDataSource.get(1L)
+
+        assertNull(existEmotional)
+    }
 }

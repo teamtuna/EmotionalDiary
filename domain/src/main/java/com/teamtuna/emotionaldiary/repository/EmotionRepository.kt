@@ -10,4 +10,5 @@ interface EmotionRepository {
     suspend fun replace(dailyEmotion: DailyEmotion): Result<Boolean>
     suspend fun add(emotion: Emotion, date: LocalDateTime, reason: String): Result<Long>
     suspend fun get(id: Long): Result<DailyEmotion>
+    suspend fun delete(id: Long)
 }

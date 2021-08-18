@@ -12,4 +12,6 @@ interface LocalDataSource {
     suspend fun get(id: UniqId): EmotionalEntity?
 
     suspend fun replace(dailyEmotion: DailyEmotion): Boolean
+
+    suspend fun delete(id: UniqId)
 }
