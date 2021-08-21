@@ -70,8 +70,10 @@ class LocalDataSourceImplTest {
     fun `replace 기존 데이터가 존재하면 데이터를 바꿔서 저장한다`() = runBlocking {
         val actualReason = "test2"
         val currentDate = LocalDateTime.now()
-        assertTrue(localDataSource.replace(
-            DailyEmotion(1L, Emotion.JOY, currentDate, actualReason))
+        assertTrue(
+            localDataSource.replace(
+                DailyEmotion(1L, Emotion.JOY, currentDate, actualReason)
+            )
         )
 
         val entity = requireNotNull(localDataSource.get(1L))
@@ -86,8 +88,10 @@ class LocalDataSourceImplTest {
         val actualReason = "test2"
         val currentDate = LocalDateTime.now()
         val dbId = localDataSource.add(Emotion.FEAR, reason)
-        assertTrue(localDataSource.replace(
-            DailyEmotion(dbId, Emotion.JOY, currentDate, actualReason))
+        assertTrue(
+            localDataSource.replace(
+                DailyEmotion(dbId, Emotion.JOY, currentDate, actualReason)
+            )
         )
 
         val entity = requireNotNull(localDataSource.get(dbId))

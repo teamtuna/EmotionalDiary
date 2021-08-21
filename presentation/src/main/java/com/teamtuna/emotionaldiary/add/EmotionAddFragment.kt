@@ -24,9 +24,12 @@ class EmotionAddFragment : Fragment() {
             R.layout.fragment_emotion_add, container, false
         )
 
-        emotionAddViewModel.response.observe(viewLifecycleOwner, {
-            Log.e("TEST!!!", "response : $it")
-        })
+        emotionAddViewModel.response.observe(
+            viewLifecycleOwner,
+            {
+                Log.e("TEST!!!", "response : $it")
+            }
+        )
 
         // view.findViewById<Button>(R.id.btn).setOnClickListener {
         //     emotionAddViewModel.add(Emotion.ANGER, "just")

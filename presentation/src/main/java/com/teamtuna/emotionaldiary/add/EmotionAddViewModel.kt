@@ -26,21 +26,27 @@ class EmotionAddViewModel @Inject constructor(
 
     fun add(emotion: Emotion, reason: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            emotionAddUseCase(emotion, reason).process({
-                // Cannot invoke setValue on a background thread
-                _response.postValue(it)
-            }, {
-            })
+            emotionAddUseCase(emotion, reason).process(
+                {
+                    // Cannot invoke setValue on a background thread
+                    _response.postValue(it)
+                },
+                {
+                }
+            )
         }
     }
 
     fun add(emotion: Emotion, date: LocalDateTime, reason: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            emotionAddByDateUseCase(emotion, date, reason).process({
-                // Cannot invoke setValue on a background thread
-                _response.postValue(it)
-            }, {
-            })
+            emotionAddByDateUseCase(emotion, date, reason).process(
+                {
+                    // Cannot invoke setValue on a background thread
+                    _response.postValue(it)
+                },
+                {
+                }
+            )
         }
     }
 }
