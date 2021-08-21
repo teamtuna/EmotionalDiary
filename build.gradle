@@ -13,7 +13,8 @@ buildscript {
         classpath 'de.mannodermaus.gradle.plugins:android-junit5:1.7.1.1' //junit5
         classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
-        classpath 'org.jlleitschuh.gradle:ktlint-gradle:9.4.1'
+        // https://github.com/JLLeitschuh/ktlint-gradle
+        classpath "org.jlleitschuh.gradle:ktlint-gradle:10.1.0"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -29,7 +30,7 @@ allprojects {
     ktlint {
         debug = false
         android = true
-        version = "0.36.0"
+        version = "0.42.1"
         filter {
             exclude("**/test/**")
             exclude("**/androidTest/**")

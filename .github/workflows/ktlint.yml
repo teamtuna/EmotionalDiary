@@ -24,7 +24,7 @@ jobs:
           reporter: github-pr-review
           android: true
           fail_on_error: true
-          ktlint_version: 0.36.0
+          ktlint_version: 0.42.1
 
   slack-workflow-status:
     if: always()
