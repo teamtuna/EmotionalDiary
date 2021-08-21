@@ -10,12 +10,48 @@ apply from: '../androidBase.gradle'
  * android.testOptions.unitTests.returnDefaultValues = true
  */
 
+android {
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.1'
+    }
+}
 
 dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.3.6'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    implementation 'androidx.databinding:databinding-runtime:7.0.0'
+
+    //https://developer.android.com/jetpack/compose/setup#compose-compiler
+    implementation 'androidx.compose.ui:ui:1.0.1'
+    // Tooling support (Previews, etc.)
+    implementation 'androidx.compose.ui:ui-tooling:1.0.1'
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation 'androidx.compose.foundation:foundation:1.0.1'
+    // Material Design
+    implementation 'androidx.compose.material:material:1.0.1'
+    // Material design icons
+    implementation 'androidx.compose.material:material-icons-core:1.0.1'
+    implementation 'androidx.compose.material:material-icons-extended:1.0.1'
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.3.1'
+    // Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
+    // Integration with observables
+    implementation 'androidx.compose.runtime:runtime-livedata:1.0.1'
+//    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.1'
+    // UI Tests
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.1'
+
+    //for theme reuse
+    //https://developer.android.com/jetpack/compose/interop/adding#reuse-view
+    // When using a MDC theme
+    //implementation "com.google.android.material:compose-theme-adapter:1.0.1"
+    // When using a AppCompat theme
+    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
 
     implementation project(":domain")
 }
