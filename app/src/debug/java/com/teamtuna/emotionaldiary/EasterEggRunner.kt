@@ -50,8 +50,9 @@ class EasterEggRunner(
                 @SuppressLint("SetTextI18n")
                 text = "EasterEgg::$versionName::$versionCode"
                 tag = EASTER_EGG_VIEW_TAG
-                setTextColor(0x00ff0000)
+                setTextColor(0x55ff0000)
                 textSize = 9f // sp
+                setBackgroundColor(0x5500ff00)
             }.also {
                 parent.addView(
                     it,
