@@ -27,6 +27,11 @@ ktlint를 적용 중 입니다. 아래 명령어 실행 후 안드로이드 스�
 ./gradlew ktlintApplyToIdea
 ```
 
+ktlint를 에러 확인방법
+```
+./gradlew ktlintCheck
+```
+
 린트 룰에 위배되는 코드의 경우 PR을 생성하면 린트 에러를 체크합니다. 커밋 전에 린트 에러가 있는지를 파악하고 싶다면 아래 명령어를 이용해 프리 커밋 훅을 설치하고 체크 합니다
 ```
 ./gradlew addKtlintCheckGitPreCommitHook
