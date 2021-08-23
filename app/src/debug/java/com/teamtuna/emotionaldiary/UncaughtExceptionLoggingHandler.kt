@@ -27,16 +27,10 @@ class UncaughtExceptionLoggingHandler(
     appContext: Context,
     actor: ((File) -> Unit)? = ::firebaseStoragePutFiles
 ) {
-    private var versionTag: String = "version ${
-    appContext.runCatching {
-        PackageInfoCompat.getLongVersionCode(
-            packageManager.getPackageInfo(
-                packageName,
-                0
-            )
-        )
-    }.getOrDefault(-1L)
-    }"
+    private val versionCode = with(appContext) {
+        PackageInfoCompat.getLongVersionCode(packageManager.getPackageInfo(packageName, 0))
+    }
+    private var versionTag = "version $versionCode"
     private var logDir = File(appContext.externalCacheDir, "temp")
 
     init {
@@ -60,28 +54,16 @@ class UncaughtExceptionLoggingHandler(
 
     private var mLastActivityWeakReference: WeakReference<Activity>? = null
     private fun lastActivityWeakReference(context: Context) {
-        (context.applicationContext as Application).registerActivityLifecycleCallbacks(object :
-                Application.ActivityLifecycleCallbacks {
-                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-                }
-
-                override fun onActivityStarted(activity: Activity) {
-                }
-
+        (context.applicationContext as Application).registerActivityLifecycleCallbacks(
+            object : Application.ActivityLifecycleCallbacks {
+                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+                override fun onActivityStarted(activity: Activity) {}
+                override fun onActivityPaused(activity: Activity) {}
+                override fun onActivityStopped(activity: Activity) {}
+                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+                override fun onActivityDestroyed(activity: Activity) {}
                 override fun onActivityResumed(activity: Activity) {
                     mLastActivityWeakReference = WeakReference(activity)
-                }
-
-                override fun onActivityPaused(activity: Activity) {
-                }
-
-                override fun onActivityStopped(activity: Activity) {
-                }
-
-                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-                }
-
-                override fun onActivityDestroyed(activity: Activity) {
                 }
             })
     }

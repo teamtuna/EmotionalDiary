@@ -6,7 +6,6 @@ import com.teamtuna.emotionaldiary.MainCoroutineRule
 import com.teamtuna.emotionaldiary.db.EmotionRoomDatabase
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
-import java.time.LocalDateTime
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -18,6 +17,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import java.time.LocalDateTime
 
 @RunWith(RobolectricTestRunner::class)
 class LocalDataSourceImplTest {

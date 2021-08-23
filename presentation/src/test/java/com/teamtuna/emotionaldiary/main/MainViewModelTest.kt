@@ -4,8 +4,8 @@ import com.teamtuna.emotionaldiary.repository.MainRepository
 import com.teamtuna.emotionaldiary.usecase.MainUseCase
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
 
 class MainViewModelTest {
 
