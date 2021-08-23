@@ -2,7 +2,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'de.mannodermaus.android-junit5'
 apply plugin: 'dagger.hilt.android.plugin'
-apply from: '../a.gradle'
+apply from: '../base.gradle'
 
 android {
     compileSdkVersion 30

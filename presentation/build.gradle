@@ -2,7 +2,7 @@ plugins {
     id 'com.android.library'
 }
 
-apply from: '../b.gradle'
+apply from: '../androidBase.gradle'
 
 
 /** 이러한 설정은 최후의 수단
