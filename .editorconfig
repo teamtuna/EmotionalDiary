@@ -1,0 +1,18 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 4
+indent_style = space
+trim_trailing_whitespace = true
+insert_final_newline = true
+tab_width = 4
+max_line_length = 100
+
+[*.{kt, kts}]
+disabled_rules = import-ordering
+# disabled_rules = no-wildcard-imports, import-ordering
+
+[**/test/**.kt]
+ktlint_ignore_back_ticked_identifier = true

@@ -35,8 +35,8 @@ allprojects {
             exclude("**/test/**")
             exclude("**/androidTest/**")
         }
+        additionalEditorconfigFile = file(".editorconfig")
     }
-
 }
 
 task clean(type: Delete) {
