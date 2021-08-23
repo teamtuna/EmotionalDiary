@@ -22,7 +22,7 @@ class MainViewModelTest {
     @Test
     fun `mainViewModel 에서 test()를 호출하면 true를 반환한다`() {
         // given
-        `when`(mainRepository.test()).thenReturn(Result.success(Unit))
+        `when`(mainRepository.test()).thenReturn(Result.success("String"))
 
         // when
         val testReturn = mainViewModel.test()
