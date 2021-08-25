@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -94,13 +96,13 @@ fun CardView(
 
 @Preview(showBackground = true, name = "Text preview")
 @Composable
-fun MainContent(names: List<String> = listOf("AndroidAndroidAndroidAndroidAndroid", "there")) {
+fun MainContent(names: List<String> = listOf("AndroidAndroidAndroidAndroidAndroid", "there", "Hi", "Hello", "Duzi")) {
     BasicsCodeLabTheme {
         Surface(color = MaterialTheme.colors.background) {
-            Column(
+            LazyColumn(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                for (i in names.indices) {
+                itemsIndexed(names) { i, name ->
                     if (i != names.size) {
                         Greeting(names[i])
                         Divider(
@@ -114,24 +116,26 @@ fun MainContent(names: List<String> = listOf("AndroidAndroidAndroidAndroidAndroi
                         Greeting(names[i])
                     }
                 }
-                Spacer(Modifier.size(30.dp))
 
-                val count = remember { mutableStateOf(0) }
-                Counter(
-                    count = count.value,
-                    updateCount = { newCount ->
-                        count.value = newCount
-                    }
-                )
+                item {
+                    Spacer(Modifier.size(30.dp))
+                    val count = remember { mutableStateOf(0) }
+                    Counter(
+                        count = count.value,
+                        updateCount = { newCount ->
+                            count.value = newCount
+                        }
+                    )
+                }
 
-                Spacer(
-                    Modifier
-                        .size(30.dp)
-                        .fillMaxWidth()
-                )
+                item {
+                    Spacer(
+                        Modifier
+                            .size(30.dp)
+                            .fillMaxWidth()
+                    )
 
-                CardView {
-
+                    CardView {}
                 }
             }
         }
