@@ -24,8 +24,11 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_history)
 
-        viewModel.emotionList.observe(this@HistoryActivity, Observer {
-            historyAdapter.submitList(it)
-        })
+        viewModel.emotionList.observe(
+            this@HistoryActivity,
+            Observer {
+                historyAdapter.submitList(it)
+            }
+        )
     }
 }

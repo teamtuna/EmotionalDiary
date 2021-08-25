@@ -8,6 +8,8 @@ import com.teamtuna.emotionaldiary.repository.EmotionRepository
 import com.teamtuna.emotionaldiary.usecase.EmotionAddByDateUseCase
 import com.teamtuna.emotionaldiary.usecase.EmotionAddUseCase
 import com.teamtuna.util.InstantExecutorExtension
+import com.teamtuna.util.getOrAwaitValue
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
@@ -54,16 +56,20 @@ internal class EmotionAddViewModelTest {
     }
 
     // org.junit.jupiter.api.Test 사용 필수 (Mock 초기화 안되는 이슈)
+    @ExperimentalCoroutinesApi
     @Test
     @DisplayName("기쁨이를 추가 한경우 EmotionAddViewModel.add가 호출되는지확인")
     fun add() = runBlockingTest {
         // given
-        whenever(emotionRepository.add(
-            Emotion.JOY, "기쁨이")
+        whenever(
+            emotionRepository.add(
+                Emotion.JOY, "기쁨이"
+            )
         ).thenReturn(Result.Success(1L))
 
         // when
         viewModel.add(Emotion.JOY, "기쁨이")
+        viewModel.response.getOrAwaitValue()
 
         // then
         Mockito.verify(emotionRepository, times(1)).add(Emotion.JOY, "기쁨이")
