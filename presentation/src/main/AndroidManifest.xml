@@ -20,6 +20,9 @@
 
         </activity>
         <activity android:name="com.teamtuna.emotionaldiary.history.HistoryActivity" />
+        <activity
+            android:name="com.teamtuna.emotionaldiary.compose.hellocompose.TestHelloCompose"
+            android:theme="@style/Theme.EmotionalDiary.Compose" />
 
     </application>
 
