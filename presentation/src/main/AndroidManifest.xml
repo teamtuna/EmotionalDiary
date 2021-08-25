@@ -10,17 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmotionalDiary">
         <activity
-            android:name="com.teamtuna.emotionaldiary.main.MainActivity"
-            android:theme="@style/Theme.EmotionalDiary.Splash">
-
+            android:name="com.teamtuna.emotionaldiary.compose.ComposeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name="com.teamtuna.emotionaldiary.main.MainActivity"
+            android:theme="@style/Theme.EmotionalDiary.Splash">
         </activity>
         <activity android:name="com.teamtuna.emotionaldiary.history.HistoryActivity" />
-
     </application>
 
 </manifest>

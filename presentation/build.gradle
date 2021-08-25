@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.library'
+    id 'kotlin-android'
 }
 
 apply from: '../androidBase.gradle'
@@ -42,6 +43,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
     // Integration with observables
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 //    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.1'
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.1'
