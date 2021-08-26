@@ -1,31 +1,36 @@
-#!/bin/bash
+@echo off
 
-GIT_FOLDER=../.git
-if [ -d "${GIT_FOLDER}" ]; then
-    echo "git location : ${GIT_FOLDER}"
-else
-    echo "has not git folder"
+set GIT_FOLDER=..\.git
+if exist %GIT_FOLDER% (
+    echo [32mgit location : %GIT_FOLDER% [0m
+) else (
+    echo [31mhas not git folder [0m
+    pause
     exit 1
-fi
+)
 
-HOOKS_FOLDER="$GIT_FOLDER/hooks"
-if [ -d "${HOOKS_FOLDER}" ]; then
-    echo "git hooks location : ${HOOKS_FOLDER}"
-else
-    echo "create git hooks folder : ${HOOKS_FOLDER}"
-    mkdir "${HOOKS_FOLDER}"
-fi
+set HOOKS_FOLDER=%GIT_FOLDER%\hooks
+if exist %HOOKS_FOLDER% (
+    echo [32mgit hooks location : %HOOKS_FOLDER% [0m
+) else (
+    echo [31mcreate git hooks folder : %HOOKS_FOLDER% [0m
+    mkdir %HOOKS_FOLDER%
+)
 
-COMMIT_MSG_FILE="${HOOKS_FOLDER}/commit-msg"
-if [ -f "${COMMIT_MSG_FILE}" ]; then
-    TIME_SEED=$(date +%s)
-    mv $COMMIT_MSG_FILE "$COMMIT_MSG_FILE.old.$TIME_SEED"
-    echo "$COMMIT_MSG_FILE $COMMIT_MSG_FILE.old.$TIME_SEED"
-fi
+set COMMIT_MSG_FILE=%HOOKS_FOLDER%\commit-msg
+if exist %COMMIT_MSG_FILE% (
+    set TIME_SEED=%date:-=%_%time::=%
+    move %COMMIT_MSG_FILE% %COMMIT_MSG_FILE%.old.%TIME_SEED%
+    echo [31mmove %COMMIT_MSG_FILE% %COMMIT_MSG_FILE%.old.%TIME_SEED%[0m
+)
 
-echo '#!/bin/bash' > $COMMIT_MSG_FILE
-echo 'commit_message=$(cat $1)' >> $COMMIT_MSG_FILE
-echo 'issue_no=$(git branch --show-current | sed -r "1s/^.*[-_#]([0-9]+).*$/\1/")' >> $COMMIT_MSG_FILE
-echo 'echo "emotion-$issue_no : $commit_message" > $1' >> $COMMIT_MSG_FILE
-echo 'exit 0' >> $COMMIT_MSG_FILE
-chmod +x $COMMIT_MSG_FILE
+set PREFIX_MESSAGE=emotion-
+
+echo #!/bin/sh > %COMMIT_MSG_FILE%
+echo commit_message=$(cat $1) >> %COMMIT_MSG_FILE%
+echo issue_no=$(git branch --show-current ^| sed -r "1s/^.*[-_#]([0-9]+).*$/\1/") >> %COMMIT_MSG_FILE%
+echo echo "%PREFIX_MESSAGE%$issue_no : $commit_message" ^> $1 >> %COMMIT_MSG_FILE%
+echo exit 0 >> %COMMIT_MSG_FILE%
+
+GOTO END
+:END

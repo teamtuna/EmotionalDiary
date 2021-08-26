@@ -23,9 +23,11 @@ if [ -f "${COMMIT_MSG_FILE}" ]; then
     echo "$COMMIT_MSG_FILE $COMMIT_MSG_FILE.old.$TIME_SEED"
 fi
 
+PREFIX_MESSAGE=emotion-
+
 echo '#!/bin/bash' > $COMMIT_MSG_FILE
 echo 'commit_message=$(cat $1)' >> $COMMIT_MSG_FILE
 echo 'issue_no=$(git branch --show-current | sed -r "1s/^.*[-_#]([0-9]+).*$/\1/")' >> $COMMIT_MSG_FILE
-echo 'echo "emotion-$issue_no : $commit_message" > $1' >> $COMMIT_MSG_FILE
+echo 'echo "$PREFIX_MESSAGE$issue_no : $commit_message" > $1' >> $COMMIT_MSG_FILE
 echo 'exit 0' >> $COMMIT_MSG_FILE
 chmod +x $COMMIT_MSG_FILE
