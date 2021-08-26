@@ -28,7 +28,7 @@ set PREFIX_MESSAGE=emotion-
 
 echo #!/bin/sh > %COMMIT_MSG_FILE%
 echo commit_message=$(cat $1) >> %COMMIT_MSG_FILE%
-echo issue_no=$(git branch --show-current ^| sed -r "1s/^.*[-_#]([0-9]+).*$/\1/") >> %COMMIT_MSG_FILE%
+echo issue_no=$(git branch --show-current ^| sed -r "s/.*[-_#]([0-9]+).*/\1/") >> %COMMIT_MSG_FILE%
 echo echo "%PREFIX_MESSAGE%$issue_no : $commit_message" ^> $1 >> %COMMIT_MSG_FILE%
 echo exit 0 >> %COMMIT_MSG_FILE%
 

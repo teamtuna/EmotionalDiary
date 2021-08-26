@@ -53,7 +53,7 @@ https://app.zeplin.io/project/60c23fafe6bd938adb07baa3
 ```
 #!/bin/sh
 commit_message=$(cat $1)
-issue_no=$(git branch --show-current | sed -r "1s/^.*[-_#]([0-9]+).*$/\1/")
+issue_no=$(git branch --show-current | sed -r "s/.*[-_#]([0-9]+).*/\1/")
 echo "emotion-$issue_no : $commit_message" > $1
 exit 0
 ```
