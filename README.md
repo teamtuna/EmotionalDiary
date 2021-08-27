@@ -48,6 +48,19 @@ rm .git/hooks/pre-commit
 
 # DESIGN
 https://app.zeplin.io/project/60c23fafe6bd938adb07baa3
-### 피그마 : https://www.figma.com/file/tw4l10B4stA0nt7M51VtEq/%EA%B0%90%EC%A0%95%EB%8B%A4%EC%9D%B4%EC%96%B4%EB%A6%AC?node-id=0%3A1
 
+# [COMMIT MESSAGE HOOK](https://likeable-honeycrisp-8c3.notion.site/githook-commit-message-e53ae4d44d134c42be38428e8a6f181b)
+
+- .git/hooks/commit-msg 위치에 아래 내용으로 파일추가
+- mac에서 사용할려면 실행권한도 줘야 한다.
+
+```
+#!/bin/sh
+commit_message=$(cat $1)
+issue_no=$(git branch --show-current | sed -r "s/.*[-_#]([0-9]+).*/\1/")
+echo "emotion-$issue_no : $commit_message" > $1
+exit 0
+```
+
+### 피그마 : https://www.figma.com/file/tw4l10B4stA0nt7M51VtEq/%EA%B0%90%EC%A0%95%EB%8B%A4%EC%9D%B4%EC%96%B4%EB%A6%AC?node-id=0%3A1
 
