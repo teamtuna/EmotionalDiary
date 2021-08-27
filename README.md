@@ -20,6 +20,8 @@
 **P5**: 그냥 사소한 의견입니다 (Approve)
 - 작성자는 P5에 대해 아무런 의견을 달지 않고 무시해도 괜찮습니다.
 
+## PR 타이틀
+- PR 타이틀은 EMOTION-${이슈번호} 으로 시작합니다.
 
 # 코드 스타일
 ktlint를 적용 중 입니다. 아래 명령어 실행 후 안드로이드 스튜디오를 재시작 해주세요.
@@ -41,6 +43,8 @@ rm .git/hooks/pre-commit
 ./gradlew addKtlintCheckGitPreCommitHook
 ```
 
+# branch
+- issue branch는 feature/emotion-${이슈번호} 의 규칙으로 생성합니다. 예) feature/emotion-34
 
 # DESIGN
 https://app.zeplin.io/project/60c23fafe6bd938adb07baa3
@@ -57,3 +61,6 @@ issue_no=$(git branch --show-current | sed -r "s/.*[-_#]([0-9]+).*/\1/")
 echo "emotion-$issue_no : $commit_message" > $1
 exit 0
 ```
+
+### 피그마 : https://www.figma.com/file/tw4l10B4stA0nt7M51VtEq/%EA%B0%90%EC%A0%95%EB%8B%A4%EC%9D%B4%EC%96%B4%EB%A6%AC?node-id=0%3A1
+
