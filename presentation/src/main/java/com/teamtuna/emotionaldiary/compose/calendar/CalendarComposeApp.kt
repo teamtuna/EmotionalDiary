@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -65,6 +67,7 @@ fun CalendarComposeApp() {
 fun MaterialPreview() {
     var month by remember { mutableStateOf(YearMonth.now()) }
     var selectionSet by remember { mutableStateOf(setOf<CalposeDate>()) }
+    val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
 
     MaterialCalendar(
         month = month,
@@ -73,8 +76,15 @@ fun MaterialPreview() {
             onClickedPreviousMonth = { month = month.minusMonths(1) },
             onClickedNextMonth = { month = month.plusMonths(1) },
         ),
-        onSelected = { selectionSet = mutableSetOf(it).apply { addAll(selectionSet) } }
+        onSelected = {
+            selectionSet = mutableSetOf(it).apply {
+                setShowDialog(true)
+                addAll(selectionSet)
+            }
+        }
     )
+
+    EmotionDialog(showDialog, setShowDialog)
 }
 
 @Composable
@@ -217,6 +227,42 @@ fun EmotionDay(
             Modifier
                 .weight(WEIGHT_7DAY_WEEK)
                 .size(maxSize)
+        )
+    }
+}
+
+@Composable
+fun EmotionDialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit) {
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = {
+            },
+            title = {
+                Text("Title")
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        // Change the state to close the dialog
+                        setShowDialog(false)
+                    },
+                ) {
+                    Text("Confirm")
+                }
+            },
+            dismissButton = {
+                Button(
+                    onClick = {
+                        // Change the state to close the dialog
+                        setShowDialog(false)
+                    },
+                ) {
+                    Text("Dismiss")
+                }
+            },
+            text = {
+                Text("This is a text on the dialog")
+            },
         )
     }
 }
