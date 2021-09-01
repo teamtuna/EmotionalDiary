@@ -180,7 +180,6 @@ fun RowScope.Day(
                 widget()
             }
         }
-
     }
 }
 
@@ -206,7 +205,8 @@ fun EmotionDay(
 ) {
     val ctx = LocalContext.current
     val maxSize = 50.dp
-    val url = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
+    val url = "https://upload.wikimedia.org/wikipedia/commons/thumb/" +
+        "e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
 
     Column(
         verticalArrangement = Arrangement.Center
@@ -217,13 +217,14 @@ fun EmotionDay(
             textAlign = TextAlign.Center,
             style = style
         )
-        AndroidView(factory = {
-            val img = ImageView(it)
-            Glide.with(ctx)
-                .load(url)
-                .into(img)
-            img
-        },
+        AndroidView(
+            factory = {
+                val img = ImageView(it)
+                Glide.with(ctx)
+                    .load(url)
+                    .into(img)
+                img
+            },
             Modifier
                 .weight(WEIGHT_7DAY_WEEK)
                 .size(maxSize)
