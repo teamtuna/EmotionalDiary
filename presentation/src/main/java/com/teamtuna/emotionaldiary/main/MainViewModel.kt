@@ -10,7 +10,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val mainUseCase: MainUseCase) : ViewModel() {
     fun test() = mainUseCase()
 
-
     private val _selectedMenu = mutableStateOf<BottomMenu>(BottomMenu.CALENDAR)
     val selectedMenu get() = _selectedMenu
 
@@ -19,8 +18,6 @@ class MainViewModel @Inject constructor(private val mainUseCase: MainUseCase) : 
     }
 }
 
-
 enum class BottomMenu {
     CALENDAR, TIMELINE, ANALYSIS, SETTING
-
 }

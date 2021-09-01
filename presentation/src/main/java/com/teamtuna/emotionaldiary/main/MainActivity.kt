@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             ProvideWindowInsets {
 
                 BottomMenu()
-                //fixme bottomAppBar
+                // fixme bottomAppBar
 //                Scaffold(
 //                    bottomAppBar = {
 //
@@ -56,8 +56,7 @@ class MainActivity : AppCompatActivity() {
                 .fillMaxSize(),
             horizontalArrangement = SpaceBetween,
             verticalAlignment = Alignment.Bottom
-        )
-        {
+        ) {
             TextButton(onClick = { viewModel.onSelectBottomMenu(BottomMenu.CALENDAR) }) {
                 val color =
                     if (selectedMenu.value == BottomMenu.CALENDAR) Color.Blue else Color.DarkGray
