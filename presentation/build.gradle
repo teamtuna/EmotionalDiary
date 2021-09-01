@@ -59,5 +59,12 @@ dependencies {
     // When using a AppCompat theme
     implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
 
+    // Calendar
+    implementation "com.github.sigmadeltasoftware:CalPose:1.1.0"
+    implementation "com.github.sigmadeltasoftware:CalPose:1.1.0"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+
     implementation project(":domain")
 }
