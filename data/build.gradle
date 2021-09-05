@@ -13,3 +13,4 @@ dependencies {
 
     implementation project(':domain')
 }
+apply from: "$rootDir/gradle/jacoco.gradle"
