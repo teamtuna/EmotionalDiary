@@ -2,7 +2,7 @@ name: Deploy Store
 
 on:
   push:
-    branches: [ master, feature/emotion-71 ]
+    branches: [ master ]
     tags:
       - v*.*
       - test/*
