@@ -93,8 +93,10 @@ fun WriteCompose(writeViewModel: WriteViewModel = viewModel()) {
                         .scrollable(state = scrollState, orientation = Orientation.Vertical)
                 ) {
                     ImageCard(emotion)
-                    WriteTextField(state = remember { mutableStateOf(TextFieldValue(text = emotion.reason)) },
-                    scrollableState = scrollState)
+                    WriteTextField(
+                        state = remember { mutableStateOf(TextFieldValue(text = emotion.reason)) },
+                        scrollableState = scrollState
+                    )
                 }
             }
         }
