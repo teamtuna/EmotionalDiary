@@ -1,5 +1,7 @@
 package com.teamtuna.emotionaldiary.write
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -88,9 +90,11 @@ fun WriteCompose(writeViewModel: WriteViewModel = viewModel()) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
+                        .scrollable(state = scrollState, orientation = Orientation.Vertical)
                 ) {
                     ImageCard(emotion)
-                    WriteTextField(remember { mutableStateOf(TextFieldValue(text = emotion.reason)) })
+                    WriteTextField(state = remember { mutableStateOf(TextFieldValue(text = emotion.reason)) },
+                    scrollableState = scrollState)
                 }
             }
         }
