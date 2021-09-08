@@ -58,67 +58,67 @@ class TimelineFragment : Fragment() {
             }
         }
     }
+}
 
-    @Composable
-    private fun MyApp(navigateToDetail: (EmotionItem) -> Unit) {
-        Scaffold(
-            content = {
-                TimeLineContent(navigateToDetail)
+@Composable
+private fun MyApp(navigateToDetail: (EmotionItem) -> Unit) {
+    Scaffold(
+        content = {
+            TimeLineContent(navigateToDetail)
+        }
+    )
+}
+
+@Composable
+fun TimeLineContent(navigateToDetail: (EmotionItem) -> Unit) {
+    val timeLine = remember { DataProvider.diaryList }
+
+    LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
+        items(
+            items = timeLine,
+            itemContent = {
+                TimeLineListItem(diary = it, navigateToDetail = navigateToDetail)
             }
         )
     }
+}
 
-    @Composable
-    private fun TimeLineContent(navigateToDetail: (EmotionItem) -> Unit) {
-        val timeLine = remember { DataProvider.diaryList }
-
-        LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
-            items(
-                items = timeLine,
-                itemContent = {
-                    TimeLineListItem(diary = it, navigateToDetail = navigateToDetail)
-                }
-            )
-        }
-    }
-
-    @Composable
-    private fun TimeLineListItem(diary: EmotionItem, navigateToDetail: (EmotionItem) -> Unit) {
-        Card(
-            modifier = Modifier
-                .padding(horizontal = 8.dp, vertical = 8.dp)
-                .fillMaxWidth(),
-            elevation = 2.dp,
-            shape = RoundedCornerShape(corner = CornerSize(16.dp))
+@Composable
+private fun TimeLineListItem(diary: EmotionItem, navigateToDetail: (EmotionItem) -> Unit) {
+    Card(
+        modifier = Modifier
+            .padding(horizontal = 8.dp, vertical = 8.dp)
+            .fillMaxWidth(),
+        elevation = 2.dp,
+        shape = RoundedCornerShape(corner = CornerSize(16.dp))
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(8.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(8.dp)
+            DiaryImage(diary)
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .align(Alignment.CenterVertically)
+                    .clickable { navigateToDetail(diary) }
             ) {
-                DiaryImage(diary)
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                        .align(Alignment.CenterVertically)
-                        .clickable { navigateToDetail(diary) }
-                ) {
-                    Text(text = diary.emotion.toString(), style = MaterialTheme.typography.h5)
-                    Text(text = diary.diaryContent)
-                }
+                Text(text = diary.emotion.toString(), style = MaterialTheme.typography.h5)
+                Text(text = diary.diaryContent)
             }
         }
     }
+}
 
-    @ExperimentalCoilApi
-    @Composable
-    private fun DiaryImage(diary: EmotionItem) {
-        Image(
-            painter = rememberImagePainter(data = diary.imageUrl, builder = {
-                transformations(CircleCropTransformation())
-            }),
-            contentDescription = null,
-            modifier = Modifier.size(64.dp)
-        )
-    }
+@ExperimentalCoilApi
+@Composable
+private fun DiaryImage(diary: EmotionItem) {
+    Image(
+        painter = rememberImagePainter(data = diary.imageUrl, builder = {
+            transformations(CircleCropTransformation())
+        }),
+        contentDescription = null,
+        modifier = Modifier.size(64.dp)
+    )
 }
