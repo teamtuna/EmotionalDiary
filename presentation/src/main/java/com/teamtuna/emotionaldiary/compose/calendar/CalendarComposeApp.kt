@@ -1,7 +1,7 @@
 package com.teamtuna.emotionaldiary.compose.calendar
 
-import android.widget.ImageView
 import androidx.compose.animation.Crossfade
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -35,7 +35,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import be.sigmadelta.calpose.Calpose
 import be.sigmadelta.calpose.WEIGHT_7DAY_WEEK
 import be.sigmadelta.calpose.model.CalposeActions
@@ -43,7 +42,8 @@ import be.sigmadelta.calpose.model.CalposeDate
 import be.sigmadelta.calpose.model.CalposeWidgets
 import be.sigmadelta.calpose.widgets.DefaultDay
 import be.sigmadelta.calpose.widgets.MaterialHeader
-import com.bumptech.glide.Glide
+import coil.compose.rememberImagePainter
+import coil.transform.CircleCropTransformation
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
 import org.threeten.bp.DayOfWeek
@@ -218,15 +218,15 @@ fun EmotionDay(
             textAlign = TextAlign.Center,
             style = style
         )
-        AndroidView(
-            factory = {
-                val img = ImageView(it)
-                Glide.with(ctx)
-                    .load(url)
-                    .into(img)
-                img
-            },
-            Modifier
+        Image(
+            painter = rememberImagePainter(
+                data = url,
+                builder = {
+                    transformations(CircleCropTransformation())
+                }
+            ),
+            contentDescription = null,
+            modifier = Modifier
                 .weight(WEIGHT_7DAY_WEEK)
                 .size(maxSize)
         )
