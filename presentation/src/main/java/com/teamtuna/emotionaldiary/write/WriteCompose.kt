@@ -50,6 +50,8 @@ fun WriteCompose(writeViewModel: WriteViewModel = viewModel()) {
                 id = 0L,
                 date = LocalDateTime.now(),
                 emotion = Emotion.FEAR,
+                location = null,
+                photo = null,
                 reason = "TEST"
             )
 

@@ -12,5 +12,7 @@ data class EmotionalEntity(
     val id: UniqId = 0,
     val emotion: Emotion,
     val date: LocalDateTime = LocalDateTime.now(),
+    val location: String?,
+    val photo: String?,
     val reason: String = ""
 )

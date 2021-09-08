@@ -6,7 +6,6 @@ import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.Result
-import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -17,6 +16,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import java.time.LocalDateTime
+import kotlinx.coroutines.runBlocking
 
 @ExtendWith(MockitoExtension::class)
 internal class EmotionalRepositoryTest {
@@ -69,6 +69,8 @@ internal class EmotionalRepositoryTest {
                 id = 1,
                 emotion = Emotion.JOY,
                 date = currentDate,
+                location = null,
+                photo = null,
                 reason = "No Emotion"
             )
         )
@@ -81,6 +83,8 @@ internal class EmotionalRepositoryTest {
             id = 1,
             emotion = Emotion.JOY,
             date = currentDate,
+            location = null,
+            photo = null,
             reason = "No Emotion"
         )
         Mockito.verify(localDataSource).get(1)
@@ -93,18 +97,18 @@ internal class EmotionalRepositoryTest {
         val currentDate = LocalDateTime.now()
         whenever(
             localDataSource.replace(
-                DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+                DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
             )
         ).thenReturn(true)
 
         val actual = repository.replace(
-            DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+            DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
         )
 
         assertTrue(actual is Result.Success)
 
         Mockito.verify(localDataSource).replace(
-            DailyEmotion(1, Emotion.FEAR, currentDate, "Yes")
+            DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
         )
         assertTrue((actual as Result.Success).data)
     }
