@@ -1,27 +1,22 @@
 package com.teamtuna.emotionaldiary.write
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.material.TextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
+import com.teamtuna.emotionaldiary.entity.DailyEmotion
+import com.teamtuna.emotionaldiary.entity.Emotion
+import java.time.LocalDateTime
 
 @Preview
 @Composable
@@ -33,59 +28,21 @@ fun WriteCompose() {
                 systemUiController.setSystemBarsColor(Color(0x55ff0000))
             }
 
-            Column {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(100.dp)
-                ) {
-                    // Image(
-                    //     painter = painterResource(id = R.drawable.splash),
-                    //     contentDescription = ""
-                    // )
-                }
-                TitleText()
-                LocationText()
-                DiaryInputField()
+            val emotion = DailyEmotion(
+                id = 0L,
+                imageUrl = "",
+                date = LocalDateTime.now(),
+                emotion = Emotion.FEAR,
+                reason = "TEST"
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+            ) {
+                ImageCard(emotion)
+                WriteTextField(remember { mutableStateOf(TextFieldValue(text = emotion.reason)) })
             }
         }
     }
-}
-
-@Composable
-fun TitleText() {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        // Image(
-        //     painter = painterResource(id = R.drawable.emotional_bg_disgust),
-        //     contentDescription = ""
-        // )
-        Text(text = "오늘의 감정은?")
-        Text(text = "기쁨")
-    }
-}
-
-@Composable
-fun LocationText() {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        // Image(
-        //     painter = painterResource(id = R.drawable.emotional_bg_joy),
-        //     contentDescription = ""
-        // )
-        Icon(
-            imageVector = Icons.Filled.Save,
-            contentDescription = "",
-            modifier = Modifier.padding(end = 8.dp)
-        )
-        Text(text = "일기의 위치는?")
-        TextButton(onClick = {}) {
-            Text(text = "위치 설정 하기")
-        }
-    }
-}
-
-@Composable
-fun DiaryInputField() {
-    TextField(modifier = Modifier.fillMaxWidth(), value = "", onValueChange = {
-
-    })
 }
