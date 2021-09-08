@@ -1,0 +1,69 @@
+apply plugin: 'jacoco'
+
+jacoco { toolVersion = '0.8.7' }
+
+String dependsOnTask = "testDebugUnitTest"
+
+task generateCodeCoverageReports(type: JacocoReport, dependsOn: dependsOnTask) {
+    group = "Reporting"
+    description = "Generate Jaoco Coverage Reports"
+
+    def reportDirPath = "$buildDir/reports/codeCoverage"
+
+    reports {
+        html.enabled true
+        xml.enabled false
+        csv.enabled false
+
+        html.destination file("$reportDirPath/${project.name}")
+        xml.destination file("$reportDirPath/${project.name}.xml")
+        csv.destination file("$reportDirPath/${project.name}.cvs")
+    }
+
+    def fileFilter =
+        [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/DataBinder*/**',
+            '**/DataBinding*/**',
+            '**/*Test*.*',
+            'android/**/*.*',
+            'androidx/**/*.*',
+            '**/BR.class',
+            '**/*_Impl**',
+            '**/*InjectAdapter*.*',
+            '**/*StaticInjection*.*',
+            '**/*ModuleAdapter*.*',
+            'hilt_aggregated_deps/**',
+            '**/Hilt_*/**',
+            '**/**_Hilt**/**',
+            '**/databinding/**',
+            '**/*special*/**',
+            'dagger/**',
+            // Dagger
+            '**/*_Provide*/**',
+            '**/*_Factory*/**',
+            '**/*_MembersInjector.class',
+            '**/*Dagger*'
+        ]
+
+    // flavor가 설정된 경우 /debug/ -> /${flavor}Debug/
+    def javaClassDirPath = "$project.buildDir/intermediates/javac/debug/classes"
+    def kotlinClassDirPath = "$project.buildDir/tmp/kotlin-classes/debug"
+    def coverageExecutionDataPath = "${buildDir}/jacoco/testDebugUnitTest.exec"
+
+    def mainJavaSrcPath = "$project.projectDir/src/main/java"
+    def mainKotlinSrcPath = "$project.projectDir/src/main/kotlin"
+
+    sourceDirectories.from = files([mainJavaSrcPath, mainKotlinSrcPath])
+    classDirectories.from = fileTree(dir: javaClassDirPath, excludes: fileFilter) + fileTree(dir: kotlinClassDirPath, excludes: fileFilter)
+    executionData.from = file(coverageExecutionDataPath)
+}
+
+tasks.all { task ->
+    if (task.name.equals(dependsOnTask)) {
+        task.finalizedBy generateCodeCoverageReports
+    }
+}
