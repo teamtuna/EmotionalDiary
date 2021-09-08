@@ -12,12 +12,11 @@
         <activity
             android:name="com.teamtuna.emotionaldiary.main.MainActivity"
             android:theme="@style/Theme.EmotionalDiary.Splash">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name="com.teamtuna.emotionaldiary.history.HistoryActivity" />
         <activity
@@ -28,13 +27,11 @@
             android:theme="@style/Theme.EmotionalDiary.Compose" />
         <activity
             android:name="com.teamtuna.emotionaldiary.write.WriteActivity"
-            android:theme="@style/Theme.EmotionalDiary.Compose" >
-        </activity>
+            android:theme="@style/Theme.EmotionalDiary.Compose" />
 
         <activity
             android:name="com.teamtuna.emotionaldiary.compose.calendar.CalendarCompose"
             android:theme="@style/Theme.EmotionalDiary.Compose" />
-
     </application>
 
 </manifest>
