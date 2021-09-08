@@ -116,7 +116,8 @@ class TimelineFragment : Fragment() {
         Image(
             painter = rememberImagePainter(data = diary.imageUrl, builder = {
                 transformations(CircleCropTransformation())
-            }), contentDescription = null,
+            }),
+            contentDescription = null,
             modifier = Modifier.size(64.dp)
         )
     }
