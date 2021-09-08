@@ -59,7 +59,8 @@ dependencies {
     // When using a MDC theme
     //implementation "com.google.android.material:compose-theme-adapter:1.0.1"
     // When using a AppCompat theme
-    implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
+    implementation 'com.google.accompanist:accompanist-appcompat-theme:0.17.0'
 
     implementation project(":domain")
 }
+apply from: "$rootDir/gradle/jacoco.gradle"

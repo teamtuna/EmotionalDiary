@@ -8,8 +8,8 @@ apply from: '../androidBase.gradle'
 android {
     defaultConfig {
         applicationId "com.teamtuna.emotionaldiary"
-        versionCode 1
-        versionName "1.0"
+        versionCode 14
+        versionName "1.0.14"
     }
 
     buildTypes {
@@ -28,10 +28,10 @@ dependencies {
     testImplementation 'androidx.room:room-testing:2.3.0'
 
     //work
-    implementation 'androidx.work:work-runtime-ktx:2.5.0'
+    implementation 'androidx.work:work-runtime-ktx:2.6.0'
 
     // firebase
-    implementation platform('com.google.firebase:firebase-bom:28.3.1')
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
