@@ -44,9 +44,9 @@ fun WriteCompose(
             SideEffect {
                 systemUiController.setSystemBarsColor(Color(0x55ff0000))
             }
+            // TODO 제거할 코드
             val emotion = DailyEmotion(
                 id = 0L,
-                imageUrl = "",
                 date = LocalDateTime.now(),
                 emotion = Emotion.FEAR,
                 reason = "TEST"
