@@ -57,6 +57,5 @@ object DataProvider {
                 "https://cdn.pixabay.com/photo/2020/10/31/17/31/sad-5701778_1280.png"
             )
         ),
-
-        )
+    )
 }
