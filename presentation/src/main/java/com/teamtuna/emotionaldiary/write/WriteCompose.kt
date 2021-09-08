@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
@@ -26,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
@@ -36,8 +36,7 @@ import java.time.LocalDateTime
 
 @Preview
 @Composable
-fun WriteCompose(
-) {
+fun WriteCompose(writeViewModel: WriteViewModel = viewModel()) {
     EmotionalDiaryTheme {
         ProvideWindowInsets {
             val systemUiController = rememberSystemUiController()
@@ -61,14 +60,12 @@ fun WriteCompose(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .wrapContentWidth(align = Alignment.CenterHorizontally)
-                                    .padding(start = 30.dp)
                             ) {
                                 Text(
                                     text = stringResource(id = R.string.app_name),
                                     style = MaterialTheme.typography.subtitle2,
                                     color = LocalContentColor.current,
                                     modifier = Modifier
-                                        .padding(start = 10.dp)
                                         .weight(1.5f)
                                 )
                             }
