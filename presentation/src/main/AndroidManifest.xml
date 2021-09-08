@@ -30,6 +30,11 @@
             android:name="com.teamtuna.emotionaldiary.write.WriteActivity"
             android:theme="@style/Theme.EmotionalDiary.Compose" >
         </activity>
+
+        <activity
+            android:name="com.teamtuna.emotionaldiary.compose.calendar.CalendarCompose"
+            android:theme="@style/Theme.EmotionalDiary.Compose" />
+
     </application>
 
 </manifest>

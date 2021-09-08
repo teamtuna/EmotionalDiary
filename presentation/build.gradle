@@ -61,6 +61,12 @@ dependencies {
     // When using a AppCompat theme
     implementation 'com.google.accompanist:accompanist-appcompat-theme:0.17.0'
 
+    // Calendar
+    implementation "com.github.sigmadeltasoftware:CalPose:1.1.0"
+
+    // coil
+    implementation "io.coil-kt:coil-compose:1.3.2"
+
     implementation project(":domain")
 }
 apply from: "$rootDir/gradle/jacoco.gradle"
