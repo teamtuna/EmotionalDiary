@@ -70,7 +70,7 @@ private fun MyApp(navigateToDetail: (EmotionItem) -> Unit) {
 }
 
 @Composable
-fun TimeLineContent(navigateToDetail: (EmotionItem) -> Unit) {
+fun TimeLineContent(navigateToDetail: (EmotionItem) -> Unit = {}) {
     val timeLine = remember { DataProvider.diaryList }
 
     LazyColumn(contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)) {
