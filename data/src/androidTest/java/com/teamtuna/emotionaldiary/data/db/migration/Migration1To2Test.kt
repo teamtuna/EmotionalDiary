@@ -15,11 +15,14 @@ class Migration1To2Test : BaseMigrationTest() {
     @Test
     fun migration_test() {
         migrationHelper.createDatabase(TEST_DB_NAME, 1).apply {
-            insert("EmotionalEntity", SQLiteDatabase.CONFLICT_FAIL, ContentValues().apply {
-                put("emotion", "JOY")
-                put("date", 0L)
-                put("reason", "TEST")
-            })
+            insert(
+                "EmotionalEntity", SQLiteDatabase.CONFLICT_FAIL,
+                ContentValues().apply {
+                    put("emotion", "JOY")
+                    put("date", 0L)
+                    put("reason", "TEST")
+                }
+            )
         }
 
         migrationHelper.runMigrationsAndValidate(
