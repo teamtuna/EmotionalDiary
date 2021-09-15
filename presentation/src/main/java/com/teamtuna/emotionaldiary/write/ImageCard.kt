@@ -15,19 +15,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.presentation.R
 
 @Composable
-fun ImageCard(dailyEmotion: DailyEmotion, modifier: Modifier = Modifier) {
+fun ImageCard(uiState: WriteUiState, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 18.dp, end = 18.dp)
     ) {
         val imageModifier = Modifier
-            .heightIn(min = 180.dp)
+            .heightIn(min = 180.dp, max = 250.dp)
             .fillMaxWidth()
             .clip(shape = MaterialTheme.shapes.medium)
         Image(
@@ -41,7 +40,7 @@ fun ImageCard(dailyEmotion: DailyEmotion, modifier: Modifier = Modifier) {
 
         ImageText(
             painter = painterResource(
-                id = when (dailyEmotion.emotion) {
+                id = when (uiState.emotion) {
                     Emotion.JOY -> R.drawable.intro_joy
                     Emotion.SADNESS -> R.drawable.intro_sad
                     Emotion.ANGER -> R.drawable.intro_anger
@@ -50,7 +49,7 @@ fun ImageCard(dailyEmotion: DailyEmotion, modifier: Modifier = Modifier) {
                 }
             ),
             text = stringResource(
-                id = when (dailyEmotion.emotion) {
+                id = when (uiState.emotion) {
                     Emotion.JOY -> R.string.description_joy
                     Emotion.SADNESS -> R.string.description_sad
                     Emotion.ANGER -> R.string.description_anger
