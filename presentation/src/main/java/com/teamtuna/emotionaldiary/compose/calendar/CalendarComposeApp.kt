@@ -10,14 +10,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -45,6 +45,7 @@ import be.sigmadelta.calpose.widgets.MaterialHeader
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.insets.statusBarsHeight
 import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.YearMonth
@@ -52,17 +53,22 @@ import org.threeten.bp.YearMonth
 @Preview
 @Composable
 fun CalendarComposeApp() {
+    val appBarColor = MaterialTheme.colors.surface.copy(alpha = 0.87f)
+
     EmotionalDiaryTheme {
         ProvideWindowInsets {
             Column {
-                Spacer(modifier = Modifier.height(100.dp))
+                Spacer(modifier = Modifier
+                    .background(appBarColor)
+                    .fillMaxWidth()
+                    .statusBarsHeight()
+                )
                 MaterialPreview()
             }
         }
     }
 }
 
-@Preview("MaterialPreview")
 @Composable
 fun MaterialPreview() {
     var month by remember { mutableStateOf(YearMonth.now()) }
@@ -106,6 +112,7 @@ fun MaterialCalendar(
             day = { dayDate, todayDate ->
                 Day(
                     dayDate = dayDate,
+                    todayDate = todayDate,
                     selectionSet = selectionSet,
                     onSelected = onSelected
                 )
@@ -139,32 +146,35 @@ fun HeaderDayRow(
 @Composable
 fun RowScope.Day(
     dayDate: CalposeDate,
+    todayDate: CalposeDate,
     selectionSet: Set<CalposeDate>,
     onSelected: (CalposeDate) -> Unit
 ) {
+    val isToday = todayDate == dayDate
     val isSelected = selectionSet.contains(dayDate)
-    val weight = WEIGHT_7DAY_WEEK
-    val bgColor = if (isSelected) Color(primaryAccent) else Color.Transparent
+    val bgColor = when {
+        isSelected -> Color(primaryAccent)
+        isToday -> Color(todayColor)
+        else -> Color.Transparent
+    }
 
     val widget: @Composable () -> Unit = {
         EmotionDay(
             text = dayDate.day.toString(),
-            modifier = Modifier
-                .padding(4.dp)
-                .weight(weight)
-                .fillMaxWidth(),
             style = TextStyle(
                 color = when {
-                    isSelected -> Color.White
+                    isSelected || isToday -> Color.White
                     else -> Color.Black
                 },
-                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+                fontWeight = if (isSelected || isToday) FontWeight.Bold else FontWeight.Normal
             )
         )
     }
 
     Column(
-        modifier = Modifier.weight(WEIGHT_7DAY_WEEK),
+        modifier = Modifier
+            .weight(WEIGHT_7DAY_WEEK)
+            .padding(4.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -200,21 +210,19 @@ fun RowScope.PriorMonthDay(
 @Composable
 fun EmotionDay(
     text: String,
-    modifier: Modifier = Modifier.padding(4.dp),
     style: TextStyle = TextStyle()
 ) {
-    val ctx = LocalContext.current
-    val maxSize = 50.dp
     val url = "https://upload.wikimedia.org/wikipedia/commons/thumb/" +
         "e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
 
     Column(
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text,
-            modifier = modifier,
+            Modifier
+                .padding(4.dp)
+                .fillMaxWidth(),
             textAlign = TextAlign.Center,
             style = style
         )
@@ -227,8 +235,8 @@ fun EmotionDay(
             ),
             contentDescription = null,
             modifier = Modifier
-                .weight(WEIGHT_7DAY_WEEK)
-                .size(maxSize)
+                .fillMaxWidth()
+                .fillMaxHeight()
         )
     }
 }
@@ -270,5 +278,6 @@ fun EmotionDialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit) {
 }
 
 const val lightGrey = 0xa0bdbdbd
+const val todayColor = 0xFF30cf5a
 const val primaryAccent = 0xFF4db6ac
 const val primaryAccentLight = 0xFF82e9de
