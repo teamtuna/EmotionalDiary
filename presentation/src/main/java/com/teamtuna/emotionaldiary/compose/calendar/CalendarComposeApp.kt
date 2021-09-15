@@ -61,10 +61,11 @@ fun CalendarComposeApp() {
     EmotionalDiaryTheme {
         ProvideWindowInsets {
             Column {
-                Spacer(modifier = Modifier
-                    .background(appBarColor)
-                    .fillMaxWidth()
-                    .statusBarsHeight()
+                Spacer(
+                    modifier = Modifier
+                        .background(appBarColor)
+                        .fillMaxWidth()
+                        .statusBarsHeight()
                 )
                 MaterialPreview()
             }
@@ -77,7 +78,9 @@ fun MaterialPreview() {
     var month by remember { mutableStateOf(YearMonth.now()) }
     var selectionSet by remember { mutableStateOf(setOf<CalposeDate>()) }
     val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
-    var currentDate by remember { mutableStateOf(CalposeDate(-1, DayOfWeek.MONDAY, YearMonth.now())) }
+    var currentDate by remember {
+        mutableStateOf(CalposeDate(-1, DayOfWeek.MONDAY, YearMonth.now()))
+    }
 
     MaterialCalendar(
         month = month,
@@ -95,7 +98,10 @@ fun MaterialPreview() {
         }
     )
 
-    EmotionListDialog(showDialog, setShowDialog, currentDate,
+    EmotionListDialog(
+        showDialog,
+        setShowDialog,
+        currentDate,
         onDismiss = {
             // dialog 없어진 후 작업이 필요할 경
         },
@@ -285,15 +291,22 @@ private fun EmotionListDialog(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Column(modifier = Modifier.padding(16.dp)) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
                     // TODO  정의된 emotion 개수에 맞게 적절하게 배치되도록 수정하기 (dialog height, emotion item size)
                     for (i in 0 until 2) {
-                        Row(modifier = Modifier.padding(8.dp)) {
+                        Row(
+                            modifier = Modifier.padding(8.dp)
+                        ) {
                             for (j in 0 until 4) {
-                                Box(Modifier.clickable(onClick = {
-                                    onEmotionClick(currentDate, emotion)
-                                    setShowDialog(false)
-                                })) {
+                                Box(
+                                    Modifier.clickable(
+                                        onClick = {
+                                            onEmotionClick(currentDate, emotion)
+                                            setShowDialog(false)
+                                        })
+                                ) {
                                     Image(
                                         painter = rememberImagePainter(
                                             data = url,
