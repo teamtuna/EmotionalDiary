@@ -1,10 +1,10 @@
 package com.teamtuna.emotionaldiary
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.log.Log
-import androidx.appcompat.app.AlertDialog
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 @Suppress("unused")
