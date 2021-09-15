@@ -12,14 +12,16 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import be.sigmadelta.calpose.Calpose
 import be.sigmadelta.calpose.WEIGHT_7DAY_WEEK
 import be.sigmadelta.calpose.model.CalposeActions
@@ -90,7 +94,7 @@ fun MaterialPreview() {
         }
     )
 
-    EmotionDialog(showDialog, setShowDialog)
+    EmotionListDialog(showDialog, setShowDialog, {}, {}, { Color -> })
 }
 
 @Composable
@@ -242,38 +246,81 @@ fun EmotionDay(
 }
 
 @Composable
-fun EmotionDialog(showDialog: Boolean, setShowDialog: (Boolean) -> Unit) {
-    if (showDialog) {
-        AlertDialog(
-            onDismissRequest = {
-            },
-            title = {
-                Text("Title")
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        // Change the state to close the dialog
-                        setShowDialog(false)
-                    },
-                ) {
-                    Text("Confirm")
+private fun EmotionListDialog(
+    showDialog: Boolean,
+    setShowDialog: (Boolean) -> Unit,
+    onDismiss: () -> Unit,
+    onNegativeClick: () -> Unit,
+    onPositiveClick: (Int) -> Unit,
+) {
+    val url = "https://upload.wikimedia.org/wikipedia/commons/thumb/" +
+        "e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
+
+    var emotion by remember { mutableStateOf(-1) }
+
+    if (!showDialog)
+        return
+
+    Dialog(onDismissRequest = onDismiss) {
+        Card(
+            elevation = 8.dp,
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+
+                Text(
+                    text = "Select Emotion",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Column(modifier = Modifier.padding(16.dp)) {
+                    for (i in 0 until 2) {
+                        Row(modifier = Modifier.padding(8.dp)) {
+                            for (j in 0 until 4) {
+                                Image(
+                                    painter = rememberImagePainter(
+                                        data = url,
+                                        builder = {
+                                            transformations(CircleCropTransformation())
+                                        }
+                                    ),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .width(50.dp)
+                                        .height(50.dp)
+                                )
+                                Spacer(modifier = Modifier.width(16.dp))
+                            }
+                            Spacer(modifier = Modifier.height(16.dp))
+                        }
+                    }
                 }
-            },
-            dismissButton = {
-                Button(
-                    onClick = {
-                        // Change the state to close the dialog
-                        setShowDialog(false)
-                    },
+
+                // Buttons
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Dismiss")
+
+                    TextButton(onClick = {
+                        onNegativeClick()
+                        setShowDialog(false)
+                    }) {
+                        Text(text = "CANCEL")
+                    }
+                    Spacer(modifier = Modifier.width(4.dp))
+                    TextButton(onClick = {
+                        onPositiveClick(emotion)
+                        setShowDialog(false)
+                    }) {
+                        Text(text = "SELECT")
+                    }
                 }
-            },
-            text = {
-                Text("This is a text on the dialog")
-            },
-        )
+            }
+        }
     }
 }
 
