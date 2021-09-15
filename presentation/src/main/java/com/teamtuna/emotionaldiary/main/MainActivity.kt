@@ -4,18 +4,20 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement.SpaceBetween
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
+import com.teamtuna.emotionaldiary.navigation.AppNavigationGraph
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,14 +36,14 @@ class MainActivity : AppCompatActivity() {
     fun MainScene() {
         EmotionalDiaryTheme {
             ProvideWindowInsets {
-
-                BottomMenu()
-                // fixme bottomAppBar
-//                Scaffold(
-//                    bottomAppBar = {
-//
-//                    }
-//                )
+                val navController = rememberNavController()
+                Scaffold(
+                    bottomBar = {
+                        BottomMenu()
+                    }
+                ) {
+                    AppNavigationGraph(navController)
+                }
             }
         }
     }
@@ -51,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         val selectedMenu = viewModel.selectedMenu
         Row(
             Modifier
-                .background(Color(0xFFEDEAE0))
                 .fillMaxSize(),
             horizontalArrangement = SpaceBetween,
             verticalAlignment = Alignment.Bottom
