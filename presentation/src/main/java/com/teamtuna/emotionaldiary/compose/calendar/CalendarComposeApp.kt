@@ -305,7 +305,8 @@ private fun EmotionListDialog(
                                         onClick = {
                                             onEmotionClick(currentDate, emotion)
                                             setShowDialog(false)
-                                        })
+                                        }
+                                    )
                                 ) {
                                     Image(
                                         painter = rememberImagePainter(
