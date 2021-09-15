@@ -21,7 +21,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -78,6 +77,7 @@ fun MaterialPreview() {
     var month by remember { mutableStateOf(YearMonth.now()) }
     var selectionSet by remember { mutableStateOf(setOf<CalposeDate>()) }
     val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
+    var currentDate by remember { mutableStateOf(CalposeDate(-1, DayOfWeek.MONDAY, YearMonth.now())) }
 
     MaterialCalendar(
         month = month,
@@ -86,15 +86,24 @@ fun MaterialPreview() {
             onClickedPreviousMonth = { month = month.minusMonths(1) },
             onClickedNextMonth = { month = month.plusMonths(1) },
         ),
-        onSelected = {
-            selectionSet = mutableSetOf(it).apply {
+        onSelected = { calPoseDate ->
+            selectionSet = mutableSetOf(calPoseDate).apply {
+                currentDate = calPoseDate
                 setShowDialog(true)
                 addAll(selectionSet)
             }
         }
     )
 
-    EmotionListDialog(showDialog, setShowDialog, {}, {}, { Color -> })
+    EmotionListDialog(showDialog, setShowDialog, currentDate,
+        onDismiss = {
+            // dialog 없어진 후 작업이 필요할 경
+        },
+        onEmotionClick = { calposeDate, emotionId ->
+            // newIntent 작업한 곳으로 보내기
+            // 날짜, emotion Id 값이 보내져아함
+        }
+    )
 }
 
 @Composable
@@ -249,16 +258,16 @@ fun EmotionDay(
 private fun EmotionListDialog(
     showDialog: Boolean,
     setShowDialog: (Boolean) -> Unit,
+    currentDate: CalposeDate,
     onDismiss: () -> Unit,
-    onNegativeClick: () -> Unit,
-    onPositiveClick: (Int) -> Unit,
+    onEmotionClick: (CalposeDate, Int) -> Unit,
 ) {
     val url = "https://upload.wikimedia.org/wikipedia/commons/thumb/" +
         "e/e6/Noto_Emoji_KitKat_263a.svg/1200px-Noto_Emoji_KitKat_263a.svg.png"
 
     var emotion by remember { mutableStateOf(-1) }
 
-    if (!showDialog)
+    if (!showDialog || currentDate.day == -1)
         return
 
     Dialog(onDismissRequest = onDismiss) {
@@ -277,46 +286,31 @@ private fun EmotionListDialog(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Column(modifier = Modifier.padding(16.dp)) {
+                    // TODO  정의된 emotion 개수에 맞게 적절하게 배치되도록 수정하기 (dialog height, emotion item size)
                     for (i in 0 until 2) {
                         Row(modifier = Modifier.padding(8.dp)) {
                             for (j in 0 until 4) {
-                                Image(
-                                    painter = rememberImagePainter(
-                                        data = url,
-                                        builder = {
-                                            transformations(CircleCropTransformation())
-                                        }
-                                    ),
-                                    contentDescription = null,
-                                    modifier = Modifier
-                                        .width(50.dp)
-                                        .height(50.dp)
-                                )
+                                Box(Modifier.clickable(onClick = {
+                                    onEmotionClick(currentDate, emotion)
+                                    setShowDialog(false)
+                                })) {
+                                    Image(
+                                        painter = rememberImagePainter(
+                                            data = url,
+                                            builder = {
+                                                transformations(CircleCropTransformation())
+                                            }
+                                        ),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .width(50.dp)
+                                            .height(50.dp)
+                                    )
+                                }
                                 Spacer(modifier = Modifier.width(16.dp))
                             }
                             Spacer(modifier = Modifier.height(16.dp))
                         }
-                    }
-                }
-
-                // Buttons
-                Row(
-                    horizontalArrangement = Arrangement.End,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-
-                    TextButton(onClick = {
-                        onNegativeClick()
-                        setShowDialog(false)
-                    }) {
-                        Text(text = "CANCEL")
-                    }
-                    Spacer(modifier = Modifier.width(4.dp))
-                    TextButton(onClick = {
-                        onPositiveClick(emotion)
-                        setShowDialog(false)
-                    }) {
-                        Text(text = "SELECT")
                     }
                 }
             }
