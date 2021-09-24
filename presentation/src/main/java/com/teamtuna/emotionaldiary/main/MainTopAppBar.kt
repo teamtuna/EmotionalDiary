@@ -21,7 +21,10 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExposurePlus1
+import androidx.compose.material.icons.filled.HdrPlus
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.PlusOne
 import androidx.compose.runtime.Composable
 
 @Composable
@@ -37,7 +40,7 @@ fun MainTopAppBar(
         navigationIcon = {
             IconButton(onClick = { homeNavigate() }) {
                 Icon(
-                    Icons.Filled.Home,
+                    Icons.Filled.PlusOne,
                     contentDescription = title
                 )
             }

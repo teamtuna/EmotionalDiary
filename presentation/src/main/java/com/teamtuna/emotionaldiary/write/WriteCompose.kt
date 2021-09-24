@@ -19,24 +19,24 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
 import com.teamtuna.emotionaldiary.presentation.R
+import com.teamtuna.emotionaldiary.theme.AppTheme
 
 @Preview
 @Composable
 fun WriteCompose(
-    writeViewModel: WriteViewModel,
+    articleId: Long? = null,
+    navigateUp: () -> Unit = {},
+    writeViewModel: WriteViewModel = hiltViewModel(),
     scaffoldState: ScaffoldState = rememberScaffoldState()
 ) {
     val uiState by writeViewModel.uiState.collectAsState()
@@ -59,13 +59,8 @@ fun WriteScreen(
     onContentChanged: (String) -> Unit,
     onConfirm: () -> Unit
 ) {
-    EmotionalDiaryTheme {
+    AppTheme {
         ProvideWindowInsets {
-            val systemUiController = rememberSystemUiController()
-            SideEffect {
-                systemUiController.setSystemBarsColor(Color(0x55ff0000))
-            }
-
             val scrollState = rememberLazyListState()
             Scaffold(
                 scaffoldState = scaffoldState,

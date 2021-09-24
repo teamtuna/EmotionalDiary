@@ -29,7 +29,7 @@ class WriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            WriteCompose(writeViewModel = viewModel)
+            WriteCompose()
         }
     }
 }

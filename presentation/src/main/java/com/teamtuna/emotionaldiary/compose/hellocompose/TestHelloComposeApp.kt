@@ -7,12 +7,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
+import com.teamtuna.emotionaldiary.theme.AppTheme
 
 @Preview
 @Composable
 fun HelloComposeApp() {
-    EmotionalDiaryTheme {
+    AppTheme {
         ProvideWindowInsets {
             val systemUiController = rememberSystemUiController()
             SideEffect {

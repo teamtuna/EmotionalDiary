@@ -47,30 +47,14 @@ import be.sigmadelta.calpose.widgets.DefaultDay
 import be.sigmadelta.calpose.widgets.MaterialHeader
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.insets.statusBarsHeight
-import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.YearMonth
 
 @Preview
 @Composable
 fun CalendarComposeApp() {
-    val appBarColor = MaterialTheme.colors.surface.copy(alpha = 0.87f)
-
-    EmotionalDiaryTheme {
-        ProvideWindowInsets {
-            Column {
-                Spacer(
-                    modifier = Modifier
-                        .background(appBarColor)
-                        .fillMaxWidth()
-                        .statusBarsHeight()
-                )
-                MaterialPreview()
-            }
-        }
-    }
+    MaterialPreview()
 }
 
 @Composable

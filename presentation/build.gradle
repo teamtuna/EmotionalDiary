@@ -46,6 +46,9 @@ dependencies {
 
     // Integration with ViewModels
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-beta01'
+    //hilt
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-alpha03'
+
 
     // Integration with observables
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.2'
