@@ -1,4 +1,12 @@
 .gradle
 local.properties
-.idea
 build
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/misc.xml
+.idea/jarRepositories.xml
+.idea/gradle.xml
+*.iml
+.idea/compiler.xml
+.idea/assetWizardSettings.xml
+.idea/inspectionProfiles
