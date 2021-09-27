@@ -21,9 +21,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExposurePlus1
-import androidx.compose.material.icons.filled.HdrPlus
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.PlusOne
 import androidx.compose.runtime.Composable
 
@@ -36,7 +33,7 @@ fun MainTopAppBar(
         title = {
             Text(text = title)
         },
-        //https://android-review.googlesource.com/c/platform/frameworks/support/+/1235108/4/ui/ui-material/integration-tests/samples/src/main/java/androidx/ui/material/samples/AppBarSamples.kt#39
+        // https://android-review.googlesource.com/c/platform/frameworks/support/+/1235108/4/ui/ui-material/integration-tests/samples/src/main/java/androidx/ui/material/samples/AppBarSamples.kt#39
         navigationIcon = {
             IconButton(onClick = { homeNavigate() }) {
                 Icon(

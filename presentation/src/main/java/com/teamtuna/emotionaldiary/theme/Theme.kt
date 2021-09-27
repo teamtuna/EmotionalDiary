@@ -42,8 +42,6 @@ private val DarkThemeColors = darkColors(
     error = Color200
 )
 
-
-
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

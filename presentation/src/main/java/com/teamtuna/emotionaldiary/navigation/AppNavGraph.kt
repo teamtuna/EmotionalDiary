@@ -79,7 +79,6 @@ fun AppNavGraph(
             composable(TIMELINE_ROUTE) {
                 MainScaffold(navController) {
                     TimeLineContent {
-
                     }
                 }
             }

@@ -32,19 +32,3 @@ val ColorA100 = Color(0xffb388ff)
 val ColorA200 = Color(0xff7c4dff)
 val ColorA400 = Color(0xff651fff)
 val ColorA700 = Color(0xff6200ea)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

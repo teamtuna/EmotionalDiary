@@ -43,14 +43,13 @@ sealed class Screen(
     val route: String,
     @StringRes val resourceId: Int,
     val icon: ImageVector,
-    @StringRes val cescription: Int = 0,/*Resources.ID_NULL*/
+    @StringRes val cescription: Int = 0, /*Resources.ID_NULL*/
 ) {
-    object Calendar    : Screen(CALENDAR_ROUTE    , R.string.calendar    , Icons.Filled.Favorite, R.string.calendar    )
-    object Favorite    : Screen(TIMELINE_ROUTE    , R.string.favorite    , Icons.Filled.Favorite, R.string.favorite    )
-    object Statistics  : Screen(STATISTICS_ROUTE  , R.string.statistics  , Icons.Filled.Favorite, R.string.statistics  )
-    object Preferences : Screen(PREFERENCES_ROUTE , R.string.preferences , Icons.Filled.Favorite, R.string.preferences )
+    object Calendar : Screen(CALENDAR_ROUTE, R.string.calendar, Icons.Filled.Favorite, R.string.calendar)
+    object Favorite : Screen(TIMELINE_ROUTE, R.string.favorite, Icons.Filled.Favorite, R.string.favorite)
+    object Statistics : Screen(STATISTICS_ROUTE, R.string.statistics, Icons.Filled.Favorite, R.string.statistics)
+    object Preferences : Screen(PREFERENCES_ROUTE, R.string.preferences, Icons.Filled.Favorite, R.string.preferences)
 }
-
 
 @Composable
 fun MainBottomMenu(navController: NavController) {

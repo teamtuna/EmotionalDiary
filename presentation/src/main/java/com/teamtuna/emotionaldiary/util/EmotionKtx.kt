@@ -13,7 +13,6 @@ val Emotion?.icon: Int?
         else -> null
     }
 
-
 val Emotion?.bg: Int
     get() = when (this) {
         Emotion.JOY -> R.color.emotional_joy
