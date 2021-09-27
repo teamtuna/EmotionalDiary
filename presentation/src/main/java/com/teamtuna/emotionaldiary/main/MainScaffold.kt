@@ -7,10 +7,9 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.teamtuna.emotionaldiary.navigation.MainDestinations
+import com.teamtuna.emotionaldiary.navigation.writeNavigate
 import com.teamtuna.emotionaldiary.presentation.R
 
 @Composable
@@ -22,15 +21,7 @@ fun MainScaffold(
         topBar = {
             MainTopAppBar(
                 title = stringResource(R.string.app_name),
-                homeNavigate = {
-                    navController.navigate(MainDestinations.ARTICLE_ROUTE) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
+                homeNavigate = { writeNavigate(navController) }
             )
         },
         bottomBar = { MainBottomMenu(navController) },

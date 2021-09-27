@@ -16,16 +16,20 @@
 
 package com.teamtuna.emotionaldiary.main
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import coil.annotation.ExperimentalCoilApi
 import com.teamtuna.emotionaldiary.navigation.AppNavGraph
 import com.teamtuna.emotionaldiary.navigation.MainDestinations
 import com.teamtuna.emotionaldiary.theme.AppTheme
 
+@ExperimentalCoilApi
+@ExperimentalFoundationApi
 @Composable
 fun MainApp() {
     AppTheme {

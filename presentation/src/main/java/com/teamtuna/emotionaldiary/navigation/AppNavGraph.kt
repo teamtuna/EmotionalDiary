@@ -16,13 +16,16 @@
 
 package com.teamtuna.emotionaldiary.navigation
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.teamtuna.emotionaldiary.compose.calendar.MaterialPreview
+import coil.annotation.ExperimentalCoilApi
+import com.teamtuna.emotionaldiary.compose.calendar.CalendarComposeApp
 import com.teamtuna.emotionaldiary.main.MainScaffold
 import com.teamtuna.emotionaldiary.navigation.MainDestinations.ARTICLE_ID_KEY
 import com.teamtuna.emotionaldiary.navigation.MainDestinations.ARTICLE_ROUTE
@@ -46,12 +49,15 @@ object MainDestinations {
     const val ARTICLE_ID_KEY = "articleId"
 }
 
+@ExperimentalCoilApi
+@ExperimentalFoundationApi
 @Composable
 fun AppNavGraph(
     navController: NavHostController = rememberNavController(),
 ) {
     // val actions = remember(navController) { MainActions(navController) }
     // val coroutineScope = rememberCoroutineScope()
+    // val homeNavigation = { homeNavigate(navController) }
     NavHost(
         navController = navController,
         startDestination = ROOT_ROUTE,
@@ -59,28 +65,32 @@ fun AppNavGraph(
         navigation(CALENDAR_ROUTE, route = ROOT_ROUTE) {
             composable(CALENDAR_ROUTE) {
                 MainScaffold(navController) {
-                    MaterialPreview(
-                        // navigateToArticle = actions.navigateToArticle,
-                    )
+                    CalendarComposeApp {
+                        navController.navigate("$ARTICLE_ROUTE/$it") {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
                 }
             }
             composable(TIMELINE_ROUTE) {
                 MainScaffold(navController) {
-                    TimeLineContent(
-                        // navigateToArticle = actions.navigateToArticle,
-                    )
+                    TimeLineContent {
+
+                    }
                 }
             }
             composable(STATISTICS_ROUTE) {
                 MainScaffold(navController) {
-                    StatisticsScreen(
-                    )
+                    StatisticsScreen()
                 }
             }
             composable(PREFERENCES_ROUTE) {
                 MainScaffold(navController) {
-                    PreferencesScreen(
-                    )
+                    PreferencesScreen()
                 }
             }
             composable("$ARTICLE_ROUTE/{$ARTICLE_ID_KEY}") { backStackEntry ->
@@ -99,6 +109,16 @@ fun AppNavGraph(
                 )
             }
         }
+    }
+}
+
+fun writeNavigate(navController: NavHostController) {
+    navController.navigate(ARTICLE_ROUTE) {
+        popUpTo(navController.graph.findStartDestination().id) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
     }
 }
 
