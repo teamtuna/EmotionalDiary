@@ -80,16 +80,7 @@ fun AppNavigationGraph(navController: NavHostController) {
             }
         }
         composable(BottomMenu.SETTING.name) {
-            // SettingList()
-            Surface {
-                Text(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(30.dp),
-
-                    text = BottomMenu.SETTING.name,
-                )
-            }
+            SettingList()
         }
         composable("write") {
             navController.context.startActivity(
