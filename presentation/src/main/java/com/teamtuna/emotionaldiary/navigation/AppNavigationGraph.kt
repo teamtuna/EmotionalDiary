@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.teamtuna.emotionaldiary.compose.calendar.MaterialPreview
 import com.teamtuna.emotionaldiary.main.BottomMenu
+import com.teamtuna.emotionaldiary.setting.SettingList
 import com.teamtuna.emotionaldiary.timeline.TimeLineContent
 import com.teamtuna.emotionaldiary.write.WriteActivity
 
@@ -61,6 +62,7 @@ fun AppNavigationGraph(navController: NavHostController) {
         //     TimeLineContent(navController, backStackEntry.arguments?.getString("date"))
         // }
         // composable(Screen.Analysis.route + "/{from}" + "/{to}") {
+
         composable(BottomMenu.CALENDAR.name) {
             MaterialPreview()
         }
@@ -78,6 +80,7 @@ fun AppNavigationGraph(navController: NavHostController) {
             }
         }
         composable(BottomMenu.SETTING.name) {
+            // SettingList()
             Surface {
                 Text(
                     modifier = Modifier
