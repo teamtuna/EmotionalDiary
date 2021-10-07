@@ -20,12 +20,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.teamtuna.emotionaldiary.compose.theme.EmotionalDiaryTheme
+import com.teamtuna.emotionaldiary.theme.AppTheme
 
 @Preview
 @Composable
 fun ArchComposeApp(viewModel: ArchComposeViewModel = viewModel()) {
-    EmotionalDiaryTheme {
+    AppTheme {
         ProvideWindowInsets {
             val testData = viewModel.getTestLiveData().observeAsState()
             // var testFlowData by remember { viewModel.getTestFlow().collectAsState(initial = "initial data") }

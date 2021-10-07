@@ -7,5 +7,10 @@
     <string name="description_fear">fear</string>
     <string name="description_disgust">disgust</string>
 
+    <string name="calendar">calendar</string>
+    <string name="favorite">favorite</string>
+    <string name="statistics">statistics</string>
+    <string name="preferences">preferences</string>
+
     <string name="write_diary_hint">그날의 감정에 대해 간략하게 입력해 주세요.</string>
 </resources>
