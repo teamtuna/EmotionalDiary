@@ -55,9 +55,9 @@ fun LocalDateTime.getDayOfTime(): Long {
         .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
 }
 
-fun LocalDateTime.getTime(): Long {
-    return this.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
-}
+fun LocalDateTime.getTime(): Long = runCatching {
+    atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+}.getOrDefault(0L)
 
 fun Long.isToday(): Boolean {
     val period = Period.between(LocalDate.now(), toLocalDateTime().toLocalDate())

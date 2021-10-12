@@ -1,5 +1,6 @@
 package com.teamtuna.emotionaldiary.db
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -11,11 +12,17 @@ import com.teamtuna.emotionaldiary.entity.UniqId
 interface EmotionalDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEmotional(entity: EmotionalEntity): UniqId
+    suspend fun insertEmotional(entity: EmotionalEntity): UniqId
 
     @Query("SELECT * FROM EmotionalEntity WHERE id = :id")
     fun getEmotional(id: UniqId): EmotionalEntity?
 
     @Delete
     fun deleteEmotional(entity: EmotionalEntity)
+
+    @Query("SELECT * FROM EmotionalEntity")
+    fun getEmotional(): PagingSource<Int, EmotionalEntity>
+
+    @Query("SELECT * FROM EmotionalEntity")
+    suspend fun getAll(): List<EmotionalEntity>
 }

@@ -1,6 +1,8 @@
 package com.teamtuna.emotionaldiary.repository
 
+import androidx.paging.PagingSource
 import com.teamtuna.emotionaldiary.datasource.LocalDataSource
+import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
 import com.teamtuna.emotionaldiary.entity.ErrorModel
@@ -36,5 +38,9 @@ class EmotionRepositoryImpl @Inject constructor(
 
     override suspend fun delete(id: Long) {
         localDataSource.delete(id)
+    }
+
+    override suspend fun add(dailyEmotion: DailyEmotion): Result<Long> {
+        return Result.Success(localDataSource.add(dailyEmotion))
     }
 }
