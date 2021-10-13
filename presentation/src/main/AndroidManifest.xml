@@ -18,20 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.teamtuna.emotionaldiary.history.HistoryActivity" />
-        <activity
-            android:name="com.teamtuna.emotionaldiary.compose.hellocompose.TestHelloCompose"
-            android:theme="@style/Theme.EmotionalDiary.Compose" />
-        <activity
-            android:name="com.teamtuna.emotionaldiary.compose.arch_compose.ArchCompose"
-            android:theme="@style/Theme.EmotionalDiary.Compose" />
-        <activity
-            android:name="com.teamtuna.emotionaldiary.write.WriteActivity"
-            android:theme="@style/Theme.EmotionalDiary.Compose" />
-
-        <activity
-            android:name="com.teamtuna.emotionaldiary.calendar.CalendarCompose"
-            android:theme="@style/Theme.EmotionalDiary.Compose" />
     </application>
 
 </manifest>

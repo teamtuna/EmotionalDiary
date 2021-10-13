@@ -1,10 +1,5 @@
 package com.teamtuna.emotionaldiary.timeline
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,55 +14,16 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 
-class TimelineFragment : Fragment() {
-
-    private val viewModel: TimelineViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        return ComposeView(requireContext()).apply {
-            setViewCompositionStrategy(
-                ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner)
-            )
-
-            setContent {
-                MaterialTheme {
-                    MyApp {
-                        Toast.makeText(requireContext(), "show detail", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun MyApp(navigateToDetail: (EmotionItem) -> Unit) {
-    Scaffold(
-        content = {
-            TimeLineContent(navigateToDetail)
-        }
-    )
-}
 
 @Composable
 fun TimeLineContent(navigateToDetail: (EmotionItem) -> Unit = {}) {
