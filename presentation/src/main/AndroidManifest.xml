@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.teamtuna.emotionaldiary.presentation">
+    package="com.teamtuna.emotionaldiary.main">
 
     <application
         android:allowBackup="false"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmotionalDiary">
         <activity
-            android:name="com.teamtuna.emotionaldiary.main.MainActivity"
+            android:name="com.teamtuna.emotionaldiary.presentation.main.MainActivity"
             android:theme="@style/Theme.EmotionalDiary.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

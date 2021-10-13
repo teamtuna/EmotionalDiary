@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.teamtuna.emotionaldiary.presentation.test", appContext.packageName)
+        assertEquals("com.teamtuna.emotionaldiary.main.test", appContext.packageName)
     }
 }
