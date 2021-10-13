@@ -34,5 +34,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-perf-ktx'
 
-    implementation project(':presentation')
+    implementation project(':main')
 }

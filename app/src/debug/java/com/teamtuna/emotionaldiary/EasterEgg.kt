@@ -155,12 +155,10 @@ suspend fun fixedMonthDailyEmotions() = run {
     val lastDate = lastDayOfWeek(lastDayOfMonth(LocalDateTime.now()))
     var date = startDate
 
-
     val list = mutableListOf<DailyEmotion>()
     while (date <= lastDate) {
         val day = date.dayOfMonth
         val month = date.monthValue
-
 
         list += DailyEmotion(
             0,
