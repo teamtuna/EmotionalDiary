@@ -110,7 +110,7 @@ class EasterEgg(private val activity: Activity) {
     @RequiresApi(Build.VERSION_CODES.N)
     fun blobDummyInsert() {
         (activity as ComponentActivity).lifecycleScope.launch(Dispatchers.IO) {
-            emotionRepository.add(*fixedMonthDailyEmotions())
+            emotionRepository.addAll(*fixedMonthDailyEmotions())
                 .onFailure {
                     Log.w(it?.title, it?.description)
                 }

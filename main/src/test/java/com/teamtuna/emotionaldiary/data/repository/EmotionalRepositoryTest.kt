@@ -3,6 +3,7 @@ package com.teamtuna.emotionaldiary.data.repository
 import com.nhaarman.mockitokotlin2.whenever
 import com.teamtuna.emotionaldiary.data.datasource.LocalDataSource
 import com.teamtuna.emotionaldiary.data.db.EmotionalEntity
+import com.teamtuna.emotionaldiary.domain.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.domain.entity.Emotion
 import com.teamtuna.emotionaldiary.domain.entity.Result
 import com.teamtuna.emotionaldiary.domain.repository.EmotionRepository
@@ -63,7 +64,7 @@ internal class EmotionalRepositoryTest {
     @DisplayName("Repository에서 Add시 Local에 같은 날짜의 Emotional이 저장")
     @Test
     fun addTest3() = runBlocking {
-        val testData = com.teamtuna.emotionaldiary.domain.entity.DailyEmotion.EMPTY
+        val testData = DailyEmotion.EMPTY
         val currentDate = LocalDateTime.now()
         whenever(localDataSource.add(testData)).thenReturn(1)
         val actual = repository.add(testData)
@@ -93,7 +94,7 @@ internal class EmotionalRepositoryTest {
 
         assertTrue(actual is Result.Success)
 
-        val expect = com.teamtuna.emotionaldiary.domain.entity.DailyEmotion(
+        val expect = DailyEmotion(
             id = 1,
             emotion = Emotion.JOY,
             date = currentDate,
@@ -111,18 +112,18 @@ internal class EmotionalRepositoryTest {
         val currentDate = LocalDateTime.now()
         whenever(
             localDataSource.replace(
-                com.teamtuna.emotionaldiary.domain.entity.DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
+                DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
             )
         ).thenReturn(true)
 
         val actual = repository.replace(
-            com.teamtuna.emotionaldiary.domain.entity.DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
+            DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
         )
 
         assertTrue(actual is Result.Success)
 
         Mockito.verify(localDataSource).replace(
-            com.teamtuna.emotionaldiary.domain.entity.DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
+            DailyEmotion(1, Emotion.FEAR, currentDate, null, null, "Yes")
         )
         assertTrue((actual as Result.Success).data)
     }

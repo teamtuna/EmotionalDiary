@@ -9,7 +9,7 @@ class EasterEggTest {
     @Test
     fun calendar_first_day_of_month() {
         // given
-        val data = LocalDateTime.now()
+        val data = LocalDateTime.parse("2021-10-14T00:00:00")
 
         // when
         val actual = firstDayOfMonth(data)
@@ -21,7 +21,7 @@ class EasterEggTest {
     @Test
     fun calendar_first_day_of_week() {
         // given
-        val data = LocalDateTime.now()
+        val data = LocalDateTime.parse("2021-10-14T00:00:00")
 
         // when
         val actual = firstDayOfWeek(data)
@@ -33,7 +33,7 @@ class EasterEggTest {
     @Test
     fun calendar_first_day_of_month_with_week() {
         // given
-        val data = LocalDateTime.now()
+        val data = LocalDateTime.parse("2021-10-14T00:00:00")
 
         // when
         val firstDayOfMonth = firstDayOfMonth(data)
@@ -46,7 +46,7 @@ class EasterEggTest {
     @Test
     fun calendar_last_day_of_month() {
         // given
-        val data = LocalDateTime.now()
+        val data = LocalDateTime.parse("2021-10-14T00:00:00")
 
         // when
         val actual = lastDayOfMonth(data)
@@ -58,10 +58,10 @@ class EasterEggTest {
     @Test
     fun calendar_last_day_of_week() {
         // given
-        val data = LocalDateTime.now()
+        val data = LocalDateTime.parse("2021-10-14T00:00:00")
 
         // when
-        val actual = firstDayOfWeek(data)
+        val actual = lastDayOfWeek(data)
 
         // then
         Truth.assertThat(actual.toLocalDate()).isEqualTo(LocalDate.parse("2021-10-16"))

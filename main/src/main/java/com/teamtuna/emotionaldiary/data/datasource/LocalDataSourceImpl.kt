@@ -3,6 +3,7 @@ package com.teamtuna.emotionaldiary.data.datasource
 import com.teamtuna.emotionaldiary.data.db.EmotionalDao
 import com.teamtuna.emotionaldiary.data.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.data.toEntity
+import com.teamtuna.emotionaldiary.domain.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.domain.entity.Emotion
 import com.teamtuna.emotionaldiary.domain.entity.UniqId
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +36,7 @@ class LocalDataSourceImpl(
         return@withContext emotionDao.getEmotional(id)
     }
 
-    override suspend fun replace(dailyEmotion: com.teamtuna.emotionaldiary.domain.entity.DailyEmotion): Boolean =
+    override suspend fun replace(dailyEmotion: DailyEmotion): Boolean =
         withContext(Dispatchers.IO) {
             val replacedId = emotionDao.insertEmotional(dailyEmotion.toEntity())
             return@withContext replacedId == dailyEmotion.id
@@ -49,7 +50,7 @@ class LocalDataSourceImpl(
         }
     }
 
-    override suspend fun add(dailyEmotion: com.teamtuna.emotionaldiary.domain.entity.DailyEmotion): UniqId {
+    override suspend fun add(dailyEmotion: DailyEmotion): UniqId {
         require(dailyEmotion.id <= 0L)
         return emotionDao.insertEmotional(dailyEmotion.toEntity())
     }

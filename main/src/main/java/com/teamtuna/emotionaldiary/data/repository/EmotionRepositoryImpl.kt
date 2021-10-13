@@ -5,6 +5,7 @@ import com.teamtuna.emotionaldiary.data.toDailyEmotion
 import com.teamtuna.emotionaldiary.domain.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.domain.entity.Emotion
 import com.teamtuna.emotionaldiary.domain.entity.Result
+import com.teamtuna.emotionaldiary.domain.entity.UniqId
 import com.teamtuna.emotionaldiary.domain.repository.EmotionRepository
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -37,7 +38,11 @@ class EmotionRepositoryImpl @Inject constructor(
         localDataSource.delete(id)
     }
 
-    override suspend fun add(vararg dailyEmotions: DailyEmotion): Result<LongArray> {
+    override suspend fun add(dailyEmotions: DailyEmotion): Result<UniqId> {
+        return Result.Success(localDataSource.add(dailyEmotions))
+    }
+
+    override suspend fun addAll(vararg dailyEmotions: DailyEmotion): Result<LongArray> {
         return Result.Success(localDataSource.addAll(*dailyEmotions))
     }
 }
