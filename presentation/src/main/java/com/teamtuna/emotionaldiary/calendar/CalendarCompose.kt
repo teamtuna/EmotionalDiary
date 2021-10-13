@@ -1,4 +1,4 @@
-package com.teamtuna.emotionaldiary.compose.calendar
+package com.teamtuna.emotionaldiary.calendar
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

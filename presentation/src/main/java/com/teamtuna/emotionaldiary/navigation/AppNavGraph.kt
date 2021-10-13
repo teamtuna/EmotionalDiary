@@ -25,7 +25,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import coil.annotation.ExperimentalCoilApi
-import com.teamtuna.emotionaldiary.compose.calendar.CalendarComposeApp
+import com.teamtuna.emotionaldiary.calendar.CalendarComposeApp
 import com.teamtuna.emotionaldiary.main.MainScaffold
 import com.teamtuna.emotionaldiary.navigation.MainDestinations.ARTICLE_ID_KEY
 import com.teamtuna.emotionaldiary.navigation.MainDestinations.ARTICLE_ROUTE

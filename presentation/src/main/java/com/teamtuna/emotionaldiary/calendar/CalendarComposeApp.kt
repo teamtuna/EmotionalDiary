@@ -1,4 +1,4 @@
-package com.teamtuna.emotionaldiary.compose.calendar
+package com.teamtuna.emotionaldiary.calendar
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.ExperimentalFoundationApi
