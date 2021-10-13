@@ -1,5 +1,6 @@
 package com.teamtuna.emotionaldiary.datasource
 
+import androidx.paging.PagingSource
 import com.teamtuna.emotionaldiary.db.EmotionalEntity
 import com.teamtuna.emotionaldiary.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.entity.Emotion
@@ -14,4 +15,6 @@ interface LocalDataSource {
     suspend fun replace(dailyEmotion: DailyEmotion): Boolean
 
     suspend fun delete(id: UniqId)
+    suspend fun add(dailyEmotion: DailyEmotion): UniqId
+    suspend fun get(): PagingSource<Int, EmotionalEntity>
 }

@@ -54,6 +54,12 @@ dependencies {
     testImplementation 'com.google.dagger:hilt-android-testing:2.38.1'
     kaptTest 'com.google.dagger:hilt-compiler:2.38.1'
 
+    //paging
+    def paging_version = "3.0.1"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    testImplementation "androidx.paging:paging-common-ktx:$paging_version"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha13"
+
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     debugImplementation 'com.github.eastar-dev.EastarLog2:log:2.1.9'

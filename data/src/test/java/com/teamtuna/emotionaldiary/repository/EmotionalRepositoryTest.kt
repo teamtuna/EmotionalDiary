@@ -60,6 +60,20 @@ internal class EmotionalRepositoryTest {
         assertEquals(1, (actual as Result.Success).data)
     }
 
+    @DisplayName("Repository에서 Add시 Local에 같은 날짜의 Emotional이 저장")
+    @Test
+    fun addTest3() = runBlocking {
+        val testData = DailyEmotion.EMPTY
+        val currentDate = LocalDateTime.now()
+        whenever(localDataSource.add(testData)).thenReturn(1)
+        val actual = repository.add(testData)
+
+        Mockito.verify(localDataSource).add(testData)
+
+        assertTrue(actual is Result.Success)
+        assertEquals(1, (actual as Result.Success).data)
+    }
+
     @DisplayName("Repository에서 get할 때 ")
     @Test
     fun getTest() = runBlocking {

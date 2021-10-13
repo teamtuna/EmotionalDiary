@@ -37,4 +37,8 @@ class EmotionRepositoryImpl @Inject constructor(
     override suspend fun delete(id: Long) {
         localDataSource.delete(id)
     }
+
+    override suspend fun add(dailyEmotion: DailyEmotion): Result<Long> {
+        return Result.Success(localDataSource.add(dailyEmotion))
+    }
 }
