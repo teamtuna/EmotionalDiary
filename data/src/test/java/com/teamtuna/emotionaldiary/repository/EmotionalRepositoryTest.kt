@@ -63,7 +63,7 @@ internal class EmotionalRepositoryTest {
     @DisplayName("Repository에서 Add시 Local에 같은 날짜의 Emotional이 저장")
     @Test
     fun addTest3() = runBlocking {
-        val testData  = DailyEmotion.EMPTY
+        val testData = DailyEmotion.EMPTY
         val currentDate = LocalDateTime.now()
         whenever(localDataSource.add(testData)).thenReturn(1)
         val actual = repository.add(testData)

@@ -71,7 +71,6 @@ class EasterEgg(private val activity: Activity) {
         EntryPointAccessors.fromApplication(activity, EmotionRepositoryEntryPoint::class.java)
             .emotionRoomDatabaseProvide().fcmDao()
 
-
     fun randomDataCreator() {
         Log.e(emotionRepository)
         (activity as ComponentActivity).lifecycleScope.launch {
@@ -100,12 +99,14 @@ class EasterEgg(private val activity: Activity) {
 }
 
 val randomDailyEmotion
-    get() = DailyEmotion(0,
+    get() = DailyEmotion(
+        0,
         Emotion.values()[Random.nextInt(5)],
         LocalDateTime.now().plusDays(Random.nextLong(-15, 15)),
         "https://picsum.photos/id/${Random.nextInt(100)}/100/100",
         "geo:${Random.latitude},${Random.longitude}",
-        ('a'..'z').shuffled().take(Random.nextInt(4, 'z' - 'a')).toCharArray().joinToString(""))
+        ('a'..'z').shuffled().take(Random.nextInt(4, 'z' - 'a')).toCharArray().joinToString("")
+    )
 
 private val Random.latitude: String
     get() = "%.4f".format(nextDouble(-90.0, +90.0))
