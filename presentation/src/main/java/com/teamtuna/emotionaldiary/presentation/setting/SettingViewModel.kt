@@ -6,4 +6,3 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingViewModel @Inject constructor() : ViewModel()
-

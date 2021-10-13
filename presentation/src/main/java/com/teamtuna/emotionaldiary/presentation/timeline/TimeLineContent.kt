@@ -24,7 +24,6 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 
-
 @Composable
 fun TimeLineContent(navigateToDetail: (EmotionItem) -> Unit = {}) {
     val timeLine = remember { DataProvider.diaryList }

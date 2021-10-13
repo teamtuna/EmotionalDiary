@@ -2,6 +2,7 @@ package com.teamtuna.emotionaldiary.data.repository
 
 import com.teamtuna.emotionaldiary.data.datasource.LocalDataSource
 import com.teamtuna.emotionaldiary.data.toDailyEmotion
+import com.teamtuna.emotionaldiary.domain.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.domain.entity.Emotion
 import com.teamtuna.emotionaldiary.domain.entity.Result
 import com.teamtuna.emotionaldiary.domain.repository.EmotionRepository
@@ -18,7 +19,7 @@ class EmotionRepositoryImpl @Inject constructor(
         return Result.Success(localDataSource.add(emotion, reason))
     }
 
-    override suspend fun replace(dailyEmotion: com.teamtuna.emotionaldiary.domain.entity.DailyEmotion): Result<Boolean> {
+    override suspend fun replace(dailyEmotion: DailyEmotion): Result<Boolean> {
         return Result.Success(localDataSource.replace(dailyEmotion))
     }
 
@@ -26,7 +27,7 @@ class EmotionRepositoryImpl @Inject constructor(
         return Result.Success(localDataSource.add(emotion, date, reason))
     }
 
-    override suspend fun get(id: com.teamtuna.emotionaldiary.domain.entity.UniqId): Result<com.teamtuna.emotionaldiary.domain.entity.DailyEmotion> {
+    override suspend fun get(id: com.teamtuna.emotionaldiary.domain.entity.UniqId): Result<DailyEmotion> {
         return localDataSource.get(id)?.let {
             Result.Success(it.toDailyEmotion())
         } ?: Result.Fail(com.teamtuna.emotionaldiary.domain.entity.ErrorModel())
@@ -36,7 +37,7 @@ class EmotionRepositoryImpl @Inject constructor(
         localDataSource.delete(id)
     }
 
-    override suspend fun add(dailyEmotion: com.teamtuna.emotionaldiary.domain.entity.DailyEmotion): Result<Long> {
+    override suspend fun add(dailyEmotion: DailyEmotion): Result<Long> {
         return Result.Success(localDataSource.add(dailyEmotion))
     }
 }

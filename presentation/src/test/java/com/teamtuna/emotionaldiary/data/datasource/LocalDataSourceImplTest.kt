@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.teamtuna.emotionaldiary.data.MainCoroutineRule
 import com.teamtuna.emotionaldiary.data.db.EmotionRoomDatabase
+import com.teamtuna.emotionaldiary.domain.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.domain.entity.Emotion
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -73,7 +74,7 @@ class LocalDataSourceImplTest {
         val currentDate = LocalDateTime.now()
         assertTrue(
             localDataSource.replace(
-                com.teamtuna.emotionaldiary.domain.entity.DailyEmotion(1L, Emotion.JOY, currentDate, null, null, actualReason)
+                DailyEmotion(1L, Emotion.JOY, currentDate, null, null, actualReason)
             )
         )
 
@@ -91,7 +92,7 @@ class LocalDataSourceImplTest {
         val dbId = localDataSource.add(Emotion.FEAR, reason)
         assertTrue(
             localDataSource.replace(
-                com.teamtuna.emotionaldiary.domain.entity.DailyEmotion(dbId, Emotion.JOY, currentDate, null, null, actualReason)
+                DailyEmotion(dbId, Emotion.JOY, currentDate, null, null, actualReason)
             )
         )
 
