@@ -54,5 +54,8 @@ class LocalDataSourceImpl(
         return emotionDao.insertEmotional(dailyEmotion.toEntity())
     }
 
+    override suspend fun addAll(vararg dailyEmotion: DailyEmotion): LongArray =
+        emotionDao.blobInsert(*dailyEmotion.map { it.toEntity() }.toTypedArray())
+
     override suspend fun get() = emotionDao.getEmotional()
 }

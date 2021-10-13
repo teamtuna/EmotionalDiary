@@ -15,6 +15,8 @@ interface LocalDataSource {
     suspend fun replace(dailyEmotion: DailyEmotion): Boolean
 
     suspend fun delete(id: UniqId)
-    suspend fun add(dailyEmotion: DailyEmotion): UniqId
+
     suspend fun get(): PagingSource<Int, EmotionalEntity>
+    suspend fun add(dailyEmotion: DailyEmotion): UniqId
+    suspend fun addAll(vararg dailyEmotion: DailyEmotion): LongArray
 }

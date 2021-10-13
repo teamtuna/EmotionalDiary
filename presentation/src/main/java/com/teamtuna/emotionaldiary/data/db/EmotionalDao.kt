@@ -14,6 +14,9 @@ interface EmotionalDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertEmotional(entity: EmotionalEntity): UniqId
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun blobInsert(vararg entity: EmotionalEntity): LongArray
+
     @Query("SELECT * FROM EmotionalEntity WHERE id = :id")
     fun getEmotional(id: UniqId): EmotionalEntity?
 

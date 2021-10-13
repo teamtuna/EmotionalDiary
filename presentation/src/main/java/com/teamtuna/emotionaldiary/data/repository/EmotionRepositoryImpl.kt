@@ -37,7 +37,7 @@ class EmotionRepositoryImpl @Inject constructor(
         localDataSource.delete(id)
     }
 
-    override suspend fun add(dailyEmotion: DailyEmotion): Result<Long> {
-        return Result.Success(localDataSource.add(dailyEmotion))
+    override suspend fun add(vararg dailyEmotions: DailyEmotion): Result<LongArray> {
+        return Result.Success(localDataSource.addAll(*dailyEmotions))
     }
 }

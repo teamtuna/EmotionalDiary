@@ -108,12 +108,15 @@ class EasterEgg(private val activity: Activity) {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun test() {
+    fun blobDummyInsert() {
         (activity as ComponentActivity).lifecycleScope.launch(Dispatchers.IO) {
-            val index = 0L
-            val date = firstDayOfWeek(firstDayOfMonth(LocalDateTime.now()))
-            val day = date.dayOfMonth
-
+            emotionRepository.add(*fixedMonthDailyEmotions())
+                .onFailure {
+                    Log.w(it?.title, it?.description)
+                }
+                .onSuccess {
+                    Log.e(it)
+                }
         }
     }
 }
@@ -143,26 +146,34 @@ suspend fun getDummyTextByDate(date: LocalDateTime) = withContext(Dispatchers.IO
         val text = InputStreamReader(it).readText()
         val eventHtml = text.substring(text.indexOf("<li>"), text.indexOf("</li>", text.indexOf("<li>")) + 5)
         val eventText = Html.fromHtml(eventHtml, Html.FROM_HTML_MODE_LEGACY)
-        eventText.toString()
+        eventText.toString().trim()
     }
 }
 
-suspend fun fixedMothDailyEmotion() = run {
+suspend fun fixedMonthDailyEmotions() = run {
     val startDate = firstDayOfWeek(firstDayOfMonth(LocalDateTime.now()))
-    val index = 0L
-    val date = startDate.plusDays(index)
-    val day = date.dayOfMonth
-    val month = date.monthValue
+    val lastDate = lastDayOfWeek(lastDayOfMonth(LocalDateTime.now()))
+    var date = startDate
 
 
-    DailyEmotion(
-        0,
-        Emotion.values()[day % Emotion.values().size],
-        date,
-        "https://picsum.photos/id/$month$day/100/100",
-        "geo:%.4f,%.4f".format(180.0 * (month.toLong() / 12.0 - 90.0), 360.0 * (day.toLong() / 31.0) - 180.0),
-        getDummyTextByDate(date)
-    )
+    val list = mutableListOf<DailyEmotion>()
+    while (date <= lastDate) {
+        val day = date.dayOfMonth
+        val month = date.monthValue
+
+
+        list += DailyEmotion(
+            0,
+            Emotion.values()[day % Emotion.values().size],
+            date,
+            "https://picsum.photos/id/$month$day/100/100",
+            "geo:%.4f,%.4f".format(180.0 * (month.toLong() / 12.0 - 90.0), 360.0 * (day.toLong() / 31.0) - 180.0),
+            getDummyTextByDate(date)
+        )
+        date = date.plusDays(Random.nextLong(1, 3))
+        Log.e(list.last())
+    }
+    list.toTypedArray()
 }
 
 val randomDailyEmotion
