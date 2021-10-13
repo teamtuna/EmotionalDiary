@@ -35,6 +35,7 @@ import com.teamtuna.emotionaldiary.navigation.MainDestinations.ROOT_ROUTE
 import com.teamtuna.emotionaldiary.navigation.MainDestinations.STATISTICS_ROUTE
 import com.teamtuna.emotionaldiary.navigation.MainDestinations.TIMELINE_ROUTE
 import com.teamtuna.emotionaldiary.preferences.PreferencesScreen
+import com.teamtuna.emotionaldiary.setting.SettingList
 import com.teamtuna.emotionaldiary.statistics.StatisticsScreen
 import com.teamtuna.emotionaldiary.timeline.TimeLineContent
 import com.teamtuna.emotionaldiary.write.WriteCompose
@@ -89,7 +90,7 @@ fun AppNavGraph(
             }
             composable(PREFERENCES_ROUTE) {
                 MainScaffold(navController) {
-                    PreferencesScreen()
+                    SettingList()
                 }
             }
             composable("$ARTICLE_ROUTE/{$ARTICLE_ID_KEY}") { backStackEntry ->
