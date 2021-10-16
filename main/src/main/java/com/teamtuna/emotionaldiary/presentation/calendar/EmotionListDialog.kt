@@ -20,15 +20,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import be.sigmadelta.calpose.model.CalposeDate
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.teamtuna.emotionaldiary.domain.entity.Emotion
 import com.teamtuna.emotionaldiary.presentation.util.icon
 
 typealias OnEmotionClickedListener = (CalposeDate, Emotion) -> Unit
 
-@ExperimentalFoundationApi
-@ExperimentalCoilApi
 @Composable
 fun EmotionListDialog(
     showDialog: Boolean,
@@ -55,6 +52,7 @@ fun EmotionListDialog(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
 
+                @OptIn(ExperimentalFoundationApi::class)
                 LazyVerticalGrid(
                     cells = GridCells.Adaptive(96.dp),
                     content = {

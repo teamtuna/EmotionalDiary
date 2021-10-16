@@ -16,31 +16,20 @@
 
 package com.teamtuna.emotionaldiary.presentation.main
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import coil.annotation.ExperimentalCoilApi
-import com.teamtuna.emotionaldiary.presentation.navigation.AppNavGraph
-import com.teamtuna.emotionaldiary.presentation.navigation.MainDestinations
+import com.teamtuna.emotionaldiary.presentation.navigation.MainNavGraph
 import com.teamtuna.emotionaldiary.presentation.theme.AppTheme
 
-@ExperimentalCoilApi
-@ExperimentalFoundationApi
 @Composable
 fun MainApp() {
     AppTheme {
-        val navController = rememberNavController()
-        val coroutineScope = rememberCoroutineScope()
-        val scaffoldState = rememberScaffoldState()
+        val mainNavHostController = rememberNavController()
+        // val coroutineScope = rememberCoroutineScope()
+        // val scaffoldState = rememberScaffoldState()
+        // val navBackStackEntry by navController.currentBackStackEntryAsState()
+        // val currentRoute = navBackStackEntry?.destination?.route ?: MainDestinations.MAIN_ROUTE
 
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route ?: MainDestinations.CALENDAR_ROUTE
-        AppNavGraph(
-            navController = navController,
-        )
+        MainNavGraph(mainNavHostController)
     }
 }

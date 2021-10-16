@@ -107,7 +107,7 @@ dependencies {
 //    androidTestImplementation 'de.mannodermaus.junit5:android-test-core:1.2.2'
 }
 
-//asserting
+//assertion
 dependencies {
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
 
