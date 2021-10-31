@@ -39,8 +39,8 @@ jobs:
         with:
           name: app-module-results.html
           path: ./app/build/reports/tests/testDebugUnitTest/index.html
-  unit-tests-presentation-module:
-    name: Run unit tests on presentation module
+  unit-tests-main-module:
+    name: Run unit tests on main module
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -54,7 +54,7 @@ jobs:
       - name: Run Unit tests
         shell: bash
         run: |
-          ./gradlew --no-daemon presentation:testDebugUnitTest
+          ./gradlew --no-daemon main:testDebugUnitTest
 
       # 테스트 결과
       - name: Upload test results
@@ -62,54 +62,54 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-module-results.html
-          path: ./presentation/build/reports/tests/testDebugUnitTest/index.html
+          path: ./main/build/reports/tests/testDebugUnitTest/index.html
 
-  unit-tests-domain-module:
-    name: Run unit tests on domain module
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-
-      # 유닛 테스트
-      - name: Run Unit tests
-        shell: bash
-        run: |
-          ./gradlew --no-daemon domain:test
-
-      # 테스트 결과
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-module-results.html
-          path: ./domain/build/reports/tests/testDebugUnitTest/index.html
-
-  unit-tests-data-module:
-    name: Run unit tests on data module
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-
-
-      # 유닛 테스트
-      - name: Run Unit tests
-        shell: bash
-        run: |
-          ./gradlew --no-daemon data:testDebugUnitTest
-
-      # 테스트 결과
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-module-results.html
-          path: ./data/build/reports/tests/testDebugUnitTest/index.html
+#  unit-tests-domain-module:
+#    name: Run unit tests on domain module
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Setup JDK
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 11
+#
+#
+#      # 유닛 테스트
+#      - name: Run Unit tests
+#        shell: bash
+#        run: |
+#          ./gradlew --no-daemon domain:test
+#
+#      # 테스트 결과
+#      - name: Upload test results
+#        if: always()
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: app-module-results.html
+#          path: ./domain/build/reports/tests/testDebugUnitTest/index.html
+#
+#  unit-tests-data-module:
+#    name: Run unit tests on data module
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Setup JDK
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 11
+#
+#
+#      # 유닛 테스트
+#      - name: Run Unit tests
+#        shell: bash
+#        run: |
+#          ./gradlew --no-daemon data:testDebugUnitTest
+#
+#      # 테스트 결과
+#      - name: Upload test results
+#        if: always()
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: app-module-results.html
+#          path: ./data/build/reports/tests/testDebugUnitTest/index.html

@@ -11,3 +11,5 @@ build
 .idea/compiler.xml
 .idea/assetWizardSettings.xml
 .idea/inspectionProfiles
+.idea/libraries
+.idea/modules.xml
