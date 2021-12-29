@@ -28,16 +28,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.teamtuna.emotionaldiary.main.R
-import com.teamtuna.emotionaldiary.presentation.navigation.MainDestinations.CALENDAR_ROUTE
-import com.teamtuna.emotionaldiary.presentation.navigation.MainDestinations.PREFERENCES_ROUTE
-import com.teamtuna.emotionaldiary.presentation.navigation.MainDestinations.STATISTICS_ROUTE
-import com.teamtuna.emotionaldiary.presentation.navigation.MainDestinations.TIMELINE_ROUTE
+import com.teamtuna.emotionaldiary.presentation.navigation.CALENDAR_ROUTE
+import com.teamtuna.emotionaldiary.presentation.navigation.PREFERENCES_ROUTE
+import com.teamtuna.emotionaldiary.presentation.navigation.STATISTICS_ROUTE
+import com.teamtuna.emotionaldiary.presentation.navigation.TIMELINE_ROUTE
 
 sealed class Screen(
     val route: String,
@@ -52,7 +52,8 @@ sealed class Screen(
 }
 
 @Composable
-fun MainBottomMenu(navController: NavController) {
+fun MainBottomMenu(bottomMenuNavHostController: NavHostController) {
+
     val items: List<Screen> = listOf(
         Screen.Calendar,
         Screen.Favorite,
@@ -60,7 +61,7 @@ fun MainBottomMenu(navController: NavController) {
         Screen.Preferences,
     )
     BottomNavigation {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val navBackStackEntry by bottomMenuNavHostController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
         items.forEach { screen ->
             BottomNavigationItem(
@@ -73,11 +74,11 @@ fun MainBottomMenu(navController: NavController) {
                 label = { Text(text = stringResource(id = screen.resourceId)) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
-                    navController.navigate(screen.route) {
+                    bottomMenuNavHostController.navigate(screen.route) {
                         // Pop up to the start destination of the graph to
                         // avoid building up a large stack of destinations
                         // on the back stack as users select items
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(bottomMenuNavHostController.graph.findStartDestination().id) {
                             saveState = true
                         }
                         // Avoid multiple copies of the same destination when

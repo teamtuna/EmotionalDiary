@@ -1,7 +1,6 @@
 package com.teamtuna.emotionaldiary.presentation.calendar
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +33,6 @@ import be.sigmadelta.calpose.model.CalposeDate
 import be.sigmadelta.calpose.model.CalposeWidgets
 import be.sigmadelta.calpose.widgets.DefaultDay
 import be.sigmadelta.calpose.widgets.MaterialHeader
-import coil.annotation.ExperimentalCoilApi
 import com.teamtuna.emotionaldiary.domain.entity.DailyEmotion
 import com.teamtuna.emotionaldiary.domain.entity.UniqId
 import org.threeten.bp.DayOfWeek
@@ -42,15 +40,11 @@ import org.threeten.bp.YearMonth
 
 typealias WriteNavigation = (UniqId) -> Unit
 
-@ExperimentalCoilApi
-@ExperimentalFoundationApi
 @Composable
 fun CalendarComposeApp(writeNavigation: WriteNavigation) {
     MaterialPreview(writeNavigation)
 }
 
-@ExperimentalCoilApi
-@ExperimentalFoundationApi
 @Composable
 fun MaterialPreview(writeNavigation: WriteNavigation) {
     var month by remember { mutableStateOf(YearMonth.now()) }
