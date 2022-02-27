@@ -99,3 +99,20 @@ jobs:
           gitlog="$(cat gitlog.txt)"
           debug_permalink=$(curl https://slack.com/api/files.upload -H "Authorization: Bearer ${{ secrets.ANDROID_BOT_TOKEN }}" -F file=@${{ steps.apk.outputs.DEBUG_APK_PATH }} -F channels=CPMANENF3 -F thread_ts='1607309305.245800' | jq -r '.file.url_private_download')
           curl https://slack.com/api/chat.postMessage -X POST -H 'Authorization: Bearer ${{ secrets.ANDROID_BOT_TOKEN }}' -H 'Content-type: application/json' --data '{"channel":"CPMANENF3","attachments": [{ "color":"#FF7E36", "fields": [{"title":"Publisher","value":"${{ github.actor }}","short":true}, {"title":"Build Variant","value":"Debug","short":true}, {"title":"Ref","value":"'"$ref"'","short":true}, {"title":"Sha", "value":"'"$sha"'","short":true}, {"title":"Recent changes","value":"'"$gitlog"'","short":false}],"actions": [{ "type": "button", "name": "download", "text": "${{ steps.apk.outputs.DEBUG_APK_NAME }}", "url": "'"$debug_permalink"'", "style": "primary" }] }] }'
+
+  slack-workflow-status:
+    if: always()
+    name: Post workflow status to slack
+    needs:
+      - build-debug-apk
+      - deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack workflow notification
+        uses: Gamesight/slack-workflow-status@v1.0.1
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
+          name: 'Android workflow bot'
+          icon_emoji: ':android:'
+
